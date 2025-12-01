@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus, Edit, Trash2, Eye, EyeOff } from "lucide-react";
+import { Plus, Edit, Trash2, Eye as EyeIcon, EyeOff, FileText } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { servicesApi } from "@/lib/api/services";
 import { Button } from "@/components/ui/Button";
@@ -101,7 +101,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="flex items-center">
                     {service.isActive ? (
-                      <Eye className="w-5 h-5 text-green-600" />
+                      <EyeIcon className="w-5 h-5 text-green-600" />
                     ) : (
                       <EyeOff className="w-5 h-5 text-gray-400" />
                     )}
@@ -123,10 +123,18 @@ export default function ServicesPage() {
               {/* Card Footer */}
               <div className="bg-gray-50 px-6 py-3 flex items-center gap-2">
                 <Link
-                  href={`/dashboard/services/${service.id}`}
+                  href={`/dashboard/services/${service.id}/view`}
                   className="flex-1"
                 >
                   <Button variant="outline" size="sm" className="w-full">
+                    <FileText className="w-4 h-4 ml-2" />
+                    عرض
+                  </Button>
+                </Link>
+                <Link
+                  href={`/dashboard/services/${service.id}`}
+                >
+                  <Button variant="outline" size="sm">
                     <Edit className="w-4 h-4 ml-2" />
                     تعديل
                   </Button>
@@ -147,5 +155,3 @@ export default function ServicesPage() {
     </div>
   );
 }
-
-

@@ -48,16 +48,20 @@ export const servicesApi = {
     return data;
   },
 
-  updateFeature: async (featureId: string, updates: any) => {
+  updateFeature: async (
+    serviceId: string,
+    featureId: string,
+    updates: { title?: string; description?: string; orderIndex?: number }
+  ) => {
     const { data } = await apiClient.put(
-      `/services/features/${featureId}`,
+      `/services/${serviceId}/features/${featureId}`,
       updates
     );
     return data;
   },
 
-  deleteFeature: async (featureId: string) => {
-    await apiClient.delete(`/services/features/${featureId}`);
+  deleteFeature: async (serviceId: string, featureId: string) => {
+    await apiClient.delete(`/services/${serviceId}/features/${featureId}`);
   },
 
   // Benefits
@@ -72,16 +76,20 @@ export const servicesApi = {
     return data;
   },
 
-  updateBenefit: async (benefitId: string, updates: any) => {
+  updateBenefit: async (
+    serviceId: string,
+    benefitId: string,
+    updates: { benefitText?: string; orderIndex?: number }
+  ) => {
     const { data } = await apiClient.put(
-      `/services/benefits/${benefitId}`,
+      `/services/${serviceId}/benefits/${benefitId}`,
       updates
     );
     return data;
   },
 
-  deleteBenefit: async (benefitId: string) => {
-    await apiClient.delete(`/services/benefits/${benefitId}`);
+  deleteBenefit: async (serviceId: string, benefitId: string) => {
+    await apiClient.delete(`/services/${serviceId}/benefits/${benefitId}`);
   },
 
   // Images
@@ -98,7 +106,7 @@ export const servicesApi = {
     return data;
   },
 
-  deleteImage: async (imageId: string) => {
-    await apiClient.delete(`/services/images/${imageId}`);
+  deleteImage: async (serviceId: string, imageId: string) => {
+    await apiClient.delete(`/services/${serviceId}/images/${imageId}`);
   },
 };

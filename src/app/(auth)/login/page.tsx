@@ -67,7 +67,7 @@ export default function LoginPage() {
           <div className="text-center space-y-4">
             <div className="flex justify-center">
               <Image
-                src="/images/logo.svg"
+                src="/images/logo.png"
                 alt="VitaXir Logo"
                 width={180}
                 height={60}

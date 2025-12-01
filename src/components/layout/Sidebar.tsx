@@ -15,6 +15,9 @@ import {
   Users,
   MessageSquare,
   LogOut,
+  Folder,
+  UserCheck,
+  FileCheck,
 } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import Image from "next/image";
@@ -26,8 +29,13 @@ const menuItems = [
     icon: LayoutDashboard,
   },
   {
-    title: "الحالات",
+    title: "حالات المرضى",
     href: "/dashboard/cases",
+    icon: Users,
+  },
+  {
+    title: "مواعيد المرضى",
+    href: "/dashboard/appointments",
     icon: Users,
   },
   {
@@ -41,6 +49,11 @@ const menuItems = [
     icon: Package,
   },
   {
+    title: "فئات المنتجات",
+    href: "/dashboard/categories",
+    icon: Folder,
+  },
+  {
     title: "قصص النجاح",
     href: "/dashboard/success-stories",
     icon: Heart,
@@ -51,18 +64,23 @@ const menuItems = [
     icon: FileText,
   },
   {
-    title: "الشراكات",
-    href: "/dashboard/partnerships",
+    title: "الشركاء",
+    href: "/dashboard/partners",
     icon: Handshake,
   },
   {
-    title: "التوظيف",
+    title: "طلبات التوظيف",
     href: "/dashboard/jobs",
-    icon: Users,
+    icon: UserCheck,
   },
   {
-    title: "الرسائل",
-    href: "/dashboard/messages",
+    title: "استفسارات الشراكات",
+    href: "/dashboard/partnerships",
+    icon: FileCheck,
+  },
+  {
+    title: "رسائل التواصل",
+    href: "/dashboard/contact",
     icon: MessageSquare,
   },
 ];
@@ -76,7 +94,7 @@ export default function Sidebar() {
       {/* Logo */}
       <div className="flex h-16 items-center justify-center border-b border-gray-200 px-6">
         <Image
-          src="/images/logo.svg"
+          src="/images/logo.png"
           alt="VitaXir"
           width={140}
           height={45}
@@ -133,6 +151,3 @@ export default function Sidebar() {
     </aside>
   );
 }
-
-
-
