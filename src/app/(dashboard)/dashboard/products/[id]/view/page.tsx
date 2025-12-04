@@ -69,7 +69,7 @@ export default function ViewProductPage({
 
   const formatPrice = (price?: number) => {
     if (!price) return "غير محدد";
-    return `${price.toLocaleString("ar-SA")} ر.س`;
+    return `${price.toLocaleString("ar-SA")} $`;
   };
 
   if (isLoading) {

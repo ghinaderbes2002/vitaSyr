@@ -17,7 +17,7 @@ export default function NewProductPage() {
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
   const [categoryId, setCategoryId] = useState("");
-  const [productType, setProductType] = useState("PROSTHETIC");
+  const [productType, setProductType] = useState("أطراف صناعية");
   const [description, setDescription] = useState("");
   const [specifications, setSpecifications] = useState("");
   const [price, setPrice] = useState("");
@@ -180,17 +180,15 @@ export default function NewProductPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   نوع المنتج *
                 </label>
-                <select
+
+                <input
+                  type="text"
                   value={productType}
                   onChange={(e) => setProductType(e.target.value)}
+                  placeholder="اكتب نوع المنتج"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   required
-                >
-                  <option value="PROSTHETIC">طرف صناعي</option>
-                  <option value="ORTHOTIC">جهاز تقويمي</option>
-                  <option value="ACCESSORY">إكسسوار</option>
-                  <option value="OTHER">أخرى</option>
-                </select>
+                />
               </div>
             </div>
 
@@ -222,7 +220,7 @@ export default function NewProductPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  السعر (ر.س)
+                  السعر ($)
                 </label>
                 <input
                   type="number"

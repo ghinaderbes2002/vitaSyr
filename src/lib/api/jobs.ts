@@ -24,7 +24,49 @@ export const jobsApi = {
   create: async (applicationData: CreateJobApplicationDto): Promise<JobApplication> => {
     const { data } = await apiClient.post<JobApplication>(
       "/jobs/job-applications",
-      applicationData
+      applicationData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return data;
+  },
+
+  // إنشاء طلب توظيف مع ملف CV
+  createWithCV: async (
+    applicationData: Omit<CreateJobApplicationDto, "cvFileUrl">,
+    cvFile: File
+  ): Promise<JobApplication> => {
+    const formData = new FormData();
+
+    // إضافة الملف
+    formData.append("cvFile", cvFile);
+
+    // إضافة باقي البيانات
+    formData.append("fullName", applicationData.fullName);
+    formData.append("email", applicationData.email);
+    formData.append("phone", applicationData.phone);
+    formData.append("specialization", applicationData.specialization);
+    formData.append("yearsOfExperience", applicationData.yearsOfExperience.toString());
+    formData.append("education", applicationData.education);
+
+    if (applicationData.coverLetter) {
+      formData.append("coverLetter", applicationData.coverLetter);
+    }
+    if (applicationData.linkedinUrl) {
+      formData.append("linkedinUrl", applicationData.linkedinUrl);
+    }
+
+    const { data } = await apiClient.post<JobApplication>(
+      "/jobs/job-applications",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
     return data;
   },
@@ -44,22 +86,5 @@ export const jobsApi = {
   // حذف طلب توظيف
   delete: async (id: string): Promise<void> => {
     await apiClient.delete(`/jobs/job-applications/${id}`);
-  },
-
-  // رفع ملف CV
-  uploadCV: async (file: File): Promise<{ cvFileUrl: string }> => {
-    const formData = new FormData();
-    formData.append("cvFile", file);
-
-    const { data } = await apiClient.post<{ cvFileUrl: string }>(
-      "/jobs/job-applications",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    return data;
   },
 };

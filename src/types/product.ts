@@ -20,17 +20,19 @@ export interface Product {
   categoryId: string;
   name: string;
   slug: string;
-  productType: "PROSTHETIC" | "ORTHOTIC" | "ACCESSORY" | "OTHER";
+  productType: string;
   description?: string;
   specifications?: string;
   price?: number;
   isPriceVisible: boolean;
+  isFeatured?: boolean;
   metaTitle: string;
   metaDescription: string;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
   category?: ProductCategory;
+  categoryName?: string;
   images?: ProductImage[];
   features?: ProductFeature[];
 }

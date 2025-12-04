@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:build": "docker build -t vitaxir-app .",
+    "docker:run": "docker run -p 3000:3000 vitaxir-app",
+    "docker:dev": "docker-compose --profile development up app-dev",
+    "docker:prod": "docker-compose up app",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

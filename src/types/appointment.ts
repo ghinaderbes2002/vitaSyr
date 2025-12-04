@@ -1,15 +1,18 @@
 // src/types/appointment.ts
 
+export type AppointmentType = "CONSULTATION" | "FOLLOW_UP" | "OTHER";
+export type AppointmentStatus = "PENDING" | "CONFIRMED" | "COMPLETED" | "CANCELLED";
+
 export interface Appointment {
   id: string;
   caseId?: string;
   patientName: string;
   phone: string;
   email?: string;
-  appointmentType: string;
+  appointmentType: AppointmentType;
   appointmentDate: string;
   appointmentTime: string;
-  status: "PENDING" | "CONFIRMED" | "COMPLETED" | "CANCELLED";
+  status: AppointmentStatus;
   notes?: string;
   assignedToId?: string;
   assignedTo?: {
@@ -30,7 +33,7 @@ export interface CreateAppointmentData {
   patientName: string;
   phone: string;
   email?: string;
-  appointmentType: string;
+  appointmentType: AppointmentType;
   appointmentDate: string;
   appointmentTime: string;
   notes?: string;
@@ -42,10 +45,10 @@ export interface UpdateAppointmentData {
   patientName?: string;
   phone?: string;
   email?: string;
-  appointmentType?: string;
+  appointmentType?: AppointmentType;
   appointmentDate?: string;
   appointmentTime?: string;
-  status?: "PENDING" | "CONFIRMED" | "COMPLETED" | "CANCELLED";
+  status?: AppointmentStatus;
   notes?: string;
   assignedToId?: string;
 }

@@ -23,6 +23,7 @@ export interface BlogPost {
   id: string;
   categoryId: string;
   category?: BlogCategory;
+  categoryName?: string;
   authorId: string;
   author?: {
     id: string;

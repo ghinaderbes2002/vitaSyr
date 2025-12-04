@@ -99,3 +99,6 @@ export const blogPostsApi = {
     await apiClient.delete(`blog/blog-posts/${id}`);
   },
 };
+
+// Export alias for backward compatibility
+export const blogApi = blogPostsApi;
