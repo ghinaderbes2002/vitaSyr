@@ -189,7 +189,9 @@ console.log(slug);
                           {service.images && service.images[index] ? (
                             <div className="relative h-80 rounded-2xl overflow-hidden shadow-xl">
                               <Image
-                                src={getImageUrl(service.images[index].imageUrl)}
+                                src={getImageUrl(
+                                  service.images[index].imageUrl
+                                )}
                                 alt={
                                   service.images[index].altText || feature.title
                                 }
@@ -333,6 +335,87 @@ console.log(slug);
         </section>
       )}
 
+      {/* Products Section - Only for Prosthetics */}
+      {service.serviceType === "PROSTHETICS" && (
+        <section className="py-16 px-4 bg-gradient-to-br from-gray-50 to-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <ShoppingBag className="w-8 h-8 text-accent-500" />
+                <h2 className="text-4xl font-bold text-gray-900">
+                  منتجات نقدمها
+                </h2>
+              </div>
+              <p className="text-xl text-gray-600">
+                تصفح مجموعتنا الواسعة من الأطراف الصناعية عالية الجودة
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "أطراف صناعية للساق",
+                  icon: "🦿",
+                  description: "أطراف صناعية متقدمة للساق السفلية والعلوية",
+                },
+                {
+                  title: "أطراف صناعية للذراع",
+                  icon: "🦾",
+                  description: "حلول مبتكرة للأطراف العلوية واليد",
+                },
+                {
+                  title: "مفاصل هيدروليكية",
+                  icon: "⚙️",
+                  description: "مفاصل هيدروليكية عالية الأداء للحركة الطبيعية",
+                },
+                {
+                  title: "مفاصل إلكترونية ذكية",
+                  icon: "🤖",
+                  description: "تقنية ذكية للتحكم الدقيق والراحة القصوى",
+                },
+                {
+                  title: "أجزاء ملائمة وملحقات",
+                  icon: "🔧",
+                  description: "ملحقات وقطع غيار لتحسين الأداء",
+                },
+                {
+                  title: "حلول مخصّصة للأطفال والكبار",
+                  icon: "👨‍👩‍👧‍👦",
+                  description: "أطراف مصممة خصيصاً لجميع الأعمار",
+                },
+              ].map((product, index) => (
+                <div
+                  key={index}
+                  className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all group hover:scale-105"
+                >
+                  <div className="text-center">
+                    <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
+                      {product.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                      {product.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {product.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-12">
+              <Link
+                href="/products"
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-xl font-bold text-lg hover:shadow-xl hover:scale-105 transition-all"
+              >
+                <ShoppingBag className="w-6 h-6 ml-2" />
+                تصفح جميع المنتجات
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* CTA Section */}
       <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto">
@@ -343,7 +426,7 @@ console.log(slug);
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               {/* Show both buttons only for PROSTHETICS */}
-              {service.serviceType === "PROSTHETICS" && (
+              {/* {service.serviceType === "PROSTHETICS" && (
                 <Link
                   href="/products"
                   className="px-8 py-4 bg-white text-primary-500 rounded-lg hover:shadow-xl hover:scale-105 transition-all font-semibold inline-flex items-center justify-center"
@@ -351,10 +434,10 @@ console.log(slug);
                   <ShoppingBag className="w-5 h-5 ml-2" />
                   تصفح المنتجات
                 </Link>
-              )}
+              )} */}
               <Link
                 href="/appointments"
-                className="px-8 py-4 bg-accent-500 text-white rounded-lg hover:shadow-xl hover:scale-105 transition-all font-semibold inline-flex items-center justify-center"
+                className="px-8 py-4 bg-white text-primary-500 rounded-lg hover:shadow-xl hover:scale-105 transition-all font-semibold inline-flex items-center justify-center"
               >
                 <Phone className="w-5 h-5 ml-2" />
                 احجز استشارتك

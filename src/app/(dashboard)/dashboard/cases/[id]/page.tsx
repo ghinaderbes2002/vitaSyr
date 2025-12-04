@@ -501,7 +501,7 @@ export default function CaseDetailsPage({
                 <div>
                   <p className="text-sm text-gray-500 mb-1">تاريخ البتر</p>
                   <p className="text-sm font-medium text-gray-900">
-                    {new Date(caseData.amputationDate).toLocaleDateString("ar-SA")}
+                    {new Date(caseData.amputationDate).toLocaleDateString("en-GB")}
                   </p>
                 </div>
                 <div>
@@ -659,7 +659,7 @@ export default function CaseDetailsPage({
                         </span>
                       </div>
                       <span className="text-xs text-gray-500">
-                        {new Date(note.createdAt).toLocaleDateString("ar-SA")}
+                        {new Date(note.createdAt).toLocaleDateString("en-GB")}
                       </span>
                     </div>
                     <p className="text-sm text-gray-700 whitespace-pre-wrap">
@@ -771,7 +771,7 @@ export default function CaseDetailsPage({
                   <span>تاريخ التسجيل</span>
                 </div>
                 <p className="text-gray-900 mr-6">
-                  {new Date(caseData.createdAt).toLocaleDateString("ar-SA", {
+                  {new Date(caseData.createdAt).toLocaleDateString("en-GB", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -784,7 +784,7 @@ export default function CaseDetailsPage({
                   <span>آخر تحديث</span>
                 </div>
                 <p className="text-gray-900 mr-6">
-                  {new Date(caseData.updatedAt).toLocaleDateString("ar-SA", {
+                  {new Date(caseData.updatedAt).toLocaleDateString("en-GB", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",

@@ -332,13 +332,13 @@ export default function ViewProductPage({
               <div>
                 <span className="text-gray-600">تاريخ الإنشاء:</span>
                 <p className="text-gray-900">
-                  {new Date(product.createdAt).toLocaleDateString("ar-SA")}
+                  {new Date(product.createdAt).toLocaleDateString("en-GB")}
                 </p>
               </div>
               <div>
                 <span className="text-gray-600">آخر تحديث:</span>
                 <p className="text-gray-900">
-                  {new Date(product.updatedAt).toLocaleDateString("ar-SA")}
+                  {new Date(product.updatedAt).toLocaleDateString("en-GB")}
                 </p>
               </div>
             </div>

@@ -129,8 +129,19 @@ const [imageFile, setImageFile] = useState<File | null>(null);
           </div>
         </section>
 
+        {/* Info Message */}
+        <section className="py-6 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-5">
+              <p className="text-blue-800 text-center text-lg font-medium leading-relaxed">
+                بعد إرسال النموذج، سيتواصل فريقنا معك لتحديد موعد وتقييم كامل لحالتك.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Form Section */}
-        <section className="py-16 px-4">
+        <section className="py-10 px-4">
           <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Full Name */}

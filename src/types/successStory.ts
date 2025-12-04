@@ -1,27 +1,29 @@
 // src/types/successStory.ts
 
+export type MilestoneType = "BEFORE" | "AFTER" | "OTHER";
+
 export interface StoryMilestone {
   id: string;
   storyId: string;
+  milestoneType: MilestoneType;
   title: string;
   description: string;
-  date?: string;
-  imageUrl?: string;
+  date: string;
+  imageUrl: string;
   orderIndex: number;
   createdAt: string;
-  updatedAt: string;
 }
 
 export interface SuccessStory {
   id: string;
   patientName: string;
-  age?: number;
+  age: number;
   caseType: string;
   storyTitle: string;
   storyDescription: string;
-  patientTestimonial?: string;
-  beforeImage?: string;
-  afterImage?: string;
+  patientTestimonial: string;
+  beforeImage: string;
+  afterImage: string;
   videoUrl?: string;
   isFeatured: boolean;
   isActive: boolean;
@@ -56,13 +58,15 @@ export interface UpdateSuccessStoryData {
 }
 
 export interface CreateMilestoneData {
+  milestoneType: MilestoneType;
   title: string;
   description: string;
-  date?: string;
+  date: string;
   orderIndex?: number;
 }
 
 export interface UpdateMilestoneData {
+  milestoneType?: MilestoneType;
   title?: string;
   description?: string;
   date?: string;
