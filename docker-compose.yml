@@ -62,10 +62,7 @@ services:
     environment:
       - NODE_ENV=production
       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://217.76.53.136:3010} # الباك على 3010
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
+    # No volumes for production - uses built files from Dockerfile
     networks:
       - vitaxir-network
 
