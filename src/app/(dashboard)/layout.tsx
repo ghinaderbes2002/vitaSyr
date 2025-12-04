@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
 import { useAuthStore } from "@/store/authStore";
+import { NavigationLoader } from "@/components/ui/NavigationLoader";
 
 export default function DashboardLayout({
   children,
@@ -40,6 +41,7 @@ export default function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <NavigationLoader />
       <Sidebar />
       <div className="mr-64">
         <Header />
