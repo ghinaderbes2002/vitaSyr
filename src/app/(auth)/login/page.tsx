@@ -161,7 +161,7 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 mt-12">
+          {/* <div className="grid grid-cols-2 gap-6 mt-12">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
               <div className="text-3xl font-bold text-accent-500">500+</div>
               <div className="text-sm text-blue-100 mt-2">حالة ناجحة</div>
@@ -170,7 +170,7 @@ export default function LoginPage() {
               <div className="text-3xl font-bold text-accent-500">15+</div>
               <div className="text-sm text-blue-100 mt-2">سنة خبرة</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
