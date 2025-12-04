@@ -42,7 +42,9 @@ function ServicesContent() {
 
       // تصفية حسب النوع إذا كان محدد
       if (serviceType) {
-        activeServices = activeServices.filter((s) => s.serviceType === serviceType);
+        activeServices = activeServices.filter(
+          (s) => s.serviceType === serviceType
+        );
       }
 
       setServices(activeServices);
@@ -310,11 +312,13 @@ function ServicesContent() {
 
 export default function ServicesPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-500"></div>
-      </div>
-    }>
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-500"></div>
+        </div>
+      }
+    >
       <ServicesContent />
     </Suspense>
   );

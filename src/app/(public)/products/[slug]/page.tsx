@@ -68,7 +68,9 @@ export default function ProductDetailPage() {
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="bg-white rounded-2xl p-8 shadow-2xl flex flex-col items-center gap-4">
             <LoadingSpinner size="lg" className="text-primary-500" />
-            <p className="text-gray-700 font-semibold text-lg">جاري تحميل المنتج...</p>
+            <p className="text-gray-700 font-semibold text-lg">
+              جاري تحميل المنتج...
+            </p>
           </div>
         </div>
         <Footer />
@@ -80,8 +82,8 @@ export default function ProductDetailPage() {
     return null;
   }
 
-  const sortedImages = product.images
-    ?.sort((a, b) => {
+  const sortedImages =
+    product.images?.sort((a, b) => {
       if (a.isPrimary) return -1;
       if (b.isPrimary) return 1;
       return a.orderIndex - b.orderIndex;
@@ -112,8 +114,12 @@ export default function ProductDetailPage() {
                 <div className="relative h-96 md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
                   {sortedImages.length > 0 ? (
                     <Image
-                      src={getImageUrl(sortedImages[selectedImageIndex].imageUrl)}
-                      alt={sortedImages[selectedImageIndex].altText || product.name}
+                      src={getImageUrl(
+                        sortedImages[selectedImageIndex].imageUrl
+                      )}
+                      alt={
+                        sortedImages[selectedImageIndex].altText || product.name
+                      }
                       fill
                       className="object-cover"
                     />
