@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: 'localhost',
         port: '3000',
       },
+      {
+        protocol: 'http',
+        hostname: '217.76.53.136',
+        port: '3010',
+      },
     ],
     unoptimized: true, // تعطيل التحسين للصور المحلية
   },
