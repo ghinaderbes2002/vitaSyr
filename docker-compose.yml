@@ -1,7 +1,57 @@
+# version: '3.8'
+
+# services:
+#   # Next.js Application
+#   app:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     container_name: vitaxir-app
+#     restart: unless-stopped
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       - NODE_ENV=production
+#       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+#     volumes:
+#       # Mount for hot reload in development (optional)
+#       - .:/app
+#       - /app/node_modules
+#       - /app/.next
+#     networks:
+#       - vitaxir-network
+
+#   # Development service (for local development with hot reload)
+#   app-dev:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile.dev
+#     container_name: vitaxir-app-dev
+#     restart: unless-stopped
+#     ports:
+#       - "3001:3000"
+#     environment:
+#       - NODE_ENV=development
+#       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+#     volumes:
+#       - .:/app
+#       - /app/node_modules
+#       - /app/.next
+#     command: npm run dev
+#     networks:
+#       - vitaxir-network
+#     profiles:
+#       - development
+
+# networks:
+#   vitaxir-network:
+#     driver: bridge
+
+
 version: '3.8'
 
 services:
-  # Next.js Application
+  # Next.js Application (Production)
   app:
     build:
       context: .
@@ -9,19 +59,18 @@ services:
     container_name: vitaxir-app
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "3011:3000"    # Port 3011 على السيرفر مربوط بالـ container Port 3000
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://217.76.53.136:3010} # الباك على 3010
     volumes:
-      # Mount for hot reload in development (optional)
       - .:/app
       - /app/node_modules
       - /app/.next
     networks:
       - vitaxir-network
 
-  # Development service (for local development with hot reload)
+  # Next.js Application (Development)
   app-dev:
     build:
       context: .
@@ -29,10 +78,10 @@ services:
     container_name: vitaxir-app-dev
     restart: unless-stopped
     ports:
-      - "3001:3000"
+      - "3012:3000"    # Port 3012 على السيرفر للـ dev
     environment:
       - NODE_ENV=development
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://217.76.53.136:3010}
     volumes:
       - .:/app
       - /app/node_modules
