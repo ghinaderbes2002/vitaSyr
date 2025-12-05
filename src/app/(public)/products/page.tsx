@@ -107,17 +107,6 @@ function ProductsContent() {
         <section className="py-12 px-4 bg-white border-b border-gray-200">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-wrap gap-3 justify-center">
-              <button
-                onClick={() => setSelectedCategory(null)}
-                className={`px-6 py-3 rounded-xl transition-all font-bold ${
-                  !selectedCategory
-                    ? "bg-gradient-to-r from-accent-500 to-accent-600 text-white shadow-lg"
-                    : "bg-white text-gray-700 border-2 border-gray-200 hover:border-accent-500"
-                }`}
-              >
-                أطراف علوية
-              </button>
-
               {categories.map((category) => (
                 <button
                   key={category.id}

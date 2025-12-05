@@ -18,6 +18,7 @@ export default function Header() {
     { href: "/products", label: "منتجاتنا" },
     { href: "/partnerships", label: "شراكات" },
     { href: "/success-stories", label: "قصص نجاح" },
+    { href: "/sponsorship", label: "كفالة إنسان" },
     { href: "/blog", label: "المدونة" },
     { href: "/contact", label: "اتصل بنا" },
   ];

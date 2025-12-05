@@ -18,6 +18,7 @@ import {
   Folder,
   UserCheck,
   FileCheck,
+  HandHeart,
 } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import Image from "next/image";
@@ -57,6 +58,11 @@ const menuItems = [
     title: "قصص النجاح",
     href: "/dashboard/success-stories",
     icon: Heart,
+  },
+  {
+    title: "كفالة إنسان",
+    href: "/dashboard/sponsorship",
+    icon: HandHeart,
   },
   {
     title: "المدونة",
