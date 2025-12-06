@@ -4,6 +4,7 @@
 
 import Image from "next/image";
 import { Target, Eye, Heart, Award, Users, Lightbulb, Shield } from "lucide-react";
+import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
 
 export default function AboutPage() {
@@ -35,9 +36,11 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
-      <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
+    <>
+      <Header />
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        {/* Hero Section */}
+        <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/about.png"
@@ -251,8 +254,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Footer */}
+        <Footer />
+      </div>
+    </>
   );
 }
