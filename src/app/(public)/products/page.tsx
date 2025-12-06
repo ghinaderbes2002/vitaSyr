@@ -8,10 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { productsApi, categoriesApi } from "@/lib/api/products";
 import { toast } from "react-hot-toast";
-import {
-  Check,
-  ShoppingBag,
-} from "lucide-react";
+import { Check, ShoppingBag } from "lucide-react";
 import type { Product, ProductCategory } from "@/types/product";
 import Footer from "@/components/public/Footer";
 import { getImageUrl } from "@/lib/utils/imageUrl";
@@ -70,7 +67,9 @@ function ProductsContent() {
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="bg-white rounded-2xl p-8 shadow-2xl flex flex-col items-center gap-4">
             <LoadingSpinner size="lg" className="text-primary-500" />
-            <p className="text-gray-700 font-semibold text-lg">جاري تحميل المنتجات...</p>
+            <p className="text-gray-700 font-semibold text-lg">
+              جاري تحميل المنتجات...
+            </p>
           </div>
         </div>
         <Footer />

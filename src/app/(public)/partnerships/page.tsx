@@ -22,7 +22,10 @@ import {
   Info,
 } from "lucide-react";
 import Link from "next/link";
-import type { CreatePartnershipInquiryDto, PartnershipType } from "@/types/partnership";
+import type {
+  CreatePartnershipInquiryDto,
+  PartnershipType,
+} from "@/types/partnership";
 import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
 import { LoadingButton } from "@/components/ui/LoadingSpinner";
@@ -41,26 +44,32 @@ export default function PartnershipsPage() {
     inquiryDetails: "",
   });
 
-  const partnershipTypes: { value: PartnershipType; label: string; description: string }[] = [
+  const partnershipTypes: {
+    value: PartnershipType;
+    label: string;
+    description: string;
+  }[] = [
     {
       value: "MEDICAL",
       label: "شراكة طبية",
-      description: "للمؤسسات الطبية والمراكز الصحية"
+      description: "للمؤسسات الطبية والمراكز الصحية",
     },
     {
       value: "INVESTMENT",
       label: "فرصة استثمارية",
-      description: "للمستثمرين وأصحاب رؤوس الأموال"
+      description: "للمستثمرين وأصحاب رؤوس الأموال",
     },
     {
       value: "OTHER",
       label: "أخرى",
-      description: "لأنواع الشراكات الأخرى"
+      description: "لأنواع الشراكات الأخرى",
     },
   ];
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -124,7 +133,8 @@ export default function PartnershipsPage() {
               شراكات وفرص استثمارية
             </h1>
             <p className="text-xl md:text-2xl opacity-95 leading-relaxed mb-8">
-              نرحب بالشراكات الطبية والاستثمارية لتطوير خدماتنا وتوسيع نطاق عملنا
+              نرحب بالشراكات الطبية والاستثمارية لتطوير خدماتنا وتوسيع نطاق
+              عملنا
             </p>
 
             {/* CTA Buttons */}
@@ -155,7 +165,8 @@ export default function PartnershipsPage() {
                 لماذا الشراكة معنا؟
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                نقدم فرصاً واعدة للنمو والتطور في مجال الأطراف الصناعية والرعاية الصحية
+                نقدم فرصاً واعدة للنمو والتطور في مجال الأطراف الصناعية والرعاية
+                الصحية
               </p>
             </div>
 
@@ -164,7 +175,8 @@ export default function PartnershipsPage() {
                 {
                   icon: TrendingUp,
                   title: "سوق متنامي",
-                  description: "قطاع الأطراف الصناعية في نمو مستمر مع فرص كبيرة للتوسع",
+                  description:
+                    "قطاع الأطراف الصناعية في نمو مستمر مع فرص كبيرة للتوسع",
                 },
                 {
                   icon: Users,
@@ -174,7 +186,8 @@ export default function PartnershipsPage() {
                 {
                   icon: Target,
                   title: "رؤية واضحة",
-                  description: "استراتيجية واضحة للنمو والتطوير على المدى الطويل",
+                  description:
+                    "استراتيجية واضحة للنمو والتطوير على المدى الطويل",
                 },
               ].map((item, index) => {
                 const Icon = item.icon;

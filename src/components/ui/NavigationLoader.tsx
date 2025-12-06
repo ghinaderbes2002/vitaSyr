@@ -2,17 +2,17 @@
 
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
 
 export function NavigationLoader() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const searchParams = ();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(false);
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   useEffect(() => {
     const handleStart = () => setLoading(true);

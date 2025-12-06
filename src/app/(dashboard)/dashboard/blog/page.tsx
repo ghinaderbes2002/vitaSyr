@@ -189,12 +189,8 @@ export default function BlogPostsPage() {
                       <Calendar className="w-3 h-3" />
                       {new Date(post.createdAt).toLocaleDateString("ar-SA")}
                     </div>
-                    {post.author && (
-                      <span className="text-gray-400">•</span>
-                    )}
-                    {post.author && (
-                      <span>{post.author.full_name}</span>
-                    )}
+                    {post.author && <span className="text-gray-400">•</span>}
+                    {post.author && <span>{post.author.full_name}</span>}
                   </div>
                 </div>
 

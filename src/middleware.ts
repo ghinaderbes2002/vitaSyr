@@ -17,7 +17,7 @@ export function middleware(request: NextRequest) {
   }
 
   // باقي الصفحات تحتاج token
-  if (!token && !pathname.startsWith("/login")) {
+  if (!token && !pathname.startsWith("/login") && pathname == "/dashboard") {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

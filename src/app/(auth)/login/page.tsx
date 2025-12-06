@@ -3,7 +3,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -27,7 +27,7 @@ export default function LoginPage() {
   const { login, isAuthenticated } = useAuthStore();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const pathname = usePathname();
   const {
     register,
     handleSubmit,
@@ -176,7 +176,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-
-
-
