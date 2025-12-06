@@ -82,7 +82,8 @@ export default function PublicSponsorshipPage() {
         <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2070&auto=format&fit=crop"
+              src="/images/sponsorship.png"
+              // src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2070&auto=format&fit=crop"
               alt="كفالة إنسان"
               fill
               className="object-cover brightness-50"
@@ -230,7 +231,9 @@ export default function PublicSponsorshipPage() {
                           <div className="mt-auto">
                             <div className="mb-4">
                               <div className="flex justify-between text-sm mb-2">
-                                <span className="text-gray-600 font-medium">التقدم</span>
+                                <span className="text-gray-600 font-medium">
+                                  التقدم
+                                </span>
                                 <span className="font-bold text-accent-600">
                                   {progress}%
                                 </span>
@@ -246,13 +249,17 @@ export default function PublicSponsorshipPage() {
                             {/* Amount Info */}
                             <div className="grid grid-cols-2 gap-3 mb-4">
                               <div className="bg-green-50 rounded-lg p-3 text-center">
-                                <p className="text-xs text-gray-600 mb-1">تم جمعه</p>
+                                <p className="text-xs text-gray-600 mb-1">
+                                  تم جمعه
+                                </p>
                                 <p className="font-bold text-green-700 text-sm">
                                   {formatPriceWithLabel(caseItem.raisedAmount)}
                                 </p>
                               </div>
                               <div className="bg-blue-50 rounded-lg p-3 text-center">
-                                <p className="text-xs text-gray-600 mb-1">المستهدف</p>
+                                <p className="text-xs text-gray-600 mb-1">
+                                  المستهدف
+                                </p>
                                 <p className="font-bold text-blue-700 text-sm">
                                   {formatPriceWithLabel(caseItem.targetAmount)}
                                 </p>

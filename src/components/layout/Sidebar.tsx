@@ -19,6 +19,7 @@ import {
   UserCheck,
   FileCheck,
   HandHeart,
+  BarChart3,
 } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import Image from "next/image";
@@ -63,6 +64,11 @@ const menuItems = [
     title: "كفالة إنسان",
     href: "/dashboard/sponsorship",
     icon: HandHeart,
+  },
+  {
+    title: "إحصائيات الموقع",
+    href: "/dashboard/stats",
+    icon: BarChart3,
   },
   {
     title: "المدونة",

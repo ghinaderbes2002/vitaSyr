@@ -6,6 +6,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
+import NavigationProgress from "@/components/ui/NavigationProgress";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,7 +31,9 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
+    <>
+      <NavigationProgress />
+      <header className="bg-white shadow-lg sticky top-0 z-50">
       {/* Main Header */}
       <div className="container mx-auto px-6 md:px-8">
         <div className="flex items-center justify-between h-24 md:h-28">
@@ -192,5 +195,6 @@ export default function Header() {
         )}
       </div>
     </header>
+    </>
   );
 }

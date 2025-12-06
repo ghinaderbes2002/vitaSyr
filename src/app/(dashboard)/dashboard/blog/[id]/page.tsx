@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { blogPostsApi, blogCategoriesApi, blogTagsApi } from "@/lib/api/blog";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight, Save } from "lucide-react";
+import { ArrowRight, Save, Upload, X } from "lucide-react";
+import { getImageUrl } from "@/lib/utils/imageUrl";
 import type { BlogPost, BlogCategory, BlogTag } from "@/types/blog";
 
 export default function EditBlogPostPage({
@@ -29,6 +30,8 @@ export default function EditBlogPostPage({
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
   const [featuredImage, setFeaturedImage] = useState("");
+  const [newImage, setNewImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>("");
   const [metaTitle, setMetaTitle] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
   const [status, setStatus] = useState("DRAFT");
@@ -85,6 +88,24 @@ export default function EditBlogPostPage({
     }
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (!file.type.startsWith("image/")) {
+        toast.error("الرجاء اختيار صورة صحيحة");
+        return;
+      }
+      setNewImage(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setNewImage(null);
+    setImagePreview("");
+    setFeaturedImage("");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -96,38 +117,38 @@ export default function EditBlogPostPage({
     try {
       setIsSaving(true);
 
-      const updateData: any = {
-        categoryId,
-        authorId: post?.authorId,
-        title: title.trim(),
-        slug: slug.trim(),
-        content: content.trim(),
-        metaTitle: metaTitle.trim() || title.trim(),
-        metaDescription:
-          metaDescription.trim() || excerpt.trim() || title.trim(),
-        status,
-        isFeatured,
-      };
+      const formData = new FormData();
+      formData.append("categoryId", categoryId);
+      formData.append("authorId", post?.authorId || "");
+      formData.append("title", title.trim());
+      formData.append("slug", slug.trim());
+      formData.append("content", content.trim());
+      formData.append("metaTitle", metaTitle.trim() || title.trim());
+      formData.append("metaDescription", metaDescription.trim() || excerpt.trim() || title.trim());
+      formData.append("status", status);
+      formData.append("isFeatured", isFeatured.toString());
 
       if (excerpt.trim()) {
-        updateData.excerpt = excerpt.trim();
+        formData.append("excerpt", excerpt.trim());
       }
 
-      if (featuredImage.trim()) {
-        updateData.featuredImage = featuredImage.trim();
+      if (newImage) {
+        formData.append("featuredImage", newImage);
       }
 
       if (status === "PUBLISHED" && post?.status !== "PUBLISHED") {
-        updateData.publishedAt = new Date().toISOString();
+        formData.append("publishedAt", new Date().toISOString());
       }
 
       if (selectedTags.length > 0) {
-        updateData.tags = selectedTags;
+        formData.append("tags", JSON.stringify(selectedTags));
       }
 
-      await blogPostsApi.update(params.id, updateData);
+      await blogPostsApi.update(params.id, formData);
       toast.success("تم تحديث المقال بنجاح");
       loadPost();
+      setNewImage(null);
+      setImagePreview("");
     } catch (error: any) {
       console.error("Error updating post:", error);
       toast.error(
@@ -205,6 +226,17 @@ export default function EditBlogPostPage({
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   required
                 />
+                <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-xs text-blue-900">
+                    <strong>ما هو الـ Slug؟</strong> هو اسم مختصر يظهر داخل رابط الصفحة
+                  </p>
+                  <p className="text-xs text-blue-700 mt-1">
+                    يرجى كتابته باللغة الإنكليزية فقط، وبدون مسافات، واستخدام علامة (-) بين الكلمات.
+                  </p>
+                  <p className="text-xs text-blue-600 mt-1">
+                    مثال: <span className="font-mono bg-blue-100 px-1 rounded">health-tips-2024</span>
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -274,15 +306,41 @@ export default function EditBlogPostPage({
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                رابط الصورة البارزة
+                الصورة البارزة
               </label>
-              <input
-                type="text"
-                value={featuredImage}
-                onChange={(e) => setFeaturedImage(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="/uploads/..."
-              />
+
+              {imagePreview || featuredImage ? (
+                <div className="relative w-full h-48 border-2 border-gray-300 rounded-lg overflow-hidden">
+                  <img
+                    src={imagePreview || getImageUrl(featuredImage)}
+                    alt="Preview"
+                    className="w-full h-full object-cover"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleRemoveImage}
+                    className="absolute top-2 right-2 p-1.5 bg-red-600 text-white rounded-full hover:bg-red-700"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              ) : (
+                <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer hover:bg-gray-50">
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <Upload className="w-10 h-10 mb-3 text-gray-400" />
+                    <p className="mb-2 text-sm text-gray-500">
+                      <span className="font-semibold">اضغط لاختيار صورة</span>
+                    </p>
+                    <p className="text-xs text-gray-500">PNG, JPG أو WEBP</p>
+                  </div>
+                  <input
+                    type="file"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                  />
+                </label>
+              )}
             </div>
 
             {/* Tags Selection */}

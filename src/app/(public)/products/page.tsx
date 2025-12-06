@@ -86,7 +86,8 @@ function ProductsContent() {
         <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop"
+              src="/images/home.png"
+              // src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop"
               alt="منتجاتنا"
               fill
               className="object-cover brightness-50"
@@ -98,7 +99,8 @@ function ProductsContent() {
           <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">منتجاتنا</h1>
             <p className="text-xl md:text-2xl leading-relaxed opacity-95">
-              تصفح مجموعتنا المتكاملة من الأطراف الصناعية والأجهزة الطبية المتطورة
+              تصفح مجموعتنا المتكاملة من الأطراف الصناعية والأجهزة الطبية
+              المتطورة
             </p>
           </div>
         </section>
@@ -136,86 +138,86 @@ function ProductsContent() {
               </div>
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredProducts.map((product) => (
-                      <Link
-                        key={product.id}
-                        href={`/products/${product.slug}`}
-                        className="group"
-                      >
-                        <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden h-full flex flex-col">
-                          {/* Product Image */}
-                          {product.images && product.images.length > 0 ? (
-                            <div className="relative h-64 overflow-hidden">
-                              <Image
-                                src={getImageUrl(
-                                  product.images.find((img) => img.isPrimary)
-                                    ?.imageUrl || product.images[0].imageUrl
-                                )}
-                                alt={
-                                  product.images.find((img) => img.isPrimary)
-                                    ?.altText || product.name
-                                }
-                                fill
-                                className="object-cover group-hover:scale-110 transition-transform duration-500"
-                              />
-                            </div>
-                          ) : (
-                            <div className="relative h-64 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
-                              <ShoppingBag className="w-16 h-16 text-primary-300" />
-                            </div>
-                          )}
-
-                          {/* Product Content */}
-                          <div className="p-6 flex-1 flex flex-col">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-primary-500 transition-colors">
-                              {product.name}
-                            </h3>
-
-                            {product.description && (
-                              <p className="text-gray-600 leading-relaxed mb-4 line-clamp-3">
-                                {product.description}
-                              </p>
+                {filteredProducts.map((product) => (
+                  <Link
+                    key={product.id}
+                    href={`/products/${product.slug}`}
+                    className="group"
+                  >
+                    <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden h-full flex flex-col">
+                      {/* Product Image */}
+                      {product.images && product.images.length > 0 ? (
+                        <div className="relative h-64 overflow-hidden">
+                          <Image
+                            src={getImageUrl(
+                              product.images.find((img) => img.isPrimary)
+                                ?.imageUrl || product.images[0].imageUrl
                             )}
-
-                            {/* Features Preview */}
-                            {product.features && product.features.length > 0 && (
-                              <div className="mt-auto space-y-2">
-                                {product.features
-                                  .sort((a, b) => a.orderIndex - b.orderIndex)
-                                  .slice(0, 3)
-                                  .map((feature) => (
-                                    <div
-                                      key={feature.id}
-                                      className="flex items-start gap-2 text-sm"
-                                    >
-                                      <Check className="w-5 h-5 text-accent-500 flex-shrink-0 mt-0.5" />
-                                      <span className="text-gray-600">
-                                        {feature.featureText}
-                                      </span>
-                                    </div>
-                                  ))}
-                              </div>
-                            )}
-
-                            {/* Price */}
-                            {product.isPriceVisible && product.price && (
-                              <div className="mt-4 pt-4 border-t border-gray-100">
-                                <span className="text-2xl font-bold text-accent-500">
-                                  {formatPriceWithLabel(product.price)}
-                                </span>
-                              </div>
-                            )}
-
-                            {/* View Details */}
-                            <div className="mt-4">
-                              <span className="inline-flex items-center text-primary-500 font-semibold group-hover:text-accent-500 transition-colors">
-                                عرض التفاصيل
-                              </span>
-                            </div>
-                          </div>
+                            alt={
+                              product.images.find((img) => img.isPrimary)
+                                ?.altText || product.name
+                            }
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
                         </div>
-                      </Link>
-                    ))}
+                      ) : (
+                        <div className="relative h-64 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
+                          <ShoppingBag className="w-16 h-16 text-primary-300" />
+                        </div>
+                      )}
+
+                      {/* Product Content */}
+                      <div className="p-6 flex-1 flex flex-col">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-primary-500 transition-colors">
+                          {product.name}
+                        </h3>
+
+                        {product.description && (
+                          <p className="text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                            {product.description}
+                          </p>
+                        )}
+
+                        {/* Features Preview */}
+                        {product.features && product.features.length > 0 && (
+                          <div className="mt-auto space-y-2">
+                            {product.features
+                              .sort((a, b) => a.orderIndex - b.orderIndex)
+                              .slice(0, 3)
+                              .map((feature) => (
+                                <div
+                                  key={feature.id}
+                                  className="flex items-start gap-2 text-sm"
+                                >
+                                  <Check className="w-5 h-5 text-accent-500 flex-shrink-0 mt-0.5" />
+                                  <span className="text-gray-600">
+                                    {feature.featureText}
+                                  </span>
+                                </div>
+                              ))}
+                          </div>
+                        )}
+
+                        {/* Price */}
+                        {product.isPriceVisible && product.price && (
+                          <div className="mt-4 pt-4 border-t border-gray-100">
+                            <span className="text-2xl font-bold text-accent-500">
+                              {formatPriceWithLabel(product.price)}
+                            </span>
+                          </div>
+                        )}
+
+                        {/* View Details */}
+                        <div className="mt-4">
+                          <span className="inline-flex items-center text-primary-500 font-semibold group-hover:text-accent-500 transition-colors">
+                            عرض التفاصيل
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
             )}
           </div>

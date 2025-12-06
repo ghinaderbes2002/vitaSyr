@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import type { SuccessStory } from "@/types/successStory";
 import Footer from "@/components/public/Footer";
+import Header from "@/components/public/Header";
 import { getImageUrl } from "@/lib/utils/imageUrl";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
@@ -78,37 +79,48 @@ export default function SuccessStoriesPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <LoadingSpinner size="lg" className="text-primary-500 mx-auto mb-4" />
-          <p className="text-gray-600 text-lg">جاري تحميل قصص النجاح...</p>
+      <>
+        <Header />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <LoadingSpinner size="lg" className="text-primary-500 mx-auto mb-4" />
+            <p className="text-gray-600 text-lg">جاري تحميل قصص النجاح...</p>
+          </div>
         </div>
-      </div>
+        <Footer />
+      </>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 bg-gradient-to-br from-primary-500 to-primary-700 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('/pattern.svg')] bg-repeat"></div>
-        </div>
-        <div className="relative max-w-6xl mx-auto text-center">
-          {/* <div className="inline-flex items-center justify-center p-3 bg-white/20 backdrop-blur-sm rounded-full mb-6">
-            <Heart className="w-8 h-8 text-white" />
-          </div> */}
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">قصص نجاح</h1>
-          <p className="text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto mb-4 opacity-95">
-            هنا نشارككم حكايات أناس بدأوا رحلتهم بالألم والبحث عن حل، ووصلوا اليوم
-            إلى حياة أكثر ثباتًا واستقلالية وثقة.
-          </p>
-          <p className="text-lg md:text-xl opacity-90">
-            كل تجربة هنا هي شهادة على أن التغيير ممكن، وأن الخطوة التي تنتظرها قد
-            تكون قريبة.
-          </p>
-        </div>
-      </section>
+    <>
+      <Header />
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        {/* Hero Section */}
+        <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/success-stories.png"
+              alt="قصص نجاح"
+              fill
+              className="object-cover brightness-40"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-900/95 via-primary-800/90 to-accent-600/85" />
+          </div>
+
+          <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">قصص نجاح</h1>
+            <p className="text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto mb-4 opacity-95">
+              هنا نشارككم حكايات أناس بدأوا رحلتهم بالألم والبحث عن حل، ووصلوا اليوم
+              إلى حياة أكثر ثباتًا واستقلالية وثقة.
+            </p>
+            <p className="text-lg md:text-xl opacity-90">
+              كل تجربة هنا هي شهادة على أن التغيير ممكن، وأن الخطوة التي تنتظرها قد
+              تكون قريبة.
+            </p>
+          </div>
+        </section>
 
       {stories.length === 0 ? (
         <section className="py-20 px-4">
@@ -400,6 +412,7 @@ export default function SuccessStoriesPage() {
 
       {/* Footer */}
       <Footer />
-    </div>
+      </div>
+    </>
   );
 }

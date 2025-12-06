@@ -5,7 +5,9 @@
  */
 export function formatPrice(price: number | null | undefined): string {
   if (price === null || price === undefined || price === 0) {
-    return "السعر عند الاستعلام";
+    // return "السعر عند الاستعلام";
+        return " 0 ";
+
   }
 
   const formatter = new Intl.NumberFormat("ar-SY", {
@@ -39,7 +41,9 @@ export function formatPriceNumber(price: number | null | undefined): string {
  */
 export function formatPriceWithLabel(price: number | null | undefined): string {
   if (price === null || price === undefined || price === 0) {
-    return "السعر عند الاستعلام";
+    // return "السعر عند الاستعلام";
+            return " 0 ";
+
   }
 
   const formatter = new Intl.NumberFormat("ar-SY", {

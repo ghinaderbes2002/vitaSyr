@@ -79,18 +79,23 @@ export const blogPostsApi = {
     return data;
   },
 
-  create: async (postData: CreateBlogPostData): Promise<BlogPost> => {
-    const { data } = await apiClient.post<BlogPost>("blog/blog-posts", postData);
+  create: async (postData: FormData | CreateBlogPostData): Promise<BlogPost> => {
+    const { data } = await apiClient.post<BlogPost>("blog/blog-posts", postData, {
+      headers: postData instanceof FormData ? { "Content-Type": "multipart/form-data" } : undefined,
+    });
     return data;
   },
 
   update: async (
     id: string,
-    updates: Partial<CreateBlogPostData>
+    updates: FormData | Partial<CreateBlogPostData>
   ): Promise<BlogPost> => {
     const { data } = await apiClient.put<BlogPost>(
       `blog/blog-posts/${id}`,
-      updates
+      updates,
+      {
+        headers: updates instanceof FormData ? { "Content-Type": "multipart/form-data" } : undefined,
+      }
     );
     return data;
   },

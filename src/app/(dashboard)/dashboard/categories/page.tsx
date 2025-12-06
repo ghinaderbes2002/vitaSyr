@@ -206,6 +206,17 @@ export default function CategoriesPage() {
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   required
                 />
+                <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-xs text-blue-900">
+                    <strong>ما هو الـ Slug؟</strong> هو اسم مختصر يظهر داخل رابط الصفحة
+                  </p>
+                  <p className="text-xs text-blue-700 mt-1">
+                    يرجى كتابته باللغة الإنكليزية فقط، وبدون مسافات، واستخدام علامة (-) بين الكلمات.
+                  </p>
+                  <p className="text-xs text-blue-600 mt-1">
+                    مثال: <span className="font-mono bg-blue-100 px-1 rounded">upper-limbs</span>
+                  </p>
+                </div>
               </div>
             </div>
 

@@ -32,6 +32,7 @@ import { getImageUrl } from "@/lib/utils/imageUrl";
 import { formatGregorianDate } from "@/lib/utils/dateFormatter";
 import { formatPriceWithLabel } from "@/lib/utils/currencyFormatter";
 import { LoadingCard } from "@/components/ui/LoadingSpinner";
+import { useSiteStats } from "@/hooks/useSiteStats";
 
 export default function HomePage() {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
@@ -39,6 +40,7 @@ export default function HomePage() {
   const [featuredStories, setFeaturedStories] = useState<SuccessStory[]>([]);
   const [partners, setPartners] = useState<Partner[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const stats = useSiteStats();
 
   useEffect(() => {
     loadData();
@@ -79,7 +81,8 @@ export default function HomePage() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop"
+              src="/images/home.png"
+              // src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop"
               alt="Vitaxir"
               fill
               className="object-cover brightness-40"
@@ -95,9 +98,14 @@ export default function HomePage() {
                 مع كل طرف نركبه… نعيد قصة حياة!
               </h1>
               <p className="text-xl md:text-2xl mb-8 text-gray-100 leading-relaxed">
-                في <span className="text-accent-400 font-bold">Vitaxir</span> نصمّم أطرافًا صناعية متطورة ونقدّم برامج تأهيل شاملة تساعدك على استعادة الحركة، الثقة، والاستقلالية.
+                في <span className="text-accent-400 font-bold">Vitaxir</span>{" "}
+                نصمّم أطرافًا صناعية متطورة ونقدّم برامج تأهيل شاملة تساعدك على
+                استعادة الحركة، الثقة، والاستقلالية.
                 <br />
-                <span className="text-accent-300 font-semibold">كل خطوة نؤمنها لك نساعدك من خلالها على استعادة حركتك… واستعادة نفسك.</span>
+                <span className="text-accent-300 font-semibold">
+                  كل خطوة نؤمنها لك نساعدك من خلالها على استعادة حركتك… واستعادة
+                  نفسك.
+                </span>
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
@@ -132,28 +140,36 @@ export default function HomePage() {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-full mb-4">
                   <Users className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">500+</div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">
+                  {stats.happyPatients}+
+                </div>
                 <div className="text-gray-600 font-medium">مريض سعيد</div>
               </div>
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-full mb-4">
                   <Award className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">15+</div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">
+                  {stats.yearsExperience}+
+                </div>
                 <div className="text-gray-600 font-medium">سنة خبرة</div>
               </div>
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-full mb-4">
                   <Heart className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">200+</div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">
+                  {stats.sponsorshipCases}+
+                </div>
                 <div className="text-gray-600 font-medium">حالة كفالة</div>
               </div>
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-full mb-4">
                   <TrendingUp className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">98%</div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">
+                  {stats.successRate}%
+                </div>
                 <div className="text-gray-600 font-medium">نسبة النجاح</div>
               </div>
             </div>
@@ -186,7 +202,8 @@ export default function HomePage() {
                       حلول متقدمة للأطراف الصناعية
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      نستخدم أحدث التقنيات والمكوّنات العالمية لنضمن لك طرفًا صناعيًا مريحًا، متينًا، ومتوافقًا مع احتياجاتك اليومية.
+                      نستخدم أحدث التقنيات والمكوّنات العالمية لنضمن لك طرفًا
+                      صناعيًا مريحًا، متينًا، ومتوافقًا مع احتياجاتك اليومية.
                     </p>
                   </div>
                 </div>
@@ -205,7 +222,9 @@ export default function HomePage() {
                       تأهيل متكامل بإشراف متخصصين
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      يعمل فريق المعالجين الفيزيائيين على تدريبك خطوة بخطوة لاستعادة التوازن والقدرة على الحركة باستخدام الطرف الصناعي.
+                      يعمل فريق المعالجين الفيزيائيين على تدريبك خطوة بخطوة
+                      لاستعادة التوازن والقدرة على الحركة باستخدام الطرف
+                      الصناعي.
                     </p>
                   </div>
                 </div>
@@ -224,7 +243,8 @@ export default function HomePage() {
                       تصميم مخصص لكل حالة
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      نؤمن بأن كل مريض حالة فريدة؛ لذلك نصمّم الأطراف بما يتناسب مع شكل الجسم، نمط الحياة، ونوع النشاط.
+                      نؤمن بأن كل مريض حالة فريدة؛ لذلك نصمّم الأطراف بما يتناسب
+                      مع شكل الجسم، نمط الحياة، ونوع النشاط.
                     </p>
                   </div>
                 </div>
@@ -243,7 +263,8 @@ export default function HomePage() {
                       جودة شراكات عالمية
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      نحن وكلاء ومزوّدون لعدد من الماركات العالمية في مجال الأطراف الصناعية، لنضمن لك جودة تواكب أعلى معايير الصناعة.
+                      نحن وكلاء ومزوّدون لعدد من الماركات العالمية في مجال
+                      الأطراف الصناعية، لنضمن لك جودة تواكب أعلى معايير الصناعة.
                     </p>
                   </div>
                 </div>
@@ -267,19 +288,27 @@ export default function HomePage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white hover:bg-white/20 transition-all">
                 <CheckCircle className="w-12 h-12 text-accent-400 mb-4" />
-                <h3 className="text-xl font-bold mb-2">تصميم وتعديل الأطراف الصناعية</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  تصميم وتعديل الأطراف الصناعية
+                </h3>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white hover:bg-white/20 transition-all">
                 <CheckCircle className="w-12 h-12 text-accent-400 mb-4" />
-                <h3 className="text-xl font-bold mb-2">التركيب والمعايرة الدقيقة</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  التركيب والمعايرة الدقيقة
+                </h3>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white hover:bg-white/20 transition-all">
                 <CheckCircle className="w-12 h-12 text-accent-400 mb-4" />
-                <h3 className="text-xl font-bold mb-2">إعادة التأهيل الحركي والفيزيائي</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  إعادة التأهيل الحركي والفيزيائي
+                </h3>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white hover:bg-white/20 transition-all">
                 <CheckCircle className="w-12 h-12 text-accent-400 mb-4" />
-                <h3 className="text-xl font-bold mb-2">الصيانة والمتابعة الدورية</h3>
+                <h3 className="text-xl font-bold mb-2">
+                  الصيانة والمتابعة الدورية
+                </h3>
               </div>
             </div>
 
@@ -295,195 +324,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Featured Products */}
-        {/* <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-12">
-              <div>
-                <h2 className="text-4xl font-bold text-gray-900 mb-2">منتجاتنا المميزة</h2>
-                <p className="text-gray-600 text-lg">أحدث الأطراف الصناعية والأجهزة الطبية</p>
-              </div>
-              <Link
-                href="/products"
-                className="text-primary-500 hover:text-accent-500 font-bold flex items-center gap-2 transition-colors"
-              >
-                عرض الكل
-                <ArrowLeft className="w-5 h-5" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {isLoading ? (
-                <LoadingCard count={3} />
-              ) : featuredProducts.length > 0 ? (
-                featuredProducts.map((product) => (
-                  <Link
-                    key={product.id}
-                    href={`/products/${product.id}`}
-                    className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden border border-gray-100"
-                  >
-                    {product.images && product.images.length > 0 ? (
-                      <div className="relative h-64 overflow-hidden">
-                        <Image
-                          src={getImageUrl(product.images[0].imageUrl)}
-                          alt={product.name}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-full h-64 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
-                        <Activity className="w-16 h-16 text-primary-300" />
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-500 transition-colors">
-                        {product.name}
-                      </h3>
-                      <p className="text-gray-600 text-sm line-clamp-2 mb-4">
-                        {product.description}
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-accent-500 font-bold text-lg">
-                          {formatPriceWithLabel(product.price)}
-                        </span>
-                        <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">{product.categoryName}</span>
-                      </div>
-                    </div>
-                  </Link>
-                ))
-              ) : (
-                <div className="col-span-3 text-center py-12">
-                  <p className="text-gray-500 text-lg">لا توجد منتجات مميزة حالياً</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </section> */}
-
-        {/* Featured Success Stories */}
-        {/* <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-12">
-              <div>
-                <h2 className="text-4xl font-bold text-gray-900 mb-2">قصص نجاح ملهمة</h2>
-                <p className="text-gray-600 text-lg">رحلات شفاء حقيقية من مرضانا</p>
-              </div>
-              <Link
-                href="/success-stories"
-                className="text-primary-500 hover:text-accent-500 font-bold flex items-center gap-2 transition-colors"
-              >
-                عرض الكل
-                <ArrowLeft className="w-5 h-5" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {isLoading ? (
-                <LoadingCard count={3} />
-              ) : featuredStories.length > 0 ? (
-                featuredStories.map((story) => (
-                  <Link
-                    key={story.id}
-                    href={`/success-stories/${story.id}`}
-                    className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden"
-                  >
-                    {story.afterImage ? (
-                      <div className="relative h-64 overflow-hidden">
-                        <Image
-                          src={getImageUrl(story.afterImage)}
-                          alt={story.storyTitle}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-full h-64 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
-                        <Heart className="w-16 h-16 text-accent-400" />
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-500 transition-colors">
-                        {story.storyTitle}
-                      </h3>
-                      <p className="text-sm text-primary-600 font-semibold mb-2">
-                        {story.patientName} - {story.caseType}
-                      </p>
-                      <p className="text-gray-600 text-sm line-clamp-3">
-                        {story.storyDescription}
-                      </p>
-                    </div>
-                  </Link>
-                ))
-              ) : (
-                <div className="col-span-3 text-center py-12">
-                  <p className="text-gray-500 text-lg">لا توجد قصص نجاح حالياً</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </section> */}
-
-        {/* Latest Blog Posts */}
-        {/* <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-12">
-              <div>
-                <h2 className="text-4xl font-bold text-gray-900 mb-2">أحدث المقالات</h2>
-                <p className="text-gray-600 text-lg">مقالات ونصائح طبية مفيدة</p>
-              </div>
-              <Link
-                href="/blog"
-                className="text-primary-500 hover:text-accent-500 font-bold flex items-center gap-2 transition-colors"
-              >
-                عرض الكل
-                <ArrowLeft className="w-5 h-5" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {isLoading ? (
-                <LoadingCard count={3} />
-              ) : latestPosts.length > 0 ? (
-                latestPosts.map((post) => (
-                  <Link
-                    key={post.id}
-                    href={`/blog/${post.id}`}
-                    className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden"
-                  >
-                    {post.featuredImage ? (
-                      <div className="relative h-64 overflow-hidden">
-                        <Image
-                          src={getImageUrl(post.featuredImage)}
-                          alt={post.title}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-full h-64 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
-                        <Award className="w-16 h-16 text-primary-300" />
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-500 transition-colors">
-                        {post.title}
-                      </h3>
-                      <p className="text-gray-600 text-sm line-clamp-3 mb-4">
-                        {post.excerpt}
-                      </p>
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-500">{formatGregorianDate(post.createdAt)}</span>
-                        <span className="text-primary-600 font-semibold">{post.categoryName}</span>
-                      </div>
-                    </div>
-                  </Link>
-                ))
-              ) : (
-                <div className="col-span-3 text-center py-12">
-                  <p className="text-gray-500 text-lg">لا توجد مقالات حالياً</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </section> */}
 
         {/* Partners Section */}
         <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
@@ -539,31 +379,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        {/* <section className="py-20 bg-gradient-to-r from-primary-600 via-primary-500 to-accent-500">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              هل تحتاج إلى مساعدة أو استشارة؟
-            </h2>
-            <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
-              فريقنا الطبي المتخصص جاهز لخدمتك ومساعدتك في رحلتك نحو استعادة حياتك
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="px-10 py-4 bg-white text-primary-600 rounded-lg font-bold hover:bg-gray-100 hover:shadow-xl hover:scale-105 transition-all"
-              >
-                تواصل معنا
-              </Link>
-              <Link
-                href="/cases"
-                className="px-10 py-4 bg-accent-500 text-white rounded-lg font-bold hover:bg-accent-600 hover:shadow-xl hover:scale-105 transition-all"
-              >
-                كفالة إنسان
-              </Link>
-            </div>
-          </div>
-        </section> */}
+    
       </div>
       <Footer />
     </>
