@@ -23,7 +23,7 @@ import Footer from "@/components/public/Footer";
 import { productsApi } from "@/lib/api/products";
 import { blogApi } from "@/lib/api/blog";
 import { successStoriesApi } from "@/lib/api/successStories";
-import { partnersApi } from "@/lib/api/partners";
+import { publicPartnersApi } from "@/lib/api/publicPartners";
 import type { Product } from "@/types/product";
 import type { BlogPost } from "@/types/blog";
 import type { SuccessStory } from "@/types/successStory";
@@ -63,7 +63,7 @@ export default function HomePage() {
       setFeaturedStories(storiesData.filter((s) => s.isFeatured).slice(0, 3));
 
       // Load partners
-      const partnersData = await partnersApi.getAll();
+      const partnersData = await publicPartnersApi.getAll();
       setPartners(partnersData.filter((p) => p.isActive));
     } catch (error) {
       console.error("Error loading homepage data:", error);
