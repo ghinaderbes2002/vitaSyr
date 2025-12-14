@@ -166,7 +166,7 @@ export default function AppointmentsPage() {
                             onChange={handleChange}
                             required
                             className="w-full pr-12 pl-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
-                            placeholder="+971-XX-XXX-XXXX"
+                            placeholder="+963-XX-XXX-XXXX"
                           />
                         </div>
                       </div>
@@ -301,10 +301,11 @@ export default function AppointmentsPage() {
                         <span className="font-semibold text-gray-600">هاتف</span>
                       </div>
                       <a
-                        href="tel:800-VITAXIR"
+                        href="tel:+963935813333"
                         className="text-2xl font-bold text-gray-900 hover:text-accent-500 transition-colors block"
+                        dir="ltr"
                       >
-                        VITAXIR-800
+                        +963 935 813 333
                       </a>
                     </div>
 
@@ -317,13 +318,13 @@ export default function AppointmentsPage() {
                         <span className="font-semibold text-gray-600">واتساب</span>
                       </div>
                       <a
-                        href="https://wa.me/971501234567"
+                        href="https://wa.me/963935813333"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xl font-bold text-gray-900 hover:text-accent-500 transition-colors block"
                         dir="ltr"
                       >
-                        +971-50-123-4567
+                        +963 935 813 333
                       </a>
                     </div>
 

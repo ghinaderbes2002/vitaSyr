@@ -3,41 +3,71 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export function NavigationLoader() {
   const pathname = usePathname();
-  // const searchParams = ();
   const [loading, setLoading] = useState(false);
+  const previousPathRef = useRef(pathname);
 
   useEffect(() => {
     setLoading(false);
+    previousPathRef.current = pathname;
   }, [pathname]);
 
   useEffect(() => {
-    const handleStart = () => setLoading(true);
+    const handleStart = (newPath: string) => {
+      // Only show loading if navigating to a different page
+      const currentPath = window.location.pathname;
+      if (newPath !== currentPath && newPath !== previousPathRef.current) {
+        setLoading(true);
+      }
+    };
 
     // Listen to route changes
     const originalPushState = window.history.pushState;
     const originalReplaceState = window.history.replaceState;
 
     window.history.pushState = function (...args) {
-      handleStart();
+      const newPath = args[2]?.toString() || '';
+      handleStart(newPath);
       originalPushState.apply(window.history, args);
     };
 
     window.history.replaceState = function (...args) {
-      handleStart();
+      const newPath = args[2]?.toString() || '';
+      handleStart(newPath);
       originalReplaceState.apply(window.history, args);
     };
 
     // Listen to popstate (back/forward)
-    window.addEventListener("popstate", handleStart);
+    window.addEventListener("popstate", () => {
+      handleStart(window.location.pathname);
+    });
+
+    // Listen to link clicks
+    const handleLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a');
+
+      if (link && link.href) {
+        const url = new URL(link.href);
+        const currentPath = window.location.pathname;
+
+        // Only show loading if navigating to a different page
+        if (url.pathname !== currentPath) {
+          handleStart(url.pathname);
+        }
+      }
+    };
+
+    document.addEventListener('click', handleLinkClick);
 
     return () => {
       window.history.pushState = originalPushState;
       window.history.replaceState = originalReplaceState;
-      window.removeEventListener("popstate", handleStart);
+      window.removeEventListener("popstate", () => {});
+      document.removeEventListener('click', handleLinkClick);
     };
   }, []);
 

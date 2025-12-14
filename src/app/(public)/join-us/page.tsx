@@ -279,7 +279,7 @@ export default function JoinUsPage() {
                         onChange={(e) => setPhone(e.target.value)}
                         required
                         className="w-full pr-12 pl-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
-                        placeholder="+971-XX-XXX-XXXX"
+                        placeholder="+963-XX-XXX-XXXX"
                       />
                     </div>
                   </div>

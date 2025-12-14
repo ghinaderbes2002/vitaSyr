@@ -140,7 +140,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
-                    placeholder="+971-XX-XXX-XXXX"
+                    placeholder="+963-XX-XXX-XXXX"
                   />
                 </div>
 
@@ -194,10 +194,10 @@ export default function ContactPage() {
                 <div>
                   <p className="font-semibold">الهاتف</p>
                   <a
-                    href="tel:8008482947"
+                    href="tel:+963935813333"
                     className="text-gray-900 font-bold text-lg hover:text-accent-500 transition-colors"
                   >
-                    800-VITAXIR
+                    +963 935 813 333
                   </a>
                   <p className="text-gray-500 text-sm">
                     متاح 7 أيام في الأسبوع
@@ -210,12 +210,12 @@ export default function ContactPage() {
                 <div>
                   <p className="font-semibold">واتساب</p>
                   <a
-                    href="https://wa.me/971501234567"
+                    href="https://wa.me/963935813333"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-900 font-bold text-lg hover:text-accent-500 transition-colors"
                   >
-                    +971-50-123-4567
+                    +963 935 813 333
                   </a>
                   <p className="text-gray-500 text-sm">استجابة فورية</p>
                 </div>
@@ -226,10 +226,10 @@ export default function ContactPage() {
                 <div>
                   <p className="font-semibold">البريد الإلكتروني</p>
                   <a
-                    href="mailto:info@vitaxirpro.com"
+                    href="mailto:info@vitaxir.com"
                     className="text-gray-900 font-bold text-lg hover:text-accent-500 transition-colors"
                   >
-                    info@vitaxirpro.com
+                    info@vitaxir.com
                   </a>
                   <p className="text-gray-500 text-sm">نرد خلال 24 ساعة</p>
                 </div>
@@ -248,7 +248,7 @@ export default function ContactPage() {
 
               <div className="flex items-center gap-4 mt-4">
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/share/17fC3cf3NJ/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-700 hover:text-blue-600 transition-colors"
@@ -256,20 +256,12 @@ export default function ContactPage() {
                   <Facebook className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/vitaxirprosthetic"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-700 hover:text-pink-500 transition-colors"
                 >
                   <Instagram className="w-6 h-6" />
-                </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-700 hover:text-blue-400 transition-colors"
-                >
-                  <Twitter className="w-6 h-6" />
                 </a>
               </div>
             </div>

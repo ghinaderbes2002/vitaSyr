@@ -38,32 +38,22 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               <a
-                href="#"
+                href="https://www.facebook.com/share/17fC3cf3NJ/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2.5 bg-white/10 rounded-lg hover:bg-accent-500 transition-all hover:scale-110"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="#"
-                className="p-2.5 bg-white/10 rounded-lg hover:bg-accent-500 transition-all hover:scale-110"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
+                href="https://www.instagram.com/vitaxirprosthetic"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2.5 bg-white/10 rounded-lg hover:bg-accent-500 transition-all hover:scale-110"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="p-2.5 bg-white/10 rounded-lg hover:bg-accent-500 transition-all hover:scale-110"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -193,10 +183,10 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-accent-500 flex-shrink-0" />
                 <a
-                  href="tel:+963123456789"
+                  href="tel:+963935813333"
                   className="text-sm hover:text-accent-500 transition-colors"
                 >
-                  +963 995 308 469
+                  +963 935 813 333
                 </a>
               </li>
               <li className="flex items-center gap-3">
