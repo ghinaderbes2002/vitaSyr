@@ -15,7 +15,7 @@ const nextConfig = {
       },
       {
         protocol: "http",
-        hostname: "159.198.37.52",
+        hostname: "159.198.37.52/api",
         port: "3010",
       },
     ],
