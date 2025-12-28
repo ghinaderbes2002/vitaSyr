@@ -23,7 +23,7 @@ COPY . .
 # Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_API_URL=http://159.198.37.52:3010/api
+ENV NEXT_PUBLIC_API_URL=https://vitaxirpro.com/api
 
 # Build the application
 RUN npm run build
