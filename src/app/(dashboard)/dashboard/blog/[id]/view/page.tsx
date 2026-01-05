@@ -147,26 +147,6 @@ export default function ViewBlogPostPage({
               </p>
             </div>
           </div>
-
-          {/* Tags */}
-          {post.tags && post.tags.length > 0 && (
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">
-                الوسوم
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag.id}
-                    className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-800"
-                  >
-                    <Tag className="w-3 h-3 ml-1" />
-                    {tag.name}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Right Column - Info Cards */}

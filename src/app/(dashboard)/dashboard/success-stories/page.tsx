@@ -61,7 +61,7 @@ export default function SuccessStoriesPage() {
       filtered = filtered.filter(
         (story) =>
           story.patientName.toLowerCase().includes(query) ||
-          story.caseType.toLowerCase().includes(query) ||
+          story.caseType?.toLowerCase().includes(query) ||
           story.storyTitle.toLowerCase().includes(query) ||
           story.storyDescription.toLowerCase().includes(query)
       );
