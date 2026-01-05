@@ -250,7 +250,7 @@ export default function PublicSponsorshipDetailPage({
 
                     <form onSubmit={handleDonationSubmit} className="space-y-6">
                       {/* Anonymous Toggle */}
-                      <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
+                      {/* <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
                         <label className="flex items-center gap-3 cursor-pointer">
                           <input
                             type="checkbox"
@@ -262,7 +262,7 @@ export default function PublicSponsorshipDetailPage({
                             أرغب بالتبرع بشكل مجهول
                           </span>
                         </label>
-                      </div>
+                      </div> */}
 
                       {!isAnonymous && (
                         <div className="grid md:grid-cols-2 gap-4">
@@ -429,7 +429,7 @@ export default function PublicSponsorshipDetailPage({
                       <span className="text-sm text-gray-600 font-medium">
                         تم جمعه
                       </span>
-                      <span className="font-bold text-green-700 text-lg">
+                      <span className="font-bold text-green-700 text-lg" dir="ltr">
                         {formatPriceWithLabel(caseData.raisedAmount)}
                       </span>
                     </div>
@@ -438,7 +438,7 @@ export default function PublicSponsorshipDetailPage({
                       <span className="text-sm text-gray-600 font-medium">
                         المستهدف
                       </span>
-                      <span className="font-bold text-blue-700 text-lg">
+                      <span className="font-bold text-blue-700 text-lg" dir="ltr">
                         {formatPriceWithLabel(caseData.targetAmount)}
                       </span>
                     </div>
@@ -447,7 +447,7 @@ export default function PublicSponsorshipDetailPage({
                       <span className="text-sm text-gray-600 font-medium">
                         المتبقي
                       </span>
-                      <span className="font-bold text-orange-700 text-lg">
+                      <span className="font-bold text-orange-700 text-lg" dir="ltr">
                         {formatPriceWithLabel(remaining)}
                       </span>
                     </div>
@@ -460,7 +460,7 @@ export default function PublicSponsorshipDetailPage({
                       className="w-full py-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-bold text-lg rounded-xl hover:shadow-xl transition-all flex items-center justify-center gap-2"
                     >
                       <Heart className="w-6 h-6" />
-                      تبرع الآن
+                       تواصل معنا للتبرع
                     </button>
                   )}
 

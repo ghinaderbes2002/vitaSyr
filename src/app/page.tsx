@@ -108,25 +108,25 @@ export default function HomePage() {
                 </span>
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link
+                {/* <Link
                   href="/cases"
                   className="px-8 py-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-lg font-bold hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2"
                 >
                   <Heart className="w-5 h-5" />
                   سجّل حالتك الآن
-                </Link>
+                </Link> */}
                 <Link
                   href="/appointments"
                   className="px-8 py-4 bg-white text-primary-500 rounded-lg font-bold hover:bg-gray-100 hover:shadow-xl transition-all"
                 >
                   احجز موعدًا
                 </Link>
-                <Link
+                {/* <Link
                   href="/contact"
                   className="px-8 py-4 bg-transparent text-white rounded-lg font-bold border-2 border-white hover:bg-white hover:text-primary-500 transition-all"
                 >
                   تواصل معنا
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@ export default function HomePage() {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-full mb-4">
                   <Users className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">
+                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
                   {stats.happyPatients}+
                 </div>
                 <div className="text-gray-600 font-medium">مريض سعيد</div>
@@ -149,7 +149,7 @@ export default function HomePage() {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-full mb-4">
                   <Award className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">
+                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
                   {stats.yearsExperience}+
                 </div>
                 <div className="text-gray-600 font-medium">سنة خبرة</div>
@@ -158,7 +158,7 @@ export default function HomePage() {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-full mb-4">
                   <Heart className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">
+                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
                   {stats.sponsorshipCases}+
                 </div>
                 <div className="text-gray-600 font-medium">حالة كفالة</div>
@@ -167,7 +167,7 @@ export default function HomePage() {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-full mb-4">
                   <TrendingUp className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">
+                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
                   {stats.successRate}%
                 </div>
                 <div className="text-gray-600 font-medium">نسبة النجاح</div>

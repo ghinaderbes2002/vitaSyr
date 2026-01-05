@@ -5,11 +5,11 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { blogPostsApi, blogCategoriesApi, blogTagsApi } from "@/lib/api/blog";
+import { blogPostsApi, blogCategoriesApi } from "@/lib/api/blog";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, Save, Upload, X } from "lucide-react";
 import { getImageUrl } from "@/lib/utils/imageUrl";
-import type { BlogPost, BlogCategory, BlogTag } from "@/types/blog";
+import type { BlogPost, BlogCategory } from "@/types/blog";
 
 export default function EditBlogPostPage({
   params,
@@ -19,7 +19,6 @@ export default function EditBlogPostPage({
   const router = useRouter();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [categories, setCategories] = useState<BlogCategory[]>([]);
-  const [tags, setTags] = useState<BlogTag[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -36,12 +35,10 @@ export default function EditBlogPostPage({
   const [metaDescription, setMetaDescription] = useState("");
   const [status, setStatus] = useState("DRAFT");
   const [isFeatured, setIsFeatured] = useState(false);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   useEffect(() => {
     loadPost();
     loadCategories();
-    loadTags();
   }, [params.id]);
 
   const loadPost = async () => {
@@ -61,7 +58,6 @@ export default function EditBlogPostPage({
       setMetaDescription(data.metaDescription || "");
       setStatus(data.status);
       setIsFeatured(data.isFeatured);
-      setSelectedTags(data.tags?.map((t) => t.id) || []);
     } catch (error: any) {
       toast.error("فشل تحميل المقال");
       router.push("/dashboard/blog");
@@ -76,15 +72,6 @@ export default function EditBlogPostPage({
       setCategories(data);
     } catch (error: any) {
       toast.error("فشل تحميل الفئات");
-    }
-  };
-
-  const loadTags = async () => {
-    try {
-      const data = await blogTagsApi.getAll();
-      setTags(data);
-    } catch (error: any) {
-      toast.error("فشل تحميل الوسوم");
     }
   };
 
@@ -140,10 +127,6 @@ export default function EditBlogPostPage({
         formData.append("publishedAt", new Date().toISOString());
       }
 
-      if (selectedTags.length > 0) {
-        formData.append("tags", JSON.stringify(selectedTags));
-      }
-
       await blogPostsApi.update(params.id, formData);
       toast.success("تم تحديث المقال بنجاح");
       loadPost();
@@ -159,14 +142,6 @@ export default function EditBlogPostPage({
     } finally {
       setIsSaving(false);
     }
-  };
-
-  const toggleTag = (tagId: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tagId)
-        ? prev.filter((id) => id !== tagId)
-        : [...prev, tagId]
-    );
   };
 
   if (isLoading) {
@@ -342,31 +317,6 @@ export default function EditBlogPostPage({
                 </label>
               )}
             </div>
-
-            {/* Tags Selection */}
-            {tags.length > 0 && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  الوسوم
-                </label>
-                <div className="flex flex-wrap gap-2 p-4 border border-gray-300 rounded-lg">
-                  {tags.map((tag) => (
-                    <button
-                      key={tag.id}
-                      type="button"
-                      onClick={() => toggleTag(tag.id)}
-                      className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                        selectedTags.includes(tag.id)
-                          ? "bg-primary-600 text-white"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                      }`}
-                    >
-                      {tag.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>

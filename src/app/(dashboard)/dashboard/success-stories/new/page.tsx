@@ -8,10 +8,12 @@ import { toast } from "react-hot-toast";
 import { successStoriesApi } from "@/lib/api/successStories";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, Save, Upload, X } from "lucide-react";
+import type { StoryType } from "@/types/successStory";
 
 export default function NewSuccessStoryPage() {
   const router = useRouter();
 
+  const [storyType, setStoryType] = useState<StoryType>("MEDICAL");
   const [patientName, setPatientName] = useState("");
   const [age, setAge] = useState("");
   const [caseType, setCaseType] = useState("");
@@ -64,7 +66,6 @@ export default function NewSuccessStoryPage() {
 
     if (
       !patientName.trim() ||
-      !caseType.trim() ||
       !storyTitle.trim() ||
       !storyDescription.trim()
     ) {
@@ -72,15 +73,21 @@ export default function NewSuccessStoryPage() {
       return;
     }
 
+    // Validation for MEDICAL stories
+    if (storyType === "MEDICAL" && !caseType.trim()) {
+      toast.error("الرجاء إدخال نوع الحالة للقصص الطبية");
+      return;
+    }
+
     try {
       setIsSaving(true);
 
       const formData = new FormData();
+      formData.append("storyType", storyType);
       formData.append("patientName", patientName.trim());
-      formData.append("caseType", caseType.trim());
       formData.append("storyTitle", storyTitle.trim());
       formData.append("storyDescription", storyDescription.trim());
-      formData.append("patientTestimonial", patientTestimonial.trim() || "I feel amazing!");
+      formData.append("patientTestimonial", patientTestimonial.trim() || "قصة ملهمة");
       formData.append("isFeatured", isFeatured.toString());
       formData.append("isActive", isActive.toString());
       formData.append("orderIndex", orderIndex || "0");
@@ -89,7 +96,11 @@ export default function NewSuccessStoryPage() {
         formData.append("age", age);
       }
 
-      // Add images
+      if (caseType.trim()) {
+        formData.append("caseType", caseType.trim());
+      }
+
+      // Add images (optional for INSPIRATIONAL stories)
       if (beforeImage) {
         formData.append("beforeImage", beforeImage);
       }
@@ -149,10 +160,54 @@ export default function NewSuccessStoryPage() {
             </h2>
 
             <div className="space-y-4">
+              {/* Story Type Selection */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  نوع القصة *
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setStoryType("MEDICAL")}
+                    className={`px-4 py-3 border-2 rounded-lg font-medium transition-all ${
+                      storyType === "MEDICAL"
+                        ? "border-primary-500 bg-primary-50 text-primary-700"
+                        : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div className="text-lg mb-1">🏥</div>
+                      <div>قصة طبية</div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        مريض - قبل/بعد العلاج
+                      </div>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setStoryType("INSPIRATIONAL")}
+                    className={`px-4 py-3 border-2 rounded-lg font-medium transition-all ${
+                      storyType === "INSPIRATIONAL"
+                        ? "border-primary-500 bg-primary-50 text-primary-700"
+                        : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div className="text-lg mb-1">⭐</div>
+                      <div>قصة إلهامية</div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        طبيب، موظف، متطوع
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    اسم المريض *
+                    {storyType === "MEDICAL" ? "اسم المريض *" : "الاسم *"}
                   </label>
                   <input
                     type="text"
@@ -165,7 +220,7 @@ export default function NewSuccessStoryPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    العمر
+                    العمر {storyType === "MEDICAL" ? "" : "(اختياري)"}
                   </label>
                   <input
                     type="number"
@@ -176,19 +231,21 @@ export default function NewSuccessStoryPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  نوع الحالة *
-                </label>
-                <input
-                  type="text"
-                  value={caseType}
-                  onChange={(e) => setCaseType(e.target.value)}
-                  placeholder="مثلاً: Surgery"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  required
-                />
-              </div>
+              {storyType === "MEDICAL" && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    نوع الحالة *
+                  </label>
+                  <input
+                    type="text"
+                    value={caseType}
+                    onChange={(e) => setCaseType(e.target.value)}
+                    placeholder="مثلاً: Surgery, Prosthetic Leg"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    required={storyType === "MEDICAL"}
+                  />
+                </div>
+              )}
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -235,13 +292,22 @@ export default function NewSuccessStoryPage() {
 
           {/* Images */}
           <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">الصور</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-gray-900">
+                {storyType === "MEDICAL" ? "الصور (قبل/بعد)" : "الصور (اختياري)"}
+              </h2>
+              {storyType === "INSPIRATIONAL" && (
+                <span className="text-xs text-gray-500">
+                  يمكنك إضافة صور توضيحية للقصة
+                </span>
+              )}
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Before Image */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  صورة قبل العلاج
+                  {storyType === "MEDICAL" ? "صورة قبل العلاج" : "صورة 1"}
                 </label>
                 {beforeImagePreview ? (
                   <div className="relative">
@@ -279,7 +345,7 @@ export default function NewSuccessStoryPage() {
               {/* After Image */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  صورة بعد العلاج
+                  {storyType === "MEDICAL" ? "صورة بعد العلاج" : "صورة 2"}
                 </label>
                 {afterImagePreview ? (
                   <div className="relative">

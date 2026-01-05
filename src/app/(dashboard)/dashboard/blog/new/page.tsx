@@ -5,10 +5,10 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { blogPostsApi, blogCategoriesApi, blogTagsApi } from "@/lib/api/blog";
+import { blogPostsApi, blogCategoriesApi } from "@/lib/api/blog";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, Save, Upload, X } from "lucide-react";
-import type { BlogCategory, BlogTag } from "@/types/blog";
+import type { BlogCategory } from "@/types/blog";
 import { useAuthStore } from "@/store/authStore";
 
 export default function NewBlogPostPage() {
@@ -16,7 +16,6 @@ export default function NewBlogPostPage() {
   const { user } = useAuthStore();
 
   const [categories, setCategories] = useState<BlogCategory[]>([]);
-  const [tags, setTags] = useState<BlogTag[]>([]);
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -28,12 +27,10 @@ export default function NewBlogPostPage() {
   const [metaDescription, setMetaDescription] = useState("");
   const [status, setStatus] = useState("DRAFT");
   const [isFeatured, setIsFeatured] = useState(false);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     loadCategories();
-    loadTags();
   }, []);
 
   const loadCategories = async () => {
@@ -45,15 +42,6 @@ export default function NewBlogPostPage() {
       }
     } catch (error: any) {
       toast.error("فشل تحميل الفئات");
-    }
-  };
-
-  const loadTags = async () => {
-    try {
-      const data = await blogTagsApi.getAll();
-      setTags(data);
-    } catch (error: any) {
-      toast.error("فشل تحميل الوسوم");
     }
   };
 
@@ -113,10 +101,6 @@ export default function NewBlogPostPage() {
         formData.append("publishedAt", new Date().toISOString());
       }
 
-      if (selectedTags.length > 0) {
-        formData.append("tags", JSON.stringify(selectedTags));
-      }
-
       const newPost = await blogPostsApi.create(formData);
 
       toast.success("تم إنشاء المقال بنجاح");
@@ -143,14 +127,6 @@ export default function NewBlogPostPage() {
         .replace(/[^\u0600-\u06FFa-z0-9-]/g, "");
       setSlug(generatedSlug);
     }
-  };
-
-  const toggleTag = (tagId: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tagId)
-        ? prev.filter((id) => id !== tagId)
-        : [...prev, tagId]
-    );
   };
 
   return (
@@ -314,31 +290,6 @@ export default function NewBlogPostPage() {
                 </label>
               )}
             </div>
-
-            {/* Tags Selection */}
-            {tags.length > 0 && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  الوسوم
-                </label>
-                <div className="flex flex-wrap gap-2 p-4 border border-gray-300 rounded-lg">
-                  {tags.map((tag) => (
-                    <button
-                      key={tag.id}
-                      type="button"
-                      onClick={() => toggleTag(tag.id)}
-                      className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                        selectedTags.includes(tag.id)
-                          ? "bg-primary-600 text-white"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                      }`}
-                    >
-                      {tag.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>

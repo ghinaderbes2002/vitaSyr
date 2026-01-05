@@ -154,4 +154,32 @@ export const productsApi = {
   deleteImage: async (productId: string, imageId: string) => {
     await apiClient.delete(`products/products/${productId}/images/${imageId}`);
   },
+
+  // =======================
+  // Videos
+  // =======================
+
+  addVideo: async (productId: string, formData: FormData) => {
+    const { data } = await apiClient.post(
+      `products/products/${productId}/videos`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return data;
+  },
+
+  deleteVideo: async (productId: string, videoId: string) => {
+    await apiClient.delete(`products/products/${productId}/videos/${videoId}`);
+  },
+
+  setPrimaryVideo: async (productId: string, videoId: string) => {
+    const { data } = await apiClient.put(
+      `products/products/${productId}/videos/${videoId}/set-primary`
+    );
+    return data;
+  },
 };

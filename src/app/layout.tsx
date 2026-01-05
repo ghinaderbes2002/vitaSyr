@@ -13,7 +13,7 @@ const cairo = Cairo({
 
 export const metadata: Metadata = {
   title: {
-    default: "VitaXir Admin - لوحة التحكم",
+    default: "VitaXir",
     template: "%s | VitaXir Admin",
   },
   description: "لوحة تحكم إدارة محتوى موقع VitaXir",
@@ -21,7 +21,11 @@ export const metadata: Metadata = {
     index: false,
     follow: false,
   },
+  icons: {
+    icon: "/logo.png",
+  },
 };
+
 
 export default function RootLayout({
   children,

@@ -35,6 +35,7 @@ export interface Product {
   categoryName?: string;
   images?: ProductImage[];
   features?: ProductFeature[];
+  videos?: ProductVideo[];
 }
 
 export interface ProductFeature {
@@ -51,6 +52,14 @@ export interface ProductImage {
   imageUrl: string;
   altText?: string;
   orderIndex: number;
+  isPrimary: boolean;
+  createdAt: string;
+}
+
+export interface ProductVideo {
+  id: string;
+  productId: string;
+  videoUrl: string;
   isPrimary: boolean;
   createdAt: string;
 }

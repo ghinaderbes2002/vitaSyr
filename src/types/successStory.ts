@@ -1,5 +1,6 @@
 // src/types/successStory.ts
 
+export type StoryType = "MEDICAL" | "INSPIRATIONAL";
 export type MilestoneType = "BEFORE" | "AFTER" | "OTHER";
 
 export interface StoryMilestone {
@@ -9,21 +10,22 @@ export interface StoryMilestone {
   title: string;
   description: string;
   date: string;
-  imageUrl: string;
+  imageUrl?: string; // اختياري
   orderIndex: number;
   createdAt: string;
 }
 
 export interface SuccessStory {
   id: string;
+  storyType: StoryType; // جديد
   patientName: string;
-  age: number;
-  caseType: string;
+  age?: number; // اختياري
+  caseType?: string; // اختياري
   storyTitle: string;
   storyDescription: string;
   patientTestimonial: string;
-  beforeImage: string;
-  afterImage: string;
+  beforeImage?: string; // اختياري
+  afterImage?: string; // اختياري
   videoUrl?: string;
   isFeatured: boolean;
   isActive: boolean;
@@ -34,9 +36,10 @@ export interface SuccessStory {
 }
 
 export interface CreateSuccessStoryData {
+  storyType: StoryType; // مطلوب
   patientName: string;
   age?: number;
-  caseType: string;
+  caseType?: string;
   storyTitle: string;
   storyDescription: string;
   patientTestimonial?: string;
@@ -46,6 +49,7 @@ export interface CreateSuccessStoryData {
 }
 
 export interface UpdateSuccessStoryData {
+  storyType?: StoryType;
   patientName?: string;
   age?: number;
   caseType?: string;

@@ -14,8 +14,8 @@ const nextConfig = {
         port: "3000",
       },
       {
-        protocol: "http",
-        hostname: "159.198.37.52/api",
+        protocol: "https",
+        hostname: "vitaxirpro.com/api",
         port: "3010",
       },
     ],

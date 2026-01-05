@@ -18,6 +18,7 @@ import {
   Heart,
 } from "lucide-react";
 import type { SuccessStory } from "@/types/successStory";
+import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
 import { getImageUrl } from "@/lib/utils/imageUrl";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
@@ -98,35 +99,35 @@ export default function SuccessStoryDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Back Button */}
-      <div className="container mx-auto px-4 py-6">
-        <Link
-          href="/success-stories"
-          className="inline-flex items-center text-primary-500 hover:text-accent-500 transition-colors font-semibold"
-        >
-          <ArrowRight className="w-5 h-5 ml-2" />
-          العودة لقصص النجاح
-        </Link>
-      </div>
+    <>
+      <Header />
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      
 
       {/* Hero Section */}
       <section className="relative py-12 px-4 bg-gradient-to-br from-primary-500 to-primary-700 text-white">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center flex-wrap gap-4 mb-6">
             <div className="flex items-center gap-2">
               <User className="w-5 h-5" />
               <span className="text-lg font-semibold">{story.patientName}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5" />
-              <span>{story.age} سنة</span>
+            {story.age && (
+              <div className="flex items-center gap-2">
+                <Calendar className="w-5 h-5" />
+                <span>{story.age} سنة</span>
+              </div>
+            )}
+            <div className="inline-block px-3 py-1 bg-white/30 backdrop-blur-sm rounded-full text-sm font-semibold">
+              {story.storyType === "MEDICAL" ? "قصة طبية" : "قصة إلهامية"}
             </div>
           </div>
 
-          <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-4">
-            {story.caseType}
-          </div>
+          {story.caseType && (
+            <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold mb-4">
+              {story.caseType}
+            </div>
+          )}
 
           <h1 className="text-5xl md:text-6xl font-bold mb-6">{story.storyTitle}</h1>
           <p className="text-xl md:text-2xl leading-relaxed opacity-95">
@@ -135,54 +136,84 @@ export default function SuccessStoryDetailPage() {
         </div>
       </section>
 
-      {/* Before/After Section */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-center gap-3 mb-12">
-            <h2 className="text-4xl font-bold text-gray-900">رحلة التحول</h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Before Image */}
-            <div
-              className="relative group cursor-pointer"
-              onClick={() => openImageModal(story.beforeImage, "قبل")}
-            >
-              <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-gray-900/80 text-white rounded-full font-bold text-lg">
-                  قبل
-                </div>
-                <Image
-                  src={getImageUrl(story.beforeImage)}
-                  alt={`${story.patientName} - قبل`}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
-              </div>
+      {/* Before/After Section - Only if images exist */}
+      {(story.beforeImage || story.afterImage) && (
+        <section className="py-16 px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center justify-center gap-3 mb-12">
+              <h2 className="text-4xl font-bold text-gray-900">
+                {story.storyType === "MEDICAL" ? "رحلة التحول" : "الصور"}
+              </h2>
             </div>
 
-            {/* After Image */}
-            <div
-              className="relative group cursor-pointer"
-              onClick={() => openImageModal(story.afterImage, "بعد")}
-            >
-              <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl border-4 border-accent-500">
-                <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-accent-500 text-white rounded-full font-bold text-lg">
-                  بعد
+            {story.storyType === "MEDICAL" && story.beforeImage && story.afterImage ? (
+              // Before/After Split for MEDICAL stories with both images
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Before Image */}
+                <div
+                  className="relative group cursor-pointer"
+                  onClick={() => openImageModal(story.beforeImage!, "قبل")}
+                >
+                  <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+                    <div className="absolute top-4 right-4 z-10 px-4 py-2 bg-gray-900/80 text-white rounded-full font-bold text-lg">
+                      قبل
+                    </div>
+                    <Image
+                      src={getImageUrl(story.beforeImage)}
+                      alt={`${story.patientName} - قبل`}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                  </div>
                 </div>
-                <Image
-                  src={getImageUrl(story.afterImage)}
-                  alt={`${story.patientName} - بعد`}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+
+                {/* After Image */}
+                <div
+                  className="relative group cursor-pointer"
+                  onClick={() => openImageModal(story.afterImage!, "بعد")}
+                >
+                  <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl border-4 border-accent-500">
+                    <div className="absolute top-4 left-4 z-10 px-4 py-2 bg-accent-500 text-white rounded-full font-bold text-lg">
+                      بعد
+                    </div>
+                    <Image
+                      src={getImageUrl(story.afterImage)}
+                      alt={`${story.patientName} - بعد`}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              // Single image display (either beforeImage or afterImage)
+              <div className="max-w-3xl mx-auto">
+                <div
+                  className="relative group cursor-pointer"
+                  onClick={() =>
+                    openImageModal(
+                      story.beforeImage || story.afterImage!,
+                      story.beforeImage ? "الصورة" : "الصورة"
+                    )
+                  }
+                >
+                  <div className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+                    <Image
+                      src={getImageUrl(story.beforeImage || story.afterImage!)}
+                      alt={story.patientName}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Video Section */}
       {story.videoUrl && (
@@ -192,12 +223,18 @@ export default function SuccessStoryDetailPage() {
               شاهد رحلة {story.patientName}
             </h2>
             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl group cursor-pointer">
-              <Image
-                src={getImageUrl(story.afterImage)}
-                alt="فيديو"
-                fill
-                className="object-cover"
-              />
+              {(story.afterImage || story.beforeImage) ? (
+                <Image
+                  src={getImageUrl(story.afterImage || story.beforeImage!)}
+                  alt="فيديو"
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
+                  <Heart className="w-32 h-32 text-primary-300" />
+                </div>
+              )}
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                 <button
                   onClick={openVideoModal}
@@ -266,21 +303,23 @@ export default function SuccessStoryDetailPage() {
                           index % 2 === 0 ? "" : "md:mr-auto"
                         } max-w-2xl`}
                       >
-                        {/* Milestone Image */}
-                        <div
-                          className="relative h-80 cursor-pointer group"
-                          onClick={() =>
-                            openImageModal(milestone.imageUrl, milestone.title)
-                          }
-                        >
-                          <Image
-                            src={getImageUrl(milestone.imageUrl)}
-                            alt={milestone.title}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
-                        </div>
+                        {/* Milestone Image - Only if exists */}
+                        {milestone.imageUrl && (
+                          <div
+                            className="relative h-80 cursor-pointer group"
+                            onClick={() =>
+                              openImageModal(milestone.imageUrl!, milestone.title)
+                            }
+                          >
+                            <Image
+                              src={getImageUrl(milestone.imageUrl)}
+                              alt={milestone.title}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                          </div>
+                        )}
 
                         {/* Milestone Content */}
                         <div className="p-8">
@@ -383,8 +422,9 @@ export default function SuccessStoryDetailPage() {
         </div>
       )}
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Footer */}
+        <Footer />
+      </div>
+    </>
   );
 }

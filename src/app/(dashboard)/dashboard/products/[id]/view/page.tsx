@@ -17,6 +17,7 @@ import {
   Star,
   Folder,
   Tag,
+  Play,
 } from "lucide-react";
 import type { Product } from "@/types/product";
 import { getImageUrl } from "@/lib/utils/imageUrl";
@@ -199,6 +200,41 @@ export default function ViewProductPage({
               </div>
             </div>
           )}
+
+          {/* Videos */}
+          {product.videos && product.videos.length > 0 && (
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                الفيديوهات
+              </h2>
+              <div className="space-y-4">
+                {product.videos
+                  .sort((a, b) => (a.isPrimary === b.isPrimary ? 0 : a.isPrimary ? -1 : 1))
+                  .map((video) => (
+                    <div
+                      key={video.id}
+                      className={`rounded-lg overflow-hidden ${
+                        video.isPrimary ? 'border-2 border-primary-500' : 'border border-gray-200'
+                      }`}
+                    >
+                      <div className="relative bg-gray-100" style={{ paddingBottom: '56.25%' }}>
+                        <video
+                          src={getImageUrl(video.videoUrl)}
+                          controls
+                          className="absolute inset-0 w-full h-full object-contain"
+                        />
+                      </div>
+                      {video.isPrimary && (
+                        <div className="bg-primary-500 text-white px-4 py-2 text-sm font-semibold flex items-center gap-2">
+                          <Star className="w-4 h-4" />
+                          الفيديو الرئيسي
+                        </div>
+                      )}
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Right Column - Info Cards */}
@@ -299,6 +335,12 @@ export default function ViewProductPage({
                 <span className="text-sm text-gray-600">عدد الصور</span>
                 <span className="text-lg font-bold text-gray-900">
                   {product.images?.length || 0}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-600">عدد الفيديوهات</span>
+                <span className="text-lg font-bold text-gray-900">
+                  {product.videos?.length || 0}
                 </span>
               </div>
             </div>

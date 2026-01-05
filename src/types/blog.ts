@@ -11,14 +11,6 @@ export interface BlogCategory {
   updatedAt: string;
 }
 
-export interface BlogTag {
-  id: string;
-  name: string;
-  slug: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export interface BlogPost {
   id: string;
   categoryId: string;
@@ -40,7 +32,6 @@ export interface BlogPost {
   status: "DRAFT" | "PUBLISHED" | "ARCHIVED";
   publishedAt?: string;
   isFeatured: boolean;
-  tags?: BlogTag[];
   createdAt: string;
   updatedAt: string;
 }
@@ -51,11 +42,6 @@ export interface CreateBlogCategoryData {
   description?: string;
   orderIndex?: number;
   isActive?: boolean;
-}
-
-export interface CreateBlogTagData {
-  name: string;
-  slug: string;
 }
 
 export interface CreateBlogPostData {
@@ -71,5 +57,4 @@ export interface CreateBlogPostData {
   status?: "DRAFT" | "PUBLISHED" | "ARCHIVED";
   publishedAt?: string;
   isFeatured?: boolean;
-  tags?: string[]; // array of tag IDs
 }

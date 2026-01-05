@@ -3,10 +3,8 @@
 import apiClient from "./client";
 import type {
   BlogCategory,
-  BlogTag,
   BlogPost,
   CreateBlogCategoryData,
-  CreateBlogTagData,
   CreateBlogPostData,
 } from "@/types/blog";
 
@@ -41,26 +39,6 @@ export const blogCategoriesApi = {
 
   delete: async (id: string): Promise<void> => {
     await apiClient.delete(`blog/blog-categories/${id}`);
-  },
-};
-
-// =======================
-// Blog Tags API
-// =======================
-
-export const blogTagsApi = {
-  getAll: async (): Promise<BlogTag[]> => {
-    const { data } = await apiClient.get<BlogTag[]>("blog/blog-tags");
-    return data;
-  },
-
-  create: async (tagData: CreateBlogTagData): Promise<BlogTag> => {
-    const { data } = await apiClient.post<BlogTag>("blog/blog-tags", tagData);
-    return data;
-  },
-
-  delete: async (id: string): Promise<void> => {
-    await apiClient.delete(`blog/blog-tags/${id}`);
   },
 };
 

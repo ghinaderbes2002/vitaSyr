@@ -16,6 +16,7 @@ import {
   Star,
   Edit2,
   X,
+  Play,
 } from "lucide-react";
 import type { Product, ProductCategory } from "@/types/product";
 import { getImageUrl } from "@/lib/utils/imageUrl";
@@ -52,6 +53,9 @@ export default function EditProductPage({
 
   // Images state
   const [uploadingImage, setUploadingImage] = useState(false);
+
+  // Videos state
+  const [uploadingVideo, setUploadingVideo] = useState(false);
 
   useEffect(() => {
     loadProduct();
@@ -239,6 +243,59 @@ export default function EditProductPage({
       loadProduct();
     } catch (error: any) {
       toast.error("فشل حذف الصورة");
+    }
+  };
+
+  // === Videos Management ===
+
+  const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("video/")) {
+      toast.error("الرجاء اختيار ملف فيديو صحيح");
+      return;
+    }
+
+    try {
+      setUploadingVideo(true);
+
+      const formData = new FormData();
+      formData.append("video", file);
+      const isPrimary = !product?.videos || product.videos.length === 0;
+      formData.append("isPrimary", isPrimary.toString());
+
+      await productsApi.addVideo(params.id, formData);
+      toast.success("تم رفع الفيديو بنجاح");
+      loadProduct();
+    } catch (error: any) {
+      console.error("Error uploading video:", error);
+      toast.error("فشل رفع الفيديو");
+    } finally {
+      setUploadingVideo(false);
+      e.target.value = "";
+    }
+  };
+
+  const handleDeleteVideo = async (videoId: string) => {
+    if (!confirm("هل أنت متأكد من حذف هذا الفيديو؟")) return;
+
+    try {
+      await productsApi.deleteVideo(params.id, videoId);
+      toast.success("تم حذف الفيديو بنجاح");
+      loadProduct();
+    } catch (error: any) {
+      toast.error("فشل حذف الفيديو");
+    }
+  };
+
+  const handleSetPrimaryVideo = async (videoId: string) => {
+    try {
+      await productsApi.setPrimaryVideo(params.id, videoId);
+      toast.success("تم تعيين الفيديو كأساسي");
+      loadProduct();
+    } catch (error: any) {
+      toast.error("فشل تعيين الفيديو كأساسي");
     }
   };
 
@@ -632,6 +689,81 @@ export default function EditProductPage({
         ) : (
           <p className="text-center text-gray-500 py-8">لا توجد صور</p>
         )}
+      </div>
+
+      {/* Videos Section */}
+      <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-gray-900">الفيديوهات</h2>
+          <label className="cursor-pointer">
+            <input
+              type="file"
+              accept="video/*"
+              onChange={handleVideoUpload}
+              className="hidden"
+              disabled={uploadingVideo}
+            />
+            <span
+              className={`inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg border transition-colors ${
+                uploadingVideo
+                  ? "bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed"
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+              }`}
+            >
+              <Upload className="w-4 h-4 ml-2" />
+              {uploadingVideo ? "جاري الرفع..." : "رفع فيديو"}
+            </span>
+          </label>
+        </div>
+
+        <div className="space-y-4">
+          {/* Videos List */}
+          {product.videos && product.videos.length > 0 ? (
+            <div className="space-y-2">
+              <p className="text-sm font-medium text-gray-700">
+                الفيديوهات المضافة ({product.videos.length})
+              </p>
+              {product.videos.map((video) => (
+                <div
+                  key={video.id}
+                  className={`flex items-center gap-3 p-3 border rounded-lg ${
+                    video.isPrimary ? 'border-primary-500 bg-primary-50' : 'border-gray-200'
+                  }`}
+                >
+                  <Play className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-gray-900 truncate" dir="ltr">
+                      {video.videoUrl}
+                    </p>
+                    {video.isPrimary && (
+                      <span className="text-xs text-primary-600 font-medium">
+                        فيديو أساسي
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex gap-2 flex-shrink-0">
+                    {!video.isPrimary && (
+                      <button
+                        onClick={() => handleSetPrimaryVideo(video.id)}
+                        className="px-3 py-1 text-sm text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+                      >
+                        جعله أساسي
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleDeleteVideo(video.id)}
+                      className="p-1.5 text-red-600 hover:bg-red-50 rounded"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-gray-500 py-8">لا توجد فيديوهات</p>
+          )}
+        </div>
       </div>
     </div>
   );

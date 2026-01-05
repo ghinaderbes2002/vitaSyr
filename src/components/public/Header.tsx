@@ -3,12 +3,14 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import NavigationProgress from "@/components/ui/NavigationProgress";
 
 export default function Header() {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
 
@@ -18,10 +20,11 @@ export default function Header() {
     { href: "/services", label: "خدماتنا", hasDropdown: true },
     { href: "/products", label: "منتجاتنا" },
     { href: "/partnerships", label: "شراكات" },
-    { href: "/success-stories", label: "قصص نجاح" },
+    { href: "/success-stories", label: "أخبارنا" },
     { href: "/sponsorship", label: "كفالة إنسان" },
     { href: "/blog", label: "المدونة" },
     { href: "/contact", label: "اتصل بنا" },
+    { href: "/join-us", label: "توظف معنا" },
   ];
 
   const serviceTypes = [
@@ -37,19 +40,6 @@ export default function Header() {
       {/* Main Header */}
       <div className="container mx-auto px-6 md:px-8">
         <div className="flex items-center justify-between h-24 md:h-28">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <div className="relative w-52 md:w-64 h-20 md:h-24">
-              <Image
-                src="/images/logo.png"
-                alt="Vitaxir Logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </Link>
-
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-2 space-x-reverse">
             {navLinks.map((link) => (
@@ -62,7 +52,9 @@ export default function Header() {
                   >
                     <Link
                       href={link.href}
-                      className="px-5 py-3 text-base text-primary-500 hover:text-accent-500 hover:bg-accent-50 rounded-lg transition-all font-bold flex items-center gap-1 group"
+                      className={`px-5 py-3 text-base hover:text-accent-500 hover:bg-accent-50 rounded-lg transition-all font-bold flex items-center gap-1 group ${
+                        pathname.startsWith('/services') ? 'text-accent-500 bg-accent-50' : 'text-primary-500'
+                      }`}
                     >
                       {link.label}
                       <ChevronDown
@@ -70,7 +62,9 @@ export default function Header() {
                           isServicesOpen ? "rotate-180" : ""
                         }`}
                       />
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 group-hover:w-full transition-all duration-300"></span>
+                      <span className={`absolute bottom-0 left-0 h-0.5 bg-accent-500 transition-all duration-300 ${
+                        pathname.startsWith('/services') ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`}></span>
                     </Link>
 
                     {/* Dropdown Menu */}
@@ -97,25 +91,22 @@ export default function Header() {
                 ) : (
                   <Link
                     href={link.href}
-                    className="px-5 py-3 text-base text-primary-500 hover:text-accent-500 hover:bg-accent-50 rounded-lg transition-all font-bold relative group"
+                    className={`px-5 py-3 text-base hover:text-accent-500 hover:bg-accent-50 rounded-lg transition-all font-bold relative group ${
+                      pathname === link.href ? 'text-accent-500 bg-accent-50' : 'text-primary-500'
+                    }`}
                   >
                     {link.label}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-500 group-hover:w-full transition-all duration-300"></span>
+                    <span className={`absolute bottom-0 left-0 h-0.5 bg-accent-500 transition-all duration-300 ${
+                      pathname === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}></span>
                   </Link>
                 )}
               </div>
             ))}
           </nav>
 
-          {/* CTA Button & Mobile Menu */}
+          {/* Mobile Menu & Logo */}
           <div className="flex items-center gap-4">
-            <Link
-              href="/join-us"
-              className="hidden md:block px-8 py-3.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg hover:shadow-xl hover:scale-105 transition-all font-bold text-base"
-            >
-              انضم إلينا{" "}
-            </Link>
-
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -128,6 +119,19 @@ export default function Header() {
                 <Menu className="w-8 h-8" />
               )}
             </button>
+
+            {/* Logo */}
+            <Link href="/" className="flex items-center">
+              <div className="relative w-40 md:w-48 h-16 md:h-20">
+                <Image
+                  src="/images/logo.png"
+                  alt="Vitaxir Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </Link>
           </div>
         </div>
 
@@ -141,7 +145,9 @@ export default function Header() {
                     <div>
                       <button
                         onClick={() => setIsServicesOpen(!isServicesOpen)}
-                        className="w-full text-right px-4 py-3 text-primary-500 hover:text-accent-500 hover:bg-accent-50 rounded-lg transition-colors font-semibold flex items-center justify-between"
+                        className={`w-full text-right px-4 py-3 hover:text-accent-500 hover:bg-accent-50 rounded-lg transition-colors font-semibold flex items-center justify-between ${
+                          pathname.startsWith('/services') ? 'text-accent-500 bg-accent-50' : 'text-primary-500'
+                        }`}
                       >
                         {link.label}
                         <ChevronDown
@@ -176,7 +182,9 @@ export default function Header() {
                     <Link
                       href={link.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className="px-4 py-3 text-primary-500 hover:text-accent-500 hover:bg-accent-50 rounded-lg transition-colors font-semibold"
+                      className={`px-4 py-3 hover:text-accent-500 hover:bg-accent-50 rounded-lg transition-colors font-semibold ${
+                        pathname === link.href ? 'text-accent-500 bg-accent-50' : 'text-primary-500'
+                      }`}
                     >
                       {link.label}
                     </Link>

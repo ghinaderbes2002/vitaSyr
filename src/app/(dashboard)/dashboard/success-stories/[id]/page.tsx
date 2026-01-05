@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { successStoriesApi } from "@/lib/api/successStories";
-import type { SuccessStory, StoryMilestone } from "@/types/successStory";
+import type { SuccessStory, StoryMilestone, StoryType } from "@/types/successStory";
 import { Button } from "@/components/ui/Button";
 import {
   ArrowRight,
@@ -38,6 +38,7 @@ export default function SuccessStoryDetailsPage({ params }: PageProps) {
   const [isSaving, setIsSaving] = useState(false);
 
   // Editable fields
+  const [storyType, setStoryType] = useState<StoryType>("MEDICAL");
   const [patientName, setPatientName] = useState("");
   const [age, setAge] = useState("");
   const [caseType, setCaseType] = useState("");
@@ -72,9 +73,10 @@ export default function SuccessStoryDetailsPage({ params }: PageProps) {
       setStory(data);
 
       // Set editable fields
+      setStoryType(data.storyType || "MEDICAL");
       setPatientName(data.patientName);
       setAge(data.age?.toString() || "");
-      setCaseType(data.caseType);
+      setCaseType(data.caseType || "");
       setStoryTitle(data.storyTitle);
       setStoryDescription(data.storyDescription);
       setPatientTestimonial(data.patientTestimonial || "");
@@ -93,7 +95,6 @@ export default function SuccessStoryDetailsPage({ params }: PageProps) {
   const handleUpdate = async () => {
     if (
       !patientName.trim() ||
-      !caseType.trim() ||
       !storyTitle.trim() ||
       !storyDescription.trim()
     ) {
@@ -101,17 +102,23 @@ export default function SuccessStoryDetailsPage({ params }: PageProps) {
       return;
     }
 
+    // Validation for MEDICAL stories
+    if (storyType === "MEDICAL" && !caseType.trim()) {
+      toast.error("الرجاء إدخال نوع الحالة للقصص الطبية");
+      return;
+    }
+
     try {
       setIsSaving(true);
 
       const formData = new FormData();
+      formData.append("storyType", storyType);
       formData.append("patientName", patientName.trim());
-      formData.append("caseType", caseType.trim());
       formData.append("storyTitle", storyTitle.trim());
       formData.append("storyDescription", storyDescription.trim());
       formData.append(
         "patientTestimonial",
-        patientTestimonial.trim() || "I feel amazing!"
+        patientTestimonial.trim() || "قصة ملهمة"
       );
       formData.append("isFeatured", isFeatured.toString());
       formData.append("isActive", isActive.toString());
@@ -119,6 +126,10 @@ export default function SuccessStoryDetailsPage({ params }: PageProps) {
 
       if (age.trim()) {
         formData.append("age", age);
+      }
+
+      if (caseType.trim()) {
+        formData.append("caseType", caseType.trim());
       }
 
       await successStoriesApi.update(params.id, formData);

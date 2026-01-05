@@ -18,6 +18,7 @@ import {
   Stethoscope,
 } from "lucide-react";
 import type { Service } from "@/types/service";
+import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
 import { getImageUrl } from "@/lib/utils/imageUrl";
 
@@ -107,9 +108,11 @@ console.log(slug);
   const sectionTitles = getSectionTitles();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Back Button */}
-      <div className="container mx-auto px-4 py-6">
+    <>
+      <Header />
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        {/* Back Button */}
+        <div className="container mx-auto px-4 py-6">
         <Link
           href="/services"
           className="inline-flex items-center text-primary-500 hover:text-accent-500 transition-colors font-semibold"
@@ -405,7 +408,7 @@ console.log(slug);
 
             <div className="text-center mt-12">
               <Link
-                href="/products"
+                href="/products?category=prosthetics"
                 className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-xl font-bold text-lg hover:shadow-xl hover:scale-105 transition-all"
               >
                 <ShoppingBag className="w-6 h-6 ml-2" />
@@ -447,8 +450,9 @@ console.log(slug);
         </div>
       </section>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Footer */}
+        <Footer />
+      </div>
+    </>
   );
 }

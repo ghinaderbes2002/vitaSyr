@@ -189,13 +189,14 @@ export default function ContactPage() {
                 معلومات التواصل
               </h2>
 
-              <div className="flex items-center gap-3">
+              {/* <div className="flex items-center gap-3">
                 <Phone className="w-6 h-6 text-accent-500" />
                 <div>
                   <p className="font-semibold">الهاتف</p>
                   <a
                     href="tel:+963935813333"
                     className="text-gray-900 font-bold text-lg hover:text-accent-500 transition-colors"
+                    dir="ltr"
                   >
                     +963 935 813 333
                   </a>
@@ -203,9 +204,9 @@ export default function ContactPage() {
                     متاح 7 أيام في الأسبوع
                   </p>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="flex items-center gap-3">
+              {/* <div className="flex items-center gap-3">
                 <MessageCircle className="w-6 h-6 text-accent-500" />
                 <div>
                   <p className="font-semibold">واتساب</p>
@@ -214,12 +215,13 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-900 font-bold text-lg hover:text-accent-500 transition-colors"
+                    dir="ltr"
                   >
                     +963 935 813 333
                   </a>
                   <p className="text-gray-500 text-sm">استجابة فورية</p>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-center gap-3">
                 <Mail className="w-6 h-6 text-accent-500" />

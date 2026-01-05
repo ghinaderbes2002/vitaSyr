@@ -185,6 +185,7 @@ export default function Footer() {
                 <a
                   href="tel:+963935813333"
                   className="text-sm hover:text-accent-500 transition-colors"
+                  dir="ltr"
                 >
                   +963 935 813 333
                 </a>
@@ -202,7 +203,7 @@ export default function Footer() {
                 <Clock className="w-5 h-5 text-accent-500 flex-shrink-0 mt-1" />
                 <div className="text-sm opacity-90">
                   <p>السبت - الخميس</p>
-                  <p>9:00 ص - 6:00 م</p>
+                  <p>10:00 ص - 6:00 م</p>
                 </div>
               </li>
             </ul>

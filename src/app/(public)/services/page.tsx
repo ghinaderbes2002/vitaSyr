@@ -19,6 +19,7 @@ import {
   Award,
 } from "lucide-react";
 import type { Service } from "@/types/service";
+import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
 import { getImageUrl } from "@/lib/utils/imageUrl";
 
@@ -313,14 +314,17 @@ function ServicesContent() {
 
 export default function ServicesPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-500"></div>
-        </div>
-      }
-    >
-      <ServicesContent />
-    </Suspense>
+    <>
+      <Header />
+      <Suspense
+        fallback={
+          <div className="min-h-screen flex items-center justify-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-500"></div>
+          </div>
+        }
+      >
+        <ServicesContent />
+      </Suspense>
+    </>
   );
 }

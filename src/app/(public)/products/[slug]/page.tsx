@@ -93,16 +93,6 @@ export default function ProductDetailPage() {
     <>
       <Header />
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Back Button */}
-        <div className="container mx-auto px-4 py-6">
-          <Link
-            href="/products"
-            className="inline-flex items-center text-primary-500 hover:text-accent-500 transition-colors font-semibold"
-          >
-            <ArrowRight className="w-5 h-5 ml-2" />
-            العودة للمنتجات
-          </Link>
-        </div>
 
         {/* Product Details */}
         <section className="py-12 px-4">
@@ -169,13 +159,13 @@ export default function ProductDetailPage() {
                 </h1>
 
                 {/* Price */}
-                {product.isPriceVisible && product.price && (
+                {/* {product.isPriceVisible && product.price && (
                   <div className="py-4 border-y border-gray-200">
-                    <span className="text-4xl font-bold text-accent-500">
+                    <span className="text-4xl font-bold text-accent-500" dir="ltr">
                       {formatPriceWithLabel(product.price)}
                     </span>
                   </div>
-                )}
+                )} */}
 
                 {/* Description */}
                 {product.description && (
@@ -210,23 +200,6 @@ export default function ProductDetailPage() {
                     </div>
                   </div>
                 )}
-
-                {/* CTA Buttons */}
-                {/* <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                  <a
-                    href="tel:+963123456789"
-                    className="flex-1 px-8 py-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-lg hover:shadow-xl hover:scale-105 transition-all font-bold text-center flex items-center justify-center gap-2"
-                  >
-                    <Phone className="w-5 h-5" />
-                    اتصل للطلب
-                  </a>
-                  <Link
-                    href="/contact"
-                    className="flex-1 px-8 py-4 bg-white text-primary-500 border-2 border-primary-500 rounded-lg hover:bg-primary-500 hover:text-white transition-all font-bold text-center"
-                  >
-                    استفسر الآن
-                  </Link>
-                </div> */}
               </div>
             </div>
           </div>
@@ -248,6 +221,44 @@ export default function ProductDetailPage() {
                     {product.specifications}
                   </p>
                 </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Videos Section */}
+        {product.videos && product.videos.length > 0 && (
+          <section className="py-16 px-4 bg-white">
+            <div className="max-w-7xl mx-auto">
+              <h2 className="text-4xl font-bold text-gray-900 mb-8">
+                الفيديوهات
+              </h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                {product.videos
+                  .sort((a, b) => (a.isPrimary === b.isPrimary ? 0 : a.isPrimary ? -1 : 1))
+                  .map((video) => (
+                    <div
+                      key={video.id}
+                      className={`rounded-2xl overflow-hidden shadow-xl border-2 ${
+                        video.isPrimary ? 'md:col-span-2 border-primary-500' : 'border-gray-200'
+                      }`}
+                    >
+                      <div className="relative bg-gray-100" style={{ paddingBottom: '56.25%' }}>
+                        <video
+                          src={getImageUrl(video.videoUrl)}
+                          controls
+                          className="absolute inset-0 w-full h-full object-contain"
+                          preload="metadata"
+                        />
+                      </div>
+                      {video.isPrimary && (
+                        <div className="bg-primary-500 text-white px-4 py-2 text-center font-semibold flex items-center justify-center gap-2">
+                          <Star className="w-5 h-5" />
+                          الفيديو الرئيسي
+                        </div>
+                      )}
+                    </div>
+                  ))}
               </div>
             </div>
           </section>

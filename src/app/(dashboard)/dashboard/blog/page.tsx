@@ -11,7 +11,6 @@ import {
   Eye as EyeIcon,
   FileText,
   Calendar,
-  Tag,
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { blogPostsApi } from "@/lib/api/blog";
@@ -92,12 +91,6 @@ export default function BlogPostsPage() {
               الفئات
             </Button>
           </Link>
-          <Link href="/dashboard/blog/tags">
-            <Button variant="outline">
-              <Tag className="w-4 h-4 ml-2" />
-              الوسوم
-            </Button>
-          </Link>
           <Link href="/dashboard/blog/new">
             <Button variant="primary">
               <Plus className="w-5 h-5 ml-2" />
@@ -123,13 +116,29 @@ export default function BlogPostsPage() {
                 className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
               >
                 {/* Featured Image */}
-                {post.featuredImage && (
+                {post.featuredImage ? (
                   <div className="relative h-48 bg-gray-100">
                     <img
                       src={getImageUrl(post.featuredImage)}
                       alt={post.title}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        if (target.parentElement) {
+                          target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-100 to-accent-100"><svg class="w-16 h-16 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>';
+                        }
+                      }}
                     />
+                    {post.isFeatured && (
+                      <div className="absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 rounded text-xs font-medium z-10">
+                        مميز
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="relative h-48 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
+                    <FileText className="w-16 h-16 text-primary-300" />
                     {post.isFeatured && (
                       <div className="absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 rounded text-xs font-medium">
                         مميز
@@ -163,25 +172,6 @@ export default function BlogPostsPage() {
                   <p className="text-sm text-gray-600 line-clamp-2 mb-3">
                     {post.excerpt || "لا يوجد مقتطف"}
                   </p>
-
-                  {/* Tags */}
-                  {post.tags && post.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {post.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag.id}
-                          className="inline-flex items-center px-2 py-0.5 rounded text-xs bg-gray-100 text-gray-600"
-                        >
-                          #{tag.name}
-                        </span>
-                      ))}
-                      {post.tags.length > 3 && (
-                        <span className="text-xs text-gray-500">
-                          +{post.tags.length - 3}
-                        </span>
-                      )}
-                    </div>
-                  )}
 
                   {/* Meta Info */}
                   <div className="flex items-center gap-3 pt-3 border-t border-gray-100 text-xs text-gray-500">

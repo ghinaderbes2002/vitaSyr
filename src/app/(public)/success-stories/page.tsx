@@ -154,64 +154,94 @@ export default function SuccessStoriesPage() {
                 <div className="relative">
                   <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
                     <div className="grid md:grid-cols-2 gap-0">
-                      {/* Images - Before/After */}
-                      <div className="relative h-[500px] md:h-[600px]">
-                        <div className="grid grid-cols-2 h-full">
-                          {/* Before */}
-                          <div
-                            className="relative cursor-pointer group"
-                            onClick={() => openImageModal(featuredStories[currentSlide].beforeImage, "قبل")}
-                          >
-                            <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-gray-900/80 text-white rounded-full text-sm font-semibold">
-                              قبل
+                      {/* Images - Conditional based on storyType */}
+                      {featuredStories[currentSlide].storyType === "MEDICAL" &&
+                       featuredStories[currentSlide].beforeImage &&
+                       featuredStories[currentSlide].afterImage ? (
+                        <div className="relative h-[500px] md:h-[600px]">
+                          <div className="grid grid-cols-2 h-full">
+                            {/* Before */}
+                            <div
+                              className="relative cursor-pointer group"
+                              onClick={() => openImageModal(featuredStories[currentSlide].beforeImage!, "قبل")}
+                            >
+                              <div className="absolute top-4 right-4 z-10 px-3 py-1 bg-gray-900/80 text-white rounded-full text-sm font-semibold">
+                                قبل
+                              </div>
+                              <Image
+                                src={getImageUrl(featuredStories[currentSlide].beforeImage!)}
+                                alt={`${featuredStories[currentSlide].patientName} - قبل`}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
                             </div>
-                            <Image
-                              src={getImageUrl(featuredStories[currentSlide].beforeImage)}
-                              alt={`${featuredStories[currentSlide].patientName} - قبل`}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
-                          </div>
 
-                          {/* After */}
-                          <div
-                            className="relative border-r-4 border-accent-500 cursor-pointer group"
-                            onClick={() => openImageModal(featuredStories[currentSlide].afterImage, "بعد")}
-                          >
-                            <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-accent-500 text-white rounded-full text-sm font-semibold">
-                              بعد
+                            {/* After */}
+                            <div
+                              className="relative border-r-4 border-accent-500 cursor-pointer group"
+                              onClick={() => openImageModal(featuredStories[currentSlide].afterImage!, "بعد")}
+                            >
+                              <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-accent-500 text-white rounded-full text-sm font-semibold">
+                                بعد
+                              </div>
+                              <Image
+                                src={getImageUrl(featuredStories[currentSlide].afterImage!)}
+                                alt={`${featuredStories[currentSlide].patientName} - بعد`}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
                             </div>
-                            <Image
-                              src={getImageUrl(featuredStories[currentSlide].afterImage)}
-                              alt={`${featuredStories[currentSlide].patientName} - بعد`}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
                           </div>
                         </div>
-
-                      </div>
+                      ) : featuredStories[currentSlide].beforeImage ? (
+                        // Single image for INSPIRATIONAL or if only one image exists
+                        <div className="relative h-[500px] md:h-[600px]">
+                          <Image
+                            src={getImageUrl(featuredStories[currentSlide].beforeImage)}
+                            alt={featuredStories[currentSlide].patientName}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : (
+                        // No image placeholder
+                        <div className="relative h-[500px] md:h-[600px] bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
+                          <div className="text-center">
+                            <Heart className="w-24 h-24 text-primary-300 mx-auto mb-4" />
+                            <p className="text-primary-600 font-semibold text-xl">
+                              {featuredStories[currentSlide].storyType === "INSPIRATIONAL" ? "قصة إلهامية" : "قصة نجاح"}
+                            </p>
+                          </div>
+                        </div>
+                      )}
 
                       {/* Story Content */}
                       <div className="p-8 md:p-12 flex flex-col justify-center">
-                        <div className="flex items-center gap-4 mb-6">
+                        <div className="flex items-center flex-wrap gap-4 mb-6">
                           <div className="flex items-center gap-2 text-gray-600">
                             <User className="w-5 h-5" />
                             <span className="font-semibold">
                               {featuredStories[currentSlide].patientName}
                             </span>
                           </div>
-                          <div className="flex items-center gap-2 text-gray-600">
-                            <Calendar className="w-5 h-5" />
-                            <span>{featuredStories[currentSlide].age} سنة</span>
+                          {featuredStories[currentSlide].age && (
+                            <div className="flex items-center gap-2 text-gray-600">
+                              <Calendar className="w-5 h-5" />
+                              <span>{featuredStories[currentSlide].age} سنة</span>
+                            </div>
+                          )}
+                          <div className="inline-block px-3 py-1 bg-accent-100 text-accent-600 rounded-full text-xs font-semibold">
+                            {featuredStories[currentSlide].storyType === "MEDICAL" ? "قصة طبية" : "قصة إلهامية"}
                           </div>
                         </div>
 
-                        <div className="inline-block px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-sm font-semibold mb-4 w-fit">
-                          {featuredStories[currentSlide].caseType}
-                        </div>
+                        {featuredStories[currentSlide].caseType && (
+                          <div className="inline-block px-3 py-1 bg-primary-100 text-primary-600 rounded-full text-sm font-semibold mb-4 w-fit">
+                            {featuredStories[currentSlide].caseType}
+                          </div>
+                        )}
 
                         <h3 className="text-3xl font-bold text-gray-900 mb-4">
                           {featuredStories[currentSlide].storyTitle}
@@ -294,67 +324,96 @@ export default function SuccessStoriesPage() {
                       key={story.id}
                       className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all group"
                     >
-                      {/* Before/After Split Image */}
-                      <div className="relative h-64">
-                        <div className="grid grid-cols-2 h-full">
-                          <div
-                            className="relative cursor-pointer"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              openImageModal(story.beforeImage, "قبل");
-                            }}
-                          >
-                            <div className="absolute top-2 right-2 z-10 px-2 py-1 bg-gray-900/80 text-white rounded-full text-xs font-semibold">
-                              قبل
+                      {/* Image Display - Conditional */}
+                      {story.storyType === "MEDICAL" && story.beforeImage && story.afterImage ? (
+                        // Before/After Split Image for MEDICAL stories
+                        <div className="relative h-64">
+                          <div className="grid grid-cols-2 h-full">
+                            <div
+                              className="relative cursor-pointer"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openImageModal(story.beforeImage!, "قبل");
+                              }}
+                            >
+                              <div className="absolute top-2 right-2 z-10 px-2 py-1 bg-gray-900/80 text-white rounded-full text-xs font-semibold">
+                                قبل
+                              </div>
+                              <Image
+                                src={getImageUrl(story.beforeImage)}
+                                alt={`${story.patientName} - قبل`}
+                                fill
+                                className="object-cover hover:scale-110 transition-transform"
+                              />
                             </div>
-                            <Image
-                              src={getImageUrl(story.beforeImage)}
-                              alt={`${story.patientName} - قبل`}
-                              fill
-                              className="object-cover hover:scale-110 transition-transform"
-                            />
-                          </div>
-                          <div
-                            className="relative border-r-2 border-accent-500 cursor-pointer"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              openImageModal(story.afterImage, "بعد");
-                            }}
-                          >
-                            <div className="absolute top-2 left-2 z-10 px-2 py-1 bg-accent-500 text-white rounded-full text-xs font-semibold">
-                              بعد
+                            <div
+                              className="relative border-r-2 border-accent-500 cursor-pointer"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openImageModal(story.afterImage!, "بعد");
+                              }}
+                            >
+                              <div className="absolute top-2 left-2 z-10 px-2 py-1 bg-accent-500 text-white rounded-full text-xs font-semibold">
+                                بعد
+                              </div>
+                              <Image
+                                src={getImageUrl(story.afterImage)}
+                                alt={`${story.patientName} - بعد`}
+                                fill
+                                className="object-cover hover:scale-110 transition-transform"
+                              />
                             </div>
-                            <Image
-                              src={getImageUrl(story.afterImage)}
-                              alt={`${story.patientName} - بعد`}
-                              fill
-                              className="object-cover hover:scale-110 transition-transform"
-                            />
                           </div>
                         </div>
-
-                      </div>
+                      ) : story.beforeImage ? (
+                        // Single image
+                        <div className="relative h-64">
+                          <Image
+                            src={getImageUrl(story.beforeImage)}
+                            alt={story.patientName}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform"
+                          />
+                        </div>
+                      ) : (
+                        // No image placeholder
+                        <div className="relative h-64 bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
+                          <div className="text-center">
+                            <Heart className="w-16 h-16 text-primary-300 mx-auto mb-2" />
+                            <p className="text-primary-600 font-semibold">
+                              {story.storyType === "INSPIRATIONAL" ? "قصة إلهامية" : "قصة نجاح"}
+                            </p>
+                          </div>
+                        </div>
+                      )}
 
                       {/* Card Content */}
                       <Link
                         href={`/success-stories/${story.id}`}
                         className="p-6 block"
                       >
-                        <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center flex-wrap gap-2 mb-3">
                           <div className="flex items-center gap-2 text-sm text-gray-600">
                             <User className="w-4 h-4" />
                             <span className="font-semibold">
                               {story.patientName}
                             </span>
                           </div>
-                          <span className="text-sm text-gray-500">
-                            {story.age} سنة
+                          {story.age && (
+                            <span className="text-sm text-gray-500">
+                              • {story.age} سنة
+                            </span>
+                          )}
+                          <span className="inline-block px-2 py-1 bg-accent-100 text-accent-600 rounded-full text-xs font-semibold">
+                            {story.storyType === "MEDICAL" ? "طبية" : "إلهامية"}
                           </span>
                         </div>
 
-                        <div className="inline-block px-2 py-1 bg-primary-100 text-primary-600 rounded-full text-xs font-semibold mb-3">
-                          {story.caseType}
-                        </div>
+                        {story.caseType && (
+                          <div className="inline-block px-2 py-1 bg-primary-100 text-primary-600 rounded-full text-xs font-semibold mb-3">
+                            {story.caseType}
+                          </div>
+                        )}
 
                         <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-500 transition-colors">
                           {story.storyTitle}

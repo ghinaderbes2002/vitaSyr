@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { productsApi, categoriesApi } from "@/lib/api/products";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight, Save } from "lucide-react";
+import { ArrowRight, Save, Upload, Play, Star } from "lucide-react";
 import type { ProductCategory } from "@/types/product";
 
 export default function NewProductPage() {
@@ -26,6 +26,9 @@ export default function NewProductPage() {
   const [metaDescription, setMetaDescription] = useState("");
   const [isActive, setIsActive] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+
+  // Video states
+  const [videos, setVideos] = useState<Array<{ file: File; isPrimary: boolean }>>([]);
 
   useEffect(() => {
     loadCategories();
@@ -81,6 +84,22 @@ export default function NewProductPage() {
 
       const newProduct = await productsApi.create(productData);
 
+      // Upload videos if any
+      if (videos.length > 0) {
+        for (const video of videos) {
+          try {
+            const formData = new FormData();
+            formData.append("video", video.file);
+            formData.append("isPrimary", video.isPrimary.toString());
+
+            await productsApi.addVideo(newProduct.id, formData as any);
+          } catch (error) {
+            console.error("Error uploading video:", error);
+            toast.error(`فشل رفع الفيديو: ${video.file.name}`);
+          }
+        }
+      }
+
       toast.success("تم إنشاء المنتج بنجاح");
       router.push(`/dashboard/products/${newProduct.id}`);
     } catch (error: any) {
@@ -106,6 +125,40 @@ export default function NewProductPage() {
         .replace(/[^\u0600-\u06FFa-z0-9-]/g, "");
       setSlug(generatedSlug);
     }
+  };
+
+  // Video management functions
+  const handleVideoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("video/")) {
+      toast.error("الرجاء اختيار ملف فيديو صحيح");
+      return;
+    }
+
+    setVideos([...videos, { file, isPrimary: videos.length === 0 }]);
+    toast.success("تم إضافة الفيديو");
+    e.target.value = "";
+  };
+
+  const handleRemoveVideo = (index: number) => {
+    const updatedVideos = videos.filter((_, i) => i !== index);
+    // If we removed the primary video, make the first one primary
+    if (updatedVideos.length > 0 && videos[index].isPrimary) {
+      updatedVideos[0].isPrimary = true;
+    }
+    setVideos(updatedVideos);
+    toast.success("تم حذف الفيديو");
+  };
+
+  const handleSetPrimaryVideo = (index: number) => {
+    const updatedVideos = videos.map((v, i) => ({
+      ...v,
+      isPrimary: i === index
+    }));
+    setVideos(updatedVideos);
+    toast.success("تم تعيين الفيديو كأساسي");
   };
 
   return (
@@ -304,6 +357,82 @@ export default function NewProductPage() {
                   placeholder={description || "وصف SEO"}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 />
+              </div>
+            </div>
+
+            {/* Video Section */}
+            <div className="border-t pt-4">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-gray-900">الفيديوهات</h3>
+                <label className="cursor-pointer">
+                  <input
+                    type="file"
+                    accept="video/*"
+                    onChange={handleVideoUpload}
+                    className="hidden"
+                  />
+                  <span className="inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-lg border bg-white text-gray-700 border-gray-300 hover:bg-gray-50 transition-colors">
+                    <Upload className="w-4 h-4 ml-2" />
+                    رفع فيديو
+                  </span>
+                </label>
+              </div>
+
+              <div className="space-y-4">
+                {/* Videos List */}
+                {videos.length > 0 ? (
+                  <div className="space-y-2">
+                    <p className="text-sm font-medium text-gray-700">
+                      الفيديوهات المضافة ({videos.length})
+                    </p>
+                    {videos.map((video, index) => (
+                      <div
+                        key={index}
+                        className={`flex items-center gap-3 p-3 border rounded-lg ${
+                          video.isPrimary ? 'border-primary-500 bg-primary-50' : 'border-gray-200'
+                        }`}
+                      >
+                        <Play className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm text-gray-900 truncate">
+                            {video.file.name}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            {(video.file.size / (1024 * 1024)).toFixed(2)} MB
+                          </p>
+                          {video.isPrimary && (
+                            <span className="text-xs text-primary-600 font-medium flex items-center gap-1">
+                              <Star className="w-3 h-3" />
+                              فيديو أساسي
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex gap-2">
+                          {!video.isPrimary && (
+                            <button
+                              type="button"
+                              onClick={() => handleSetPrimaryVideo(index)}
+                              className="px-3 py-1 text-sm text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+                            >
+                              جعله أساسي
+                            </button>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveVideo(index)}
+                            className="px-3 py-1 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          >
+                            حذف
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-center text-gray-500 py-8 text-sm">
+                    لم يتم إضافة فيديوهات بعد
+                  </p>
+                )}
               </div>
             </div>
 

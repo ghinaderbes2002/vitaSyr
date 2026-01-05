@@ -14,6 +14,7 @@ import {
   Star,
   CheckCircle,
   Clock,
+  Users,
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { sponsorshipCasesApi } from "@/lib/api/sponsorship";
@@ -107,7 +108,7 @@ export default function PublicSponsorshipPage() {
         <section className="py-12 px-4 bg-white border-b border-gray-200">
           <div className="max-w-7xl mx-auto">
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center">
+              {/* <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center">
                 <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Target className="w-8 h-8 text-white" />
                 </div>
@@ -115,8 +116,8 @@ export default function PublicSponsorshipPage() {
                   {cases.length}
                 </h3>
                 <p className="text-blue-700 font-medium">حالة قيد التمويل</p>
-              </div>
-
+              </div> */}
+              {/* 
               <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 text-center">
                 <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle className="w-8 h-8 text-white" />
@@ -127,6 +128,17 @@ export default function PublicSponsorshipPage() {
                   )}
                 </h3>
                 <p className="text-green-700 font-medium">إجمالي التبرعات</p>
+              </div> */}
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center">
+                <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-white" />
+                </div>
+
+                <h3 className="text-3xl font-bold text-blue-900 mb-2">120</h3>
+
+                <p className="text-blue-700 font-medium">
+                  عدد الأشخاص المكفولين
+                </p>
               </div>
 
               <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-6 text-center">
@@ -270,7 +282,7 @@ export default function PublicSponsorshipPage() {
                             <div className="pt-4 border-t border-gray-100">
                               <span className="inline-flex items-center justify-center w-full gap-2 px-4 py-3 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-bold rounded-xl group-hover:shadow-lg transition-all">
                                 <Heart className="w-5 h-5" />
-                                تبرع الآن
+                                تواصل معنا للتبرع
                               </span>
                             </div>
                           </div>
