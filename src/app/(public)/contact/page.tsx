@@ -184,87 +184,87 @@ export default function ContactPage() {
             </div>
 
             {/* Contact Info */}
-            <div className="bg-white rounded-2xl shadow-xl border-2 border-gray-200 p-8 flex flex-col gap-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <div className="bg-white rounded-2xl shadow-xl p-8 h-full flex flex-col">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                <Phone className="w-6 h-6 text-accent-500" />
                 معلومات التواصل
               </h2>
 
-              {/* <div className="flex items-center gap-3">
-                <Phone className="w-6 h-6 text-accent-500" />
-                <div>
-                  <p className="font-semibold">الهاتف</p>
-                  <a
-                    href="tel:+963935813333"
-                    className="text-gray-900 font-bold text-lg hover:text-accent-500 transition-colors"
-                    dir="ltr"
-                  >
-                    +963 935 813 333
-                  </a>
-                  <p className="text-gray-500 text-sm">
-                    متاح 7 أيام في الأسبوع
+              <div className="space-y-6 flex-grow">
+                <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl p-6 border-2 border-primary-100">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-white rounded-full p-3 shadow-md">
+                      <Mail className="w-6 h-6 text-accent-500" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-bold text-gray-900 mb-2">البريد الإلكتروني</p>
+                      <a
+                        href="mailto:info@vitaxir.com"
+                        className="text-accent-600 font-bold text-lg hover:text-accent-700 transition-colors block"
+                      >
+                        info@vitaxir.com
+                      </a>
+                      <p className="text-gray-600 text-sm mt-2">نرد على استفساراتك خلال 24 ساعة</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border-2 border-blue-200">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-white rounded-full p-3 shadow-md">
+                      <Clock className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-bold text-gray-900 mb-2">ساعات العمل</p>
+                      <p className="text-blue-900 font-bold text-lg">
+                        السبت - الخميس
+                      </p>
+                      <p className="text-gray-700 text-lg font-semibold mt-1">
+                        9:00 صباحاً - 8:00 مساءً
+                      </p>
+                      <p className="text-gray-600 text-sm mt-2">نحن في خدمتك طوال أيام الأسبوع</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border-2 border-green-200">
+                  <div className="flex items-start gap-4">
+                    <div className="bg-white rounded-full p-3 shadow-md">
+                      <MessageCircle className="w-6 h-6 text-green-600" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-bold text-gray-900 mb-2">تواصل معنا</p>
+                      <p className="text-gray-700 leading-relaxed">
+                        سواء كنت بحاجة إلى استشارة طبية، معلومات عن منتجاتنا، أو أي استفسار آخر، فريقنا جاهز لمساعدتك.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t-2 border-gray-100 pt-6">
+                  <h3 className="font-bold text-gray-900 mb-4 text-lg">تابعنا على مواقع التواصل</h3>
+                  <div className="flex items-center gap-4">
+                    <a
+                      href="https://www.facebook.com/share/17fC3cf3NJ/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 transition-all hover:scale-110 shadow-lg"
+                    >
+                      <Facebook className="w-6 h-6" />
+                    </a>
+                    <a
+                      href="https://www.instagram.com/vitaxirprosthetic"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-full p-3 transition-all hover:scale-110 shadow-lg"
+                    >
+                      <Instagram className="w-6 h-6" />
+                    </a>
+                  </div>
+                  <p className="text-gray-600 text-sm mt-4">
+                    تابع آخر أخبارنا وقصص نجاح المرضى على صفحاتنا
                   </p>
                 </div>
-              </div> */}
-
-              {/* <div className="flex items-center gap-3">
-                <MessageCircle className="w-6 h-6 text-accent-500" />
-                <div>
-                  <p className="font-semibold">واتساب</p>
-                  <a
-                    href="https://wa.me/963935813333"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-900 font-bold text-lg hover:text-accent-500 transition-colors"
-                    dir="ltr"
-                  >
-                    +963 935 813 333
-                  </a>
-                  <p className="text-gray-500 text-sm">استجابة فورية</p>
-                </div>
-              </div> */}
-
-              <div className="flex items-center gap-3">
-                <Mail className="w-6 h-6 text-accent-500" />
-                <div>
-                  <p className="font-semibold">البريد الإلكتروني</p>
-                  <a
-                    href="mailto:info@vitaxir.com"
-                    className="text-gray-900 font-bold text-lg hover:text-accent-500 transition-colors"
-                  >
-                    info@vitaxir.com
-                  </a>
-                  <p className="text-gray-500 text-sm">نرد خلال 24 ساعة</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <Clock className="w-6 h-6 text-accent-500" />
-                <div>
-                  <p className="font-semibold">ساعات العمل</p>
-                  <p className="text-gray-900 font-bold text-lg">
-                    9 صباحاً - 8 مساءً
-                  </p>
-                  <p className="text-gray-500 text-sm">(7 أيام)</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 mt-4">
-                <a
-                  href="https://www.facebook.com/share/17fC3cf3NJ/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
-                >
-                  <Facebook className="w-6 h-6" />
-                </a>
-                <a
-                  href="https://www.instagram.com/vitaxirprosthetic"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-700 hover:text-pink-500 transition-colors"
-                >
-                  <Instagram className="w-6 h-6" />
-                </a>
               </div>
             </div>
           </div>
