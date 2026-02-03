@@ -280,7 +280,7 @@ export default function ProductDetailPage() {
                   تواصل معنا
                 </Link>
                 <a
-                  href="tel:+963123456789"
+                  href="tel:+963987106020"
                   className="px-10 py-4 bg-accent-500 text-white rounded-lg hover:shadow-xl hover:scale-105 transition-all font-bold"
                 >
                   اتصل بنا

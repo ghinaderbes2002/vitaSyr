@@ -2,35 +2,57 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import NavigationProgress from "@/components/ui/NavigationProgress";
+import { servicesApi } from "@/lib/api/services";
 
 export default function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [serviceTypes, setServiceTypes] = useState<{ type: string; slug: string }[]>([]);
+
+  useEffect(() => {
+    loadServiceTypes();
+  }, []);
+
+  const loadServiceTypes = async () => {
+    try {
+      const data = await servicesApi.getAll();
+      const activeServices = data.filter((s) => s.isActive);
+
+      // Create map of service type to slug (first service of each type)
+      const typeToSlugMap: { [key: string]: string } = {};
+      activeServices.forEach((s) => {
+        const type = s.serviceType?.trim();
+        if (type && !typeToSlugMap[type]) {
+          typeToSlugMap[type] = s.slug;
+        }
+      });
+
+      setServiceTypes(
+        Object.entries(typeToSlugMap).map(([type, slug]) => ({ type, slug }))
+      );
+    } catch (error) {
+      console.error("Failed to load service types:", error);
+    }
+  };
 
   const navLinks = [
     { href: "/", label: "الرئيسية" },
     { href: "/about", label: "من نحن" },
     { href: "/services", label: "خدماتنا", hasDropdown: true },
-    { href: "/products", label: "منتجاتنا" },
+    // { href: "/products", label: "منتجاتنا" },
     { href: "/partnerships", label: "شراكات" },
     { href: "/success-stories", label: "أخبارنا" },
     { href: "/sponsorship", label: "كفالة إنسان" },
     { href: "/blog", label: "المدونة" },
     { href: "/contact", label: "اتصل بنا" },
     { href: "/join-us", label: "توظف معنا" },
-  ];
-
-  const serviceTypes = [
-    { href: "/services/prosthetics", label: "الأطراف الصناعية" },
-    { href: "/services/physiotherapy", label: "العلاج الفيزيائي" },
-    { href: "/services/foot-balance", label: "تحليل القدم وتصحيح المشي" },
   ];
 
   return (
@@ -45,27 +67,34 @@ export default function Header() {
             {navLinks.map((link) => (
               <div key={link.href} className="relative">
                 {link.hasDropdown ? (
-                  <div
-                    className="relative"
-                    onMouseEnter={() => setIsServicesOpen(true)}
-                    onMouseLeave={() => setIsServicesOpen(false)}
-                  >
-                    <Link
-                      href={link.href}
-                      className={`px-5 py-3 text-base hover:text-accent-500 hover:bg-accent-50 rounded-lg transition-all font-bold flex items-center gap-1 group ${
-                        pathname.startsWith('/services') ? 'text-accent-500 bg-accent-50' : 'text-primary-500'
-                      }`}
-                    >
-                      {link.label}
-                      <ChevronDown
-                        className={`w-5 h-5 transition-transform ${
-                          isServicesOpen ? "rotate-180" : ""
+                  <div className="relative">
+                    <div className={`flex items-center rounded-lg hover:bg-accent-50 transition-all relative group ${
+                      pathname.startsWith('/services') ? 'bg-accent-50' : ''
+                    }`}>
+                      <Link
+                        href={link.href}
+                        className={`pl-5 py-3 text-base hover:text-accent-500 transition-colors font-bold ${
+                          pathname.startsWith('/services') ? 'text-accent-500' : 'text-primary-500'
                         }`}
-                      />
-                      <span className={`absolute bottom-0 left-0 h-0.5 bg-accent-500 transition-all duration-300 ${
+                      >
+                        {link.label}
+                      </Link>
+                      <button
+                        onClick={() => setIsServicesOpen(!isServicesOpen)}
+                        className={`pr-4 py-3 hover:text-accent-500 transition-colors ${
+                          pathname.startsWith('/services') ? 'text-accent-500' : 'text-primary-500'
+                        }`}
+                      >
+                        <ChevronDown
+                          className={`w-5 h-5 transition-transform ${
+                            isServicesOpen ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                      <span className={`absolute bottom-0 left-0 right-0 h-0.5 bg-accent-500 transition-all duration-300 ${
                         pathname.startsWith('/services') ? 'w-full' : 'w-0 group-hover:w-full'
                       }`}></span>
-                    </Link>
+                    </div>
 
                     {/* Dropdown Menu */}
                     {isServicesOpen && (
@@ -76,13 +105,13 @@ export default function Header() {
                         >
                           كل الخدمات
                         </Link>
-                        {serviceTypes.map((service) => (
+                        {serviceTypes.map(({ type, slug }) => (
                           <Link
-                            key={service.href}
-                            href={service.href}
+                            key={type}
+                            href={`/services/${slug}`}
                             className="block px-5 py-3 text-gray-700 hover:bg-accent-50 hover:text-accent-500 transition-colors font-semibold"
                           >
-                            {service.label}
+                            {type}
                           </Link>
                         ))}
                       </div>
@@ -165,14 +194,14 @@ export default function Header() {
                           >
                             كل الخدمات
                           </Link>
-                          {serviceTypes.map((service) => (
+                          {serviceTypes.map(({ type, slug }) => (
                             <Link
-                              key={service.href}
-                              href={service.href}
+                              key={type}
+                              href={`/services/${slug}`}
                               onClick={() => setIsMenuOpen(false)}
                               className="block px-4 py-2 text-sm text-gray-700 hover:text-accent-500 hover:bg-accent-50 rounded-lg transition-colors"
                             >
-                              {service.label}
+                              {type}
                             </Link>
                           ))}
                         </div>

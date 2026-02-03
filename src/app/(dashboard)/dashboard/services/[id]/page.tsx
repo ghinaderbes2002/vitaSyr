@@ -24,7 +24,7 @@ export default function ServiceEditPage() {
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [description, setDescription] = useState("");
-  const [serviceType, setServiceType] = useState("PROSTHETICS");
+  const [serviceType, setServiceType] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
   const [isActive, setIsActive] = useState(true);
@@ -109,8 +109,8 @@ export default function ServiceEditPage() {
 
   // Features Functions
   const handleAddFeature = async () => {
-    if (!newFeature.title.trim() || !newFeature.description.trim()) {
-      toast.error("الرجاء ملء جميع حقول الميزة");
+    if (!newFeature.title.trim()) {
+      toast.error("الرجاء كتابة عنوان الميزة");
       return;
     }
 
@@ -315,16 +315,14 @@ export default function ServiceEditPage() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 نوع الخدمة *
               </label>
-              <select
+              <input
+                type="text"
                 value={serviceType}
                 onChange={(e) => setServiceType(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              >
-                <option value="PROSTHETICS">الأطراف الصناعية</option>
-                <option value="PHYSIOTHERAPY">العلاج الفيزيائي</option>
-                <option value="FOOT_BALANCE">تحليل القدم</option>
-                <option value="OTHER">أخرى</option>
-              </select>
+                placeholder="مثال: الأطراف الصناعية، العلاج الفيزيائي"
+                required
+              />
             </div>
 
             <div className="flex items-center gap-2 pt-8">
@@ -333,7 +331,7 @@ export default function ServiceEditPage() {
                 id="isActive"
                 checked={isActive}
                 onChange={(e) => setIsActive(e.target.checked)}
-                className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                className="w-4 h-4 text-primary-600 border-gray-300 rounded-lg focus:ring-primary-500"
               />
               <label htmlFor="isActive" className="text-sm font-medium text-gray-700">
                 نشط
@@ -390,17 +388,17 @@ export default function ServiceEditPage() {
           <div className="space-y-3">
             <input
               type="text"
-              placeholder="عنوان الميزة"
+              placeholder="عنوان الميزة *"
               value={newFeature.title}
               onChange={(e) => setNewFeature({ ...newFeature, title: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
             />
             <textarea
-              placeholder="وصف الميزة"
+              placeholder="وصف الميزة (اختياري)"
               value={newFeature.description}
               onChange={(e) => setNewFeature({ ...newFeature, description: e.target.value })}
-              rows={2}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+              rows={4}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 resize-y"
             />
             <Button onClick={handleAddFeature} size="sm" variant="primary">
               <Plus className="w-4 h-4 ml-2" />
@@ -427,8 +425,8 @@ export default function ServiceEditPage() {
                     <textarea
                       defaultValue={feature.description}
                       id={`feature-desc-${feature.id}`}
-                      rows={2}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                      rows={4}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg resize-y"
                     />
                     <div className="flex gap-2">
                       <Button
@@ -457,7 +455,7 @@ export default function ServiceEditPage() {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <h4 className="font-medium text-gray-900">{feature.title}</h4>
-                      <p className="text-sm text-gray-600 mt-1">{feature.description}</p>
+                      <p className="text-sm text-gray-600 mt-1 whitespace-pre-line">{feature.description}</p>
                     </div>
                     <div className="flex gap-2">
                       <button

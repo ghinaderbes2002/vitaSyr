@@ -253,7 +253,7 @@ export default function ContactPage() {
                       <Facebook className="w-6 h-6" />
                     </a>
                     <a
-                      href="https://www.instagram.com/vitaxirprosthetic"
+                      href="https://www.instagram.com/vitaxir_company?igsh=MWdxY3p2dGh4a3l6dA=="
                       target="_blank"
                       rel="noopener noreferrer"
                       className="bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-full p-3 transition-all hover:scale-110 shadow-lg"

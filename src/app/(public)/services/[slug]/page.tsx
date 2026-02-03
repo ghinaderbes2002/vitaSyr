@@ -16,6 +16,7 @@ import {
   Award,
   Sparkles,
   Stethoscope,
+  ArrowLeft,
 } from "lucide-react";
 import type { Service } from "@/types/service";
 import Header from "@/components/public/Header";
@@ -107,12 +108,25 @@ console.log(slug);
 
   const sectionTitles = getSectionTitles();
 
+  // Get product category based on feature title for supply service
+  const getProductCategory = (featureTitle: string): string | null => {
+    const title = featureTitle.toLowerCase();
+    if (title.includes('أطراف صناعية')) {
+      return 'prosthetics';
+    } else if (title.includes('أجهزة العلاج الفيزيائي')) {
+      return 'Physical_therapy_equipment';
+    } else if (title.includes('تحليل صحة القدم') || title.includes('أجهزة خاصة بتحليل')) {
+      return 'Foot_health_analysis_devices';
+    }
+    return null;
+  };
+
   return (
     <>
       <Header />
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Back Button */}
-        <div className="container mx-auto px-4 py-6">
+        {/* <div className="container mx-auto px-4 py-6">
         <Link
           href="/services"
           className="inline-flex items-center text-primary-500 hover:text-accent-500 transition-colors font-semibold"
@@ -120,7 +134,7 @@ console.log(slug);
           <ArrowRight className="w-5 h-5 ml-2" />
           العودة للخدمات
         </Link>
-      </div>
+      </div> */}
 
       {/* Hero Section with Images */}
       <section className="relative py-12 px-4">
@@ -218,7 +232,7 @@ console.log(slug);
                             <h3 className="text-3xl font-bold text-gray-900 mb-4">
                               {feature.title}
                             </h3>
-                            <p className="text-gray-600 leading-relaxed text-lg">
+                            <p className="text-gray-600 leading-relaxed text-lg whitespace-pre-line">
                               {feature.description}
                             </p>
                           </div>
@@ -251,11 +265,24 @@ console.log(slug);
                           <div className="p-2 bg-accent-100 rounded-lg flex-shrink-0">
                             <Check className="w-6 h-6 text-accent-500" />
                           </div>
-                          <div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">
-                              {feature.title}
-                            </h3>
-                            <p className="text-gray-600 leading-relaxed">
+                          <div className="flex-1">
+                            <div className="flex items-start justify-between mb-2">
+                              <h3 className="text-xl font-bold text-gray-900 flex-1">
+                                {feature.title}
+                              </h3>
+                              {service.slug === "supply_of_medical_devices_and_prosthetic_solutions" &&
+                               getProductCategory(feature.title) && (
+                                <Link
+                                  href={`/products?category=${getProductCategory(feature.title)}`}
+                                  className="inline-flex items-center gap-1 text-accent-500 hover:text-accent-600 transition-colors text-sm font-semibold whitespace-nowrap"
+                                  title="تصفح المنتجات"
+                                >
+                                  تصفح المنتجات
+                                  <ArrowLeft className="w-4 h-4" />
+                                </Link>
+                              )}
+                            </div>
+                            <p className="text-gray-600 leading-relaxed mb-3 whitespace-pre-line">
                               {feature.description}
                             </p>
                           </div>
@@ -428,16 +455,16 @@ console.log(slug);
               تواصل معنا اليوم لمعرفة المزيد عن هذه الخدمة واحجز استشارتك
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {/* Show both buttons only for PROSTHETICS */}
-              {/* {service.serviceType === "PROSTHETICS" && (
+              {/* Show products button for specific service */}
+              {service.slug === "supply_of_medical_devices_and_prosthetic_solutions" && (
                 <Link
                   href="/products"
-                  className="px-8 py-4 bg-white text-primary-500 rounded-lg hover:shadow-xl hover:scale-105 transition-all font-semibold inline-flex items-center justify-center"
+                  className="px-8 py-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-lg hover:shadow-xl hover:scale-105 transition-all font-semibold inline-flex items-center justify-center"
                 >
                   <ShoppingBag className="w-5 h-5 ml-2" />
                   تصفح المنتجات
                 </Link>
-              )} */}
+              )}
               <Link
                 href="/appointments"
                 className="px-8 py-4 bg-white text-primary-500 rounded-lg hover:shadow-xl hover:scale-105 transition-all font-semibold inline-flex items-center justify-center"

@@ -20,6 +20,8 @@ import {
   Target,
   MessageCircle,
   Info,
+  Heart,
+  Wrench,
 } from "lucide-react";
 import Link from "next/link";
 import type {
@@ -133,8 +135,8 @@ export default function PartnershipsPage() {
               شراكات وفرص استثمارية
             </h1>
             <p className="text-xl md:text-2xl opacity-95 leading-relaxed mb-8">
-              نرحب بالشراكات الطبية والاستثمارية لتطوير خدماتنا وتوسيع نطاق
-              عملنا
+              انضم إلينا في تطوير مستقبل الأطراف الصناعية والعلاج الفيزيائي وطب
+              القدم.
             </p>
 
             {/* CTA Buttons */}
@@ -165,29 +167,42 @@ export default function PartnershipsPage() {
                 لماذا الشراكة معنا؟
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                نقدم فرصاً واعدة للنمو والتطور في مجال الأطراف الصناعية والرعاية
-                الصحية
+                تقدّم Vitaxir فرصًا للتعاون والشراكات الاستراتيجية مع مجموعة
+                متنوعة من الجهات لتحقيق قيمة مشتركة ومستدامة، وتشمل
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
                   icon: TrendingUp,
-                  title: "سوق متنامي",
+                  title: " الجهات والمنشآت الطبية",
                   description:
-                    "قطاع الأطراف الصناعية في نمو مستمر مع فرص كبيرة للتوسع",
+                    " تأسيس وتشغيل مراكز مجهزة وفق أعلى معايير الجودة.  ",
                 },
                 {
                   icon: Users,
-                  title: "فريق محترف",
-                  description: "نخبة من المتخصصين والخبراء في المجال الطبي",
+                  title: "المستثمرين ",
+                  description:
+                    " فرص استثمارية في قطاع الأطراف الصناعية والعلاج الفيزيائي الواعد.",
                 },
                 {
                   icon: Target,
-                  title: "رؤية واضحة",
+                  title: " مؤسسات الرعاية الصحية",
                   description:
-                    "استراتيجية واضحة للنمو والتطوير على المدى الطويل",
+                    " تطوير خدمات تأهيلية متكاملة ومستدامة.",
+                },
+                {
+                  icon: Heart,
+                  title: "المنظمات الإنسانية",
+                  description:
+                    "دعم مشاريع التأهيل وتحسين الوصول إلى خدمات طبية متقدمة.",
+                },
+                {
+                  icon: Wrench,
+                  title: "مطوري المنتجات الطبية",
+                  description:
+                    "شراكات لتطوير الأجهزة والتقنيات الحديثة.",
                 },
               ].map((item, index) => {
                 const Icon = item.icon;

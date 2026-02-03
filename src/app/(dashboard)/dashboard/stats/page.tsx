@@ -83,7 +83,7 @@ export default function StatsPage() {
           {/* Happy Patients */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              عدد المرضى السعداء
+              عدد المتدربين
             </label>
             <div className="relative">
               <input
@@ -114,7 +114,10 @@ export default function StatsPage() {
                 type="number"
                 value={stats.yearsExperience}
                 onChange={(e) =>
-                  setStats({ ...stats, yearsExperience: Number(e.target.value) })
+                  setStats({
+                    ...stats,
+                    yearsExperience: Number(e.target.value),
+                  })
                 }
                 min="0"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-lg font-bold"
@@ -131,7 +134,7 @@ export default function StatsPage() {
           {/* Sponsorship Cases */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              حالات الكفالة
+              الشركات{" "}
             </label>
             <div className="relative">
               <input
@@ -158,7 +161,7 @@ export default function StatsPage() {
           {/* Success Rate */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              نسبة النجاح (%)
+              دول{" "}
             </label>
             <div className="relative">
               <input
@@ -202,7 +205,7 @@ export default function StatsPage() {
             <div className="text-3xl font-bold text-gray-900 mb-2">
               {stats.happyPatients}+
             </div>
-            <div className="text-gray-600 font-medium text-sm">مريض سعيد</div>
+            <div className="text-gray-600 font-medium text-sm">متدرب </div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-gray-900 mb-2">
@@ -214,13 +217,13 @@ export default function StatsPage() {
             <div className="text-3xl font-bold text-gray-900 mb-2">
               {stats.sponsorshipCases}+
             </div>
-            <div className="text-gray-600 font-medium text-sm">حالة كفالة</div>
+            <div className="text-gray-600 font-medium text-sm">الشركات </div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-gray-900 mb-2">
               {stats.successRate}%
             </div>
-            <div className="text-gray-600 font-medium text-sm">نسبة النجاح</div>
+            <div className="text-gray-600 font-medium text-sm">دول </div>
           </div>
         </div>
       </div>

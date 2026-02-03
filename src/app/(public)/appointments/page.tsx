@@ -301,11 +301,11 @@ export default function AppointmentsPage() {
                         <span className="font-semibold text-gray-600">هاتف</span>
                       </div>
                       <a
-                        href="tel:+963935813333"
+                        href="tel:+963987106020"
                         className="text-2xl font-bold text-gray-900 hover:text-accent-500 transition-colors block"
                         dir="ltr"
                       >
-                        +963 935 813 333
+                        +963 987 106 020
                       </a>
                     </div>
 
@@ -318,13 +318,13 @@ export default function AppointmentsPage() {
                         <span className="font-semibold text-gray-600">واتساب</span>
                       </div>
                       <a
-                        href="https://wa.me/963935813333"
+                        href="https://wa.me/963987106020"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xl font-bold text-gray-900 hover:text-accent-500 transition-colors block"
                         dir="ltr"
                       >
-                        +963 935 813 333
+                        +963 987 106 020
                       </a>
                     </div>
 

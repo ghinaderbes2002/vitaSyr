@@ -47,7 +47,7 @@ export default function Footer() {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://www.instagram.com/vitaxirprosthetic"
+                href="https://www.instagram.com/vitaxir_company?igsh=MWdxY3p2dGh4a3l6dA=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 bg-white/10 rounded-lg hover:bg-accent-500 transition-all hover:scale-110"
@@ -183,11 +183,11 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-accent-500 flex-shrink-0" />
                 <a
-                  href="tel:+963935813333"
+                  href="tel:+963987106020"
                   className="text-sm hover:text-accent-500 transition-colors"
                   dir="ltr"
                 >
-                  +963 935 813 333
+                 +963 987 106 020
                 </a>
               </li>
               <li className="flex items-center gap-3">

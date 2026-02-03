@@ -17,6 +17,7 @@ import {
   Wrench,
   Globe,
   TrendingUp,
+  MapPin,
 } from "lucide-react";
 import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
@@ -95,17 +96,20 @@ export default function HomePage() {
           <div className="container mx-auto px-4 py-20 relative z-10">
             <div className="max-w-4xl">
               <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white leading-tight">
-                مع كل طرف نركبه… نعيد قصة حياة!
+                نمكّن المراكز الطبية ونحوّل الابتكار إلى واقع ملموس..
               </h1>
               <p className="text-xl md:text-2xl mb-8 text-gray-100 leading-relaxed">
-                في <span className="text-accent-400 font-bold">Vitaxir</span>{" "}
-                نصمّم أطرافًا صناعية متطورة ونقدّم برامج تأهيل شاملة تساعدك على
-                استعادة الحركة، الثقة، والاستقلالية.
+                شركة <span className="text-accent-400 font-bold">Vitaxir</span>{" "}
+                هي شركة متخصصة في تجهيز وتطوير مراكز الأطراف الصناعية وإعادة
+                التأهيل والعلاج الفيزيائي ومراكز صحة القدم، تأسست في تركيا منذ
+                أكثر من 11 عاماً، تعمل على تجهيز المراكز الطبية وتأهيل الكوادر،
+                وتقديم حلول مبتكرة للمرافق الطبية التي تهدف إلى تقديم خدمات
+                الأطراف الصناعية والعلاج الفيزيائي وطب الأقدام.
                 <br />
-                <span className="text-accent-300 font-semibold">
+                {/* <span className="text-accent-300 font-semibold">
                   كل خطوة نؤمنها لك نساعدك من خلالها على استعادة حركتك… واستعادة
                   نفسك.
-                </span>
+                </span> */}
               </p>
               <div className="flex flex-wrap gap-4">
                 {/* <Link
@@ -120,6 +124,13 @@ export default function HomePage() {
                   className="px-8 py-4 bg-white text-primary-500 rounded-lg font-bold hover:bg-gray-100 hover:shadow-xl transition-all"
                 >
                   احجز موعدًا
+                </Link>
+                <Link
+                  href="/contact"
+                  className="px-8 py-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white rounded-lg font-bold hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2"
+                >
+                  <Heart className="w-5 h-5" />
+                  ناقش مشروعك معنا
                 </Link>
                 {/* <Link
                   href="/contact"
@@ -140,37 +151,68 @@ export default function HomePage() {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-full mb-4">
                   <Users className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
+                <div
+                  className="text-3xl font-bold text-gray-900 mb-2"
+                  dir="ltr"
+                >
                   {stats.happyPatients}+
                 </div>
-                <div className="text-gray-600 font-medium">مريض سعيد</div>
+                <div className="text-gray-600 font-medium">
+                  <span className="block"> متدرب </span>
+                  <span className="block">
+                    من خلال التدريبات التخصصية التي قدمناها{" "}
+                  </span>
+                </div>{" "}
               </div>
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-full mb-4">
                   <Award className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
+                <div
+                  className="text-3xl font-bold text-gray-900 mb-2"
+                  dir="ltr"
+                >
                   {stats.yearsExperience}+
                 </div>
-                <div className="text-gray-600 font-medium">سنة خبرة</div>
+                <div className="text-gray-600 font-medium">
+                  <span className="block">عام من الخبرة</span>
+                  <span className="block">
+                    بدأنا الإنجاز والتخصص منذ عام 2013
+                  </span>
+                </div>
               </div>
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-full mb-4">
                   <Heart className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
+                <div
+                  className="text-3xl font-bold text-gray-900 mb-2"
+                  dir="ltr"
+                >
                   {stats.sponsorshipCases}+
                 </div>
-                <div className="text-gray-600 font-medium">حالة كفالة</div>
+                <div className="text-gray-600 font-medium">
+                  <span className="block"> شركات </span>
+                  <span className="block">
+                    ساهمنا بتأسيس 4 شركات قدمت العلاج لأكثر من 3000 مريض وقامت
+                    بتركيب 2500 طرف{" "}
+                  </span>
+                </div>
               </div>
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-full mb-4">
                   <TrendingUp className="w-8 h-8" />
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
-                  {stats.successRate}%
+                <div
+                  className="text-3xl font-bold text-gray-900 mb-2"
+                  dir="ltr"
+                >
+                  {stats.sponsorshipCases}+
                 </div>
-                <div className="text-gray-600 font-medium">نسبة النجاح</div>
+                <div className="text-gray-600 font-medium">
+                  <span className="block"> دول </span>
+                  <span className="block">أسسنا شركاتنا في 4 دول مختلفة</span>
+                </div>{" "}
               </div>
             </div>
           </div>
@@ -184,7 +226,8 @@ export default function HomePage() {
                 لماذا <span className="text-primary-500">نحن</span>؟
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                نقدم حلولاً متكاملة ومتطورة تضمن لك استعادة حياتك بشكل كامل
+                لا نقدّم خدمة فقط، بل نبني شراكات قائمة على الثقة، المعرفة،
+                والأثر المستدام.{" "}
               </p>
             </div>
 
@@ -199,11 +242,12 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                      حلول متقدمة للأطراف الصناعية
+                      كفالة حقيقية للمراكز{" "}
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      نستخدم أحدث التقنيات والمكوّنات العالمية لنضمن لك طرفًا
-                      صناعيًا مريحًا، متينًا، ومتوافقًا مع احتياجاتك اليومية.
+                      نؤمن أن التأهيل حق أساسي، لذلك نعتبر تأسيس وتجهيز وتأهيل
+                      المراكز كفالة متكاملة تضمن استمرارية تقديم الأطراف
+                      الصناعية وخدمات التأهيل لمن هم بأمسّ الحاجة.
                     </p>
                   </div>
                 </div>
@@ -219,12 +263,11 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                      تأهيل متكامل بإشراف متخصصين
+                      ثقة تُبنى بالنتائج{" "}
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      يعمل فريق المعالجين الفيزيائيين على تدريبك خطوة بخطوة
-                      لاستعادة التوازن والقدرة على الحركة باستخدام الطرف
-                      الصناعي.
+                      نلتزم بأعلى معايير الجودة والمهنية في كل مرحلة، من التخطيط
+                      وحتى التشغيل، ما جعلنا محل ثقة شركائنا داخل سوريا وخارجها.
                     </p>
                   </div>
                 </div>
@@ -240,11 +283,12 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                      تصميم مخصص لكل حالة
+                      شراكات مع وكالات وشركات عالمية{" "}
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      نؤمن بأن كل مريض حالة فريدة؛ لذلك نصمّم الأطراف بما يتناسب
-                      مع شكل الجسم، نمط الحياة، ونوع النشاط.
+                      نعمل بالتعاون مع موردين ووكالات دولية معتمدة، لنضمن أحدث
+                      التقنيات وأفضل الحلول في مجال الأطراف الصناعية وإعادة
+                      التأهيل.
                     </p>
                   </div>
                 </div>
@@ -260,12 +304,41 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                      جودة شراكات عالمية
+                      خبرة أكاديمية وعلمية متخصصة{" "}
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
-                      نحن وكلاء ومزوّدون لعدد من الماركات العالمية في مجال
-                      الأطراف الصناعية، لنضمن لك جودة تواكب أعلى معايير الصناعة.
+                      نستند إلى معرفة علمية وخبرة أكاديمية وميدانية، وننقل هذه
+                      الخبرة عبر التدريب، الإشراف، وبناء الكوادر المؤهلة.
                     </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature 5 */}
+              <div className="md:col-start-1 md:col-end-3 flex justify-center">
+                <div
+                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all 
+                  border-t-4 border-primary-500 
+                  w-full md:w-[calc(50%-1rem)]"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <div
+                        className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 
+                rounded-xl flex items-center justify-center text-white"
+                      >
+                        <MapPin className="w-8 h-8" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                        نصل إليك أينما كنت
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        أينما كان موقعك، نحن قادرون على مرافقتك في تأسيس وتجهيز
+                        مركزك، وتقديم الدعم الفني والتدريبي.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -289,25 +362,45 @@ export default function HomePage() {
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white hover:bg-white/20 transition-all">
                 <CheckCircle className="w-12 h-12 text-accent-400 mb-4" />
                 <h3 className="text-xl font-bold mb-2">
-                  تصميم وتعديل الأطراف الصناعية
+                  تجهيز وتأسيس المراكز{" "}
                 </h3>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white hover:bg-white/20 transition-all">
                 <CheckCircle className="w-12 h-12 text-accent-400 mb-4" />
                 <h3 className="text-xl font-bold mb-2">
-                  التركيب والمعايرة الدقيقة
+                  تدريب وتأهيل الكوادر{" "}
                 </h3>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white hover:bg-white/20 transition-all">
                 <CheckCircle className="w-12 h-12 text-accent-400 mb-4" />
                 <h3 className="text-xl font-bold mb-2">
-                  إعادة التأهيل الحركي والفيزيائي
+                  توريد الأجهزة والأطراف{" "}
                 </h3>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white hover:bg-white/20 transition-all">
                 <CheckCircle className="w-12 h-12 text-accent-400 mb-4" />
                 <h3 className="text-xl font-bold mb-2">
-                  الصيانة والمتابعة الدورية
+                  توريد أجهزة متخصصة لفحص صحة القدم وتصميم الضبانات الطبية{" "}
+                </h3>
+              </div>
+              <div
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white 
+                hover:bg-white/20 transition-all
+                lg:col-start-2"
+              >
+                <CheckCircle className="w-12 h-12 text-accent-400 mb-4" />
+                <h3 className="text-xl font-bold mb-2">
+                  الاستشارات الفنية والإدارية
+                </h3>
+              </div>
+
+              <div
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white 
+                hover:bg-white/20 transition-all"
+              >
+                <CheckCircle className="w-12 h-12 text-accent-400 mb-4" />
+                <h3 className="text-xl font-bold mb-2">
+                  الدعم الفني والمتابعة
                 </h3>
               </div>
             </div>
@@ -323,7 +416,6 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
 
         {/* Partners Section */}
         <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
@@ -366,7 +458,7 @@ export default function HomePage() {
                         className="max-h-16 w-auto object-contain"
                       />
                     </div>
-                  )
+                  ),
                 )}
               </div>
             ) : (
@@ -378,8 +470,6 @@ export default function HomePage() {
             )}
           </div>
         </section>
-
-    
       </div>
       <Footer />
     </>

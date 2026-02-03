@@ -28,26 +28,39 @@ function ServicesContent() {
   const serviceType = searchParams.get("type");
 
   const [services, setServices] = useState<Service[]>([]);
+  const [allServices, setAllServices] = useState<Service[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedType, setSelectedType] = useState<string>(serviceType || "");
 
   useEffect(() => {
     loadServices();
+  }, []);
+
+  useEffect(() => {
+    // تحديث النوع المختار من URL
+    if (serviceType !== null) {
+      setSelectedType(serviceType);
+    }
   }, [serviceType]);
+
+  useEffect(() => {
+    // فلترة حسب النوع المحدد
+    if (selectedType) {
+      const trimmedType = selectedType.trim();
+      setServices(allServices.filter((s) => s.serviceType?.trim() === trimmedType));
+    } else {
+      setServices(allServices);
+    }
+  }, [selectedType, allServices]);
 
   const loadServices = async () => {
     try {
       setIsLoading(true);
       const data = await servicesApi.getAll();
       // فقط الخدمات النشطة
-      let activeServices = data.filter((s) => s.isActive);
+      const activeServices = data.filter((s) => s.isActive);
 
-      // تصفية حسب النوع إذا كان محدد
-      if (serviceType) {
-        activeServices = activeServices.filter(
-          (s) => s.serviceType === serviceType
-        );
-      }
-
+      setAllServices(activeServices);
       setServices(activeServices);
     } catch (error) {
       toast.error("فشل تحميل الخدمات");
@@ -56,44 +69,6 @@ function ServicesContent() {
     }
   };
 
-  const getServiceTypeLabel = (type: string | null) => {
-    switch (type) {
-      case "PROSTHETICS":
-        return "الأطراف الصناعية";
-      case "PHYSIOTHERAPY":
-        return "العلاج الفيزيائي";
-      case "FOOT_BALANCE":
-        return "تحليل القدم وتصحيح المشي";
-      default:
-        return "كل الخدمات";
-    }
-  };
-
-  const getServiceIcon = (type: string) => {
-    switch (type) {
-      case "PROSTHETICS":
-        return <Activity className="w-12 h-12" />;
-      case "PHYSIOTHERAPY":
-        return <Stethoscope className="w-12 h-12" />;
-      case "FOOT_BALANCE":
-        return <Users className="w-12 h-12" />;
-      default:
-        return <Award className="w-12 h-12" />;
-    }
-  };
-
-  const getServiceColor = (type: string) => {
-    switch (type) {
-      case "PROSTHETICS":
-        return "from-primary-500 to-primary-600";
-      case "PHYSIOTHERAPY":
-        return "from-accent-500 to-accent-600";
-      case "FOOT_BALANCE":
-        return "from-blue-500 to-cyan-500";
-      default:
-        return "from-gray-500 to-gray-600";
-    }
-  };
 
   if (isLoading) {
     return (
@@ -120,22 +95,10 @@ function ServicesContent() {
         </div>
 
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            {getServiceTypeLabel(serviceType)}
-          </h1>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">خدماتنا</h1>
           <p className="text-xl md:text-2xl leading-relaxed opacity-95">
-            {serviceType
-              ? `تصفح جميع خدماتنا في مجال ${getServiceTypeLabel(serviceType)}`
-              : "نقدم مجموعة متكاملة من الخدمات الطبية المتخصصة في الأطراف الصناعية والعلاج الفيزيائي"}
+            نقدم مجموعة متكاملة من الخدمات الطبية المتخصصة في الأطراف الصناعية والعلاج الفيزيائي
           </p>
-          {serviceType && (
-            <Link
-              href="/services"
-              className="inline-block mt-6 px-6 py-3 bg-white text-primary-500 rounded-lg hover:bg-accent-500 hover:text-white transition-all font-semibold"
-            >
-              عرض كل الخدمات
-            </Link>
-          )}
         </div>
       </section>
 
@@ -169,13 +132,9 @@ function ServicesContent() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       </div>
                     ) : (
-                      <div
-                        className={`relative h-64 bg-gradient-to-br ${getServiceColor(
-                          service.serviceType
-                        )} flex items-center justify-center`}
-                      >
+                      <div className="relative h-64 bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
                         <div className="text-white opacity-80">
-                          {getServiceIcon(service.serviceType)}
+                          <Award className="w-12 h-12" />
                         </div>
                       </div>
                     )}

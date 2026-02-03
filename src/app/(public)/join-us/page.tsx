@@ -129,7 +129,9 @@ export default function JoinUsPage() {
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">انضم إلينا</h1>
             <p className="text-xl md:text-2xl opacity-95 leading-relaxed">
-              كن جزءاً من فريقنا المتميز في خدمة المجتمع
+              كن جزءًا من رحلة تطوير مستقبل الأطراف الصناعية والعلاج الفيزيائي،
+              وساهم في تقديم خدمات عالية الجودة للمجتمع إذا كنت متخصصًا في أحد
+              المجالات التالية أو لديك خبرة ذات صلة، فنحن نرحّب بك{" "}
             </p>
           </div>
         </section>
@@ -318,7 +320,9 @@ export default function JoinUsPage() {
                       <input
                         type="number"
                         value={yearsOfExperience}
-                        onChange={(e) => setYearsOfExperience(Number(e.target.value))}
+                        onChange={(e) =>
+                          setYearsOfExperience(Number(e.target.value))
+                        }
                         required
                         min={0}
                         max={50}

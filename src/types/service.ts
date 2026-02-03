@@ -45,10 +45,8 @@ export interface ServiceImage {
 export interface CreateServiceData {
   slug: string;
   title: string;
+  description?: string;
   serviceType: string;
-  shortDescription?: string;
-  fullDescription?: string;
-  mainImage?: string;
   metaTitle: string;
   metaDescription: string;
   isActive?: boolean;

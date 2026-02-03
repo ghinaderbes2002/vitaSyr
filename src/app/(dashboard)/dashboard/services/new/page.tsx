@@ -15,7 +15,7 @@ export default function NewServicePage() {
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [description, setDescription] = useState("");
-  const [serviceType, setServiceType] = useState("PROSTHETICS");
+  const [serviceType, setServiceType] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
   const [isActive, setIsActive] = useState(true);
@@ -35,16 +35,12 @@ export default function NewServicePage() {
       const serviceData: any = {
         title: title.trim(),
         slug: slug.trim(),
+        description: description.trim(),
         serviceType,
         metaTitle: metaTitle.trim() || title.trim(),
         metaDescription: metaDescription.trim() || description.trim() || title.trim(),
         isActive,
       };
-
-      // Add description only if not empty
-      if (description.trim()) {
-        serviceData.description = description.trim();
-      }
 
       console.log("Creating service with data:", serviceData);
 
@@ -149,17 +145,14 @@ export default function NewServicePage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   نوع الخدمة *
                 </label>
-                <select
+                <input
+                  type="text"
                   value={serviceType}
                   onChange={(e) => setServiceType(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  placeholder="مثال: الأطراف الصناعية، العلاج الفيزيائي"
                   required
-                >
-                  <option value="PROSTHETICS">الأطراف الصناعية</option>
-                  <option value="PHYSIOTHERAPY">العلاج الفيزيائي</option>
-                  <option value="FOOT_BALANCE">تحليل القدم</option>
-                  <option value="OTHER">أخرى</option>
-                </select>
+                />
               </div>
 
               <div className="flex items-center gap-2 pt-8">
@@ -168,7 +161,7 @@ export default function NewServicePage() {
                   id="isActive"
                   checked={isActive}
                   onChange={(e) => setIsActive(e.target.checked)}
-                  className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                  className="w-4 h-4 text-primary-600 border-gray-300 rounded-lg focus:ring-primary-500"
                 />
                 <label htmlFor="isActive" className="text-sm font-medium text-gray-700">
                   نشط
