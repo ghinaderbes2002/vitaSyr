@@ -144,7 +144,7 @@ console.log(slug);
           <div className="grid md:grid-cols-2 gap-8 items-center">
             {/* Service Info */}
             <div className="space-y-6">
-              <div className="inline-block px-4 py-2 bg-accent-100 text-accent-600 rounded-full text-sm font-semibold">
+              {/* <div className="inline-block px-4 py-2 bg-accent-100 text-accent-600 rounded-full text-sm font-semibold">
                 {service.serviceType === "PROSTHETICS"
                   ? "الأطراف الصناعية"
                   : service.serviceType === "PHYSIOTHERAPY"
@@ -152,7 +152,7 @@ console.log(slug);
                   : service.serviceType === "FOOT_BALANCE"
                   ? "توازن القدم"
                   : "خدمات أخرى"}
-              </div>
+              </div> */}
               <h1 className="text-5xl font-bold text-gray-900 leading-tight">
                 {service.title}
               </h1>
@@ -193,7 +193,138 @@ console.log(slug);
       {/* Features Section */}
       {service.features && service.features.length > 0 && (
         <>
-          {service.serviceType === "PHYSIOTHERAPY" ? (
+          {service.slug === "center_setup_and_establishment" ? (
+            // Card Design Layout for Center Setup
+            <section className="py-16 px-4 bg-white">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex items-center gap-3 mb-12">
+                  <Sparkles className="w-8 h-8 text-accent-500" />
+                  <h2 className="text-4xl font-bold text-gray-900">
+                    {sectionTitles.features}
+                  </h2>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {service.features
+                    .sort((a, b) => a.orderIndex - b.orderIndex)
+                    .map((feature, index) => (
+                      <div
+                        key={feature.id}
+                        className="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                      >
+                        {/* Card Image */}
+                        <div className="relative h-64 overflow-hidden">
+                          {service.images && service.images[index] ? (
+                            <div
+                              className="relative w-full h-full cursor-pointer"
+                              onClick={() => setSelectedImage(index)}
+                            >
+                              <Image
+                                src={getImageUrl(service.images[index].imageUrl)}
+                                alt={service.images[index].altText || feature.title}
+                                fill
+                                className="object-cover group-hover:scale-110 transition-transform duration-500"
+                              />
+                            </div>
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
+                              <Award className="w-16 h-16 text-primary-300" />
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Card Content */}
+                        <div className="p-6">
+                          <div className="inline-block p-2 bg-accent-100 rounded-lg mb-3">
+                            <Check className="w-5 h-5 text-accent-500" />
+                          </div>
+                          <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                            {feature.title}
+                          </h3>
+                          <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            </section>
+          ) : service.slug === "supply_of_medical_devices_and_prosthetic_solutions" ? (
+            // Split Layout for Supply Service
+            <section className="py-16 px-4 bg-white">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex items-center gap-3 mb-12">
+                  <Sparkles className="w-8 h-8 text-accent-500" />
+                  <h2 className="text-4xl font-bold text-gray-900">
+                    {sectionTitles.features}
+                  </h2>
+                </div>
+
+                {service.features
+                  .sort((a, b) => a.orderIndex - b.orderIndex)
+                  .map((feature, index) => (
+                    <div key={feature.id} className="mb-16 last:mb-0">
+                      <div
+                        className={`flex flex-col md:flex-row gap-8 items-stretch ${
+                          index % 2 === 0 ? "" : "md:flex-row-reverse"
+                        }`}
+                      >
+                        {/* Image */}
+                        <div className="w-full md:w-1/2">
+                          {service.images && service.images[index] ? (
+                            <div
+                              className="relative h-full min-h-[400px] rounded-2xl overflow-hidden shadow-xl cursor-pointer group"
+                              onClick={() => setSelectedImage(index)}
+                            >
+                              <Image
+                                src={getImageUrl(
+                                  service.images[index].imageUrl
+                                )}
+                                alt={
+                                  service.images[index].altText || feature.title
+                                }
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                            </div>
+                          ) : (
+                            <div className="relative h-full min-h-[400px] rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br from-primary-100 to-accent-100 flex items-center justify-center">
+                              <Award className="w-24 h-24 text-primary-300" />
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Content */}
+                        <div className="w-full md:w-1/2 flex">
+                          <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border-2 border-gray-200 hover:border-accent-500 transition-colors w-full flex flex-col">
+                            <div className="inline-block p-3 bg-accent-100 rounded-xl mb-4 w-fit">
+                              <Check className="w-8 h-8 text-accent-500" />
+                            </div>
+                            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                              {feature.title}
+                            </h3>
+                            <p className="text-gray-600 leading-relaxed text-lg whitespace-pre-line mb-6 flex-grow">
+                              {feature.description}
+                            </p>
+                            {getProductCategory(feature.title) && (
+                              <Link
+                                href={`/products?category=${getProductCategory(feature.title)}`}
+                                className="inline-flex items-center gap-2 text-accent-500 hover:text-accent-600 transition-colors font-bold text-base self-start"
+                                title="تصفح المنتجات"
+                              >
+                                تصفح المنتجات
+                                <ArrowLeft className="w-5 h-5" />
+                              </Link>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </section>
+          ) : service.serviceType === "PHYSIOTHERAPY" ? (
             // Split Layout for Physiotherapy
             <section className="py-16 px-4 bg-white">
               <div className="max-w-6xl mx-auto">
