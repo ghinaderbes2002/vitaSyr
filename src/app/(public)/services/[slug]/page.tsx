@@ -17,6 +17,7 @@ import {
   Sparkles,
   Stethoscope,
   ArrowLeft,
+  X,
 } from "lucide-react";
 import type { Service } from "@/types/service";
 import Header from "@/components/public/Header";
@@ -32,6 +33,7 @@ console.log(slug);
 
   const [service, setService] = useState<Service | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   useEffect(() => {
     if (slug) {
@@ -162,12 +164,22 @@ console.log(slug);
             {/* Service Image */}
             <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
               {service.images && service.images.length > 0 ? (
-                <Image
-                  src={getImageUrl(service.images[0].imageUrl)}
-                  alt={service.images[0].altText || service.title}
-                  fill
-                  className="object-cover"
-                />
+                <div
+                  className="relative w-full h-full cursor-pointer group"
+                  onClick={() => setSelectedImage(0)}
+                >
+                  <Image
+                    src={getImageUrl(service.images[0].imageUrl)}
+                    alt={service.images[0].altText || service.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
+                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity text-lg font-semibold">
+                      اضغط للتكبير
+                    </span>
+                  </div>
+                </div>
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
                   <Award className="w-24 h-24 text-white opacity-50" />
@@ -336,8 +348,8 @@ console.log(slug);
       )}
 
       {/* Image Gallery */}
-      {service.images && service.images.length > 1 && (
-        <section className="py-16 px-4">
+      {service.images && service.images.length > 0 && (
+        <section className="py-16 px-4" id="image-gallery">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">
               معرض الصور
@@ -346,18 +358,19 @@ console.log(slug);
             <div className="grid md:grid-cols-3 gap-6">
               {service.images
                 .sort((a, b) => a.orderIndex - b.orderIndex)
-                .slice(1)
-                .map((image) => (
+                .map((image, index) => (
                   <div
                     key={image.id}
-                    className="relative h-64 rounded-xl overflow-hidden shadow-lg group"
+                    className="relative h-64 rounded-xl overflow-hidden shadow-lg group cursor-pointer"
+                    onClick={() => setSelectedImage(index)}
                   >
                     <Image
                       src={getImageUrl(image.imageUrl)}
                       alt={image.altText || service.title}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300" />
                   </div>
                 ))}
             </div>
@@ -476,6 +489,65 @@ console.log(slug);
           </div>
         </div>
       </section>
+
+        {/* Image Lightbox Modal */}
+        {selectedImage !== null && service.images && (
+          <div
+            className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button
+              className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+              onClick={() => setSelectedImage(null)}
+            >
+              <X className="w-10 h-10" />
+            </button>
+
+            {/* Previous Button */}
+            {selectedImage > 0 && (
+              <button
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black bg-opacity-50 p-3 rounded-full"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedImage(selectedImage - 1);
+                }}
+              >
+                <ArrowRight className="w-8 h-8" />
+              </button>
+            )}
+
+            {/* Next Button */}
+            {selectedImage < service.images.length - 1 && (
+              <button
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black bg-opacity-50 p-3 rounded-full"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedImage(selectedImage + 1);
+                }}
+              >
+                <ArrowLeft className="w-8 h-8" />
+              </button>
+            )}
+
+            {/* Image */}
+            <div
+              className="relative w-full h-full max-w-6xl max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={getImageUrl(service.images[selectedImage].imageUrl)}
+                alt={service.images[selectedImage].altText || service.title}
+                fill
+                className="object-contain"
+              />
+            </div>
+
+            {/* Image Counter */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white bg-black bg-opacity-50 px-4 py-2 rounded-full">
+              {selectedImage + 1} / {service.images.length}
+            </div>
+          </div>
+        )}
 
         {/* Footer */}
         <Footer />
