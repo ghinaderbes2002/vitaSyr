@@ -89,7 +89,7 @@ export default function AboutPage() {
             <div className="grid md:grid-cols-2 gap-12 items-stretch">
               <div className="relative min-h-[500px] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2053&auto=format&fit=crop"
+                  src="/images/center.jpg"
                   alt="فريق المركز"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-500"

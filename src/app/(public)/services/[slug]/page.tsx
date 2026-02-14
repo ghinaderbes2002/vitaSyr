@@ -310,7 +310,7 @@ console.log(slug);
                             {getProductCategory(feature.title) && (
                               <Link
                                 href={`/products?category=${getProductCategory(feature.title)}`}
-                                className="inline-flex items-center gap-2 text-accent-500 hover:text-accent-600 transition-colors font-bold text-base self-start"
+                                className="inline-flex items-center gap-2 text-accent-500 hover:text-accent-600 transition-colors font-bold text-base self-end"
                                 title="تصفح المنتجات"
                               >
                                 تصفح المنتجات
