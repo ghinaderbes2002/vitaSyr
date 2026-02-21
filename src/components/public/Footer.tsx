@@ -89,20 +89,20 @@ export default function Footer() {
                   خدماتنا
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/products"
                   className="hover:text-accent-500 transition-colors hover:translate-x-1 inline-block"
                 >
                   منتجاتنا
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   href="/success-stories"
                   className="hover:text-accent-500 transition-colors hover:translate-x-1 inline-block"
                 >
-                  قصص النجاح
+                  أخبارنا 
                 </Link>
               </li>
               <li>
@@ -125,42 +125,50 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/services"
+                  href="/services/center_setup_and_establishmet"
                   className="hover:text-accent-500 transition-colors hover:translate-x-1 inline-block"
                 >
-                  الأطراف الصناعية
+                  تجهيز وتأسيس المراكز
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/services"
+                  href="/services/Training_and_qualifying_personnel"
                   className="hover:text-accent-500 transition-colors hover:translate-x-1 inline-block"
                 >
-                  العلاج الفيزيائي
+                  تدريب وتأهيل الكوادر
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/services"
+                  href="/services/supply_of_medical_devices_and_prosthetic_solutions"
                   className="hover:text-accent-500 transition-colors hover:translate-x-1 inline-block"
                 >
-                  إعادة التأهيل
+                  توريد الأجهزة والأطراف الصناعية
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/services"
+                  href="/services/supply_of_medical_devices_and_prosthetic_solutions"
                   className="hover:text-accent-500 transition-colors hover:translate-x-1 inline-block"
                 >
-                  Foot Balance
+                  تركيب الأطراف الصناعية
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/partnerships"
+                  href="/services/Technical_and_administrative_consulting"
                   className="hover:text-accent-500 transition-colors hover:translate-x-1 inline-block"
                 >
-                  شراكات استثمارية
+                  الاستشارات الفنية والإدارية
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/Technical_support_and_follow_up"
+                  className="hover:text-accent-500 transition-colors hover:translate-x-1 inline-block"
+                >
+                  الدعم الفني والمتابعة
                 </Link>
               </li>
             </ul>

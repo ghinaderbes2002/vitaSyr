@@ -110,18 +110,13 @@ console.log(slug);
 
   const sectionTitles = getSectionTitles();
 
-  // Get product category based on feature title for supply service
-  const getProductCategory = (featureTitle: string): string | null => {
-    const title = featureTitle.toLowerCase();
-    if (title.includes('أطراف صناعية')) {
-      return 'prosthetics';
-    } else if (title.includes('أجهزة العلاج الفيزيائي')) {
-      return 'Physical_therapy_equipment';
-    } else if (title.includes('تحليل صحة القدم') || title.includes('أجهزة خاصة بتحليل')) {
-      return 'Foot_health_analysis_devices';
-    }
-    return null;
-  };
+  // قائمة الخدمات التي لها منتجات (يمكن تعديلها من هنا)
+  const servicesWithProducts = [
+    "supply_of_medical_devices_and_prosthetic_solutions",
+    // أضف slugs الخدمات الأخرى التي لها منتجات هنا
+  ];
+
+  const hasProducts = servicesWithProducts.includes(service.slug);
 
   return (
     <>
@@ -193,7 +188,7 @@ console.log(slug);
       {/* Features Section */}
       {service.features && service.features.length > 0 && (
         <>
-          {service.slug === "center_setup_and_establishment" ? (
+          {service.slug === "center_setup_and_establishmet" ? (
             // Card Design Layout for Center Setup
             <section className="py-16 px-4 bg-white">
               <div className="max-w-6xl mx-auto">
@@ -307,9 +302,9 @@ console.log(slug);
                             <p className="text-gray-600 leading-relaxed text-lg whitespace-pre-line mb-6 flex-grow">
                               {feature.description}
                             </p>
-                            {getProductCategory(feature.title) && (
+                            {hasProducts && (
                               <Link
-                                href={`/products?category=${getProductCategory(feature.title)}`}
+                                href="/products"
                                 className="inline-flex items-center gap-2 text-accent-500 hover:text-accent-600 transition-colors font-bold text-base self-end"
                                 title="تصفح المنتجات"
                               >
@@ -413,10 +408,9 @@ console.log(slug);
                               <h3 className="text-xl font-bold text-gray-900 flex-1">
                                 {feature.title}
                               </h3>
-                              {service.slug === "supply_of_medical_devices_and_prosthetic_solutions" &&
-                               getProductCategory(feature.title) && (
+                              {hasProducts && (
                                 <Link
-                                  href={`/products?category=${getProductCategory(feature.title)}`}
+                                  href="/products"
                                   className="inline-flex items-center gap-1 text-accent-500 hover:text-accent-600 transition-colors text-sm font-semibold whitespace-nowrap"
                                   title="تصفح المنتجات"
                                 >
