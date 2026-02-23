@@ -102,7 +102,7 @@ export default function Footer() {
                   href="/success-stories"
                   className="hover:text-accent-500 transition-colors hover:translate-x-1 inline-block"
                 >
-                  أخبارنا 
+                  أخبارنا
                 </Link>
               </li>
               <li>
@@ -195,16 +195,16 @@ export default function Footer() {
                   className="text-sm hover:text-accent-500 transition-colors"
                   dir="ltr"
                 >
-                 +963 987 106 020
+                  +963 987 106 020
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent-500 flex-shrink-0" />
                 <a
-                  href="mailto:info@vitaxir.com"
+                  href="mailto:info@vitaxirpro.com"
                   className="text-sm hover:text-accent-500 transition-colors"
                 >
-                  info@vitaxir.com
+                  info@vitaxirpro.com{" "}
                 </a>
               </li>
               <li className="flex items-start gap-3">

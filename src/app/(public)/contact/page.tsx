@@ -30,7 +30,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -197,14 +197,18 @@ export default function ContactPage() {
                       <Mail className="w-6 h-6 text-accent-500" />
                     </div>
                     <div className="flex-1">
-                      <p className="font-bold text-gray-900 mb-2">البريد الإلكتروني</p>
+                      <p className="font-bold text-gray-900 mb-2">
+                        البريد الإلكتروني
+                      </p>
                       <a
-                        href="mailto:info@vitaxir.com"
+                        href="mailto:info@vitaxirpro.com"
                         className="text-accent-600 font-bold text-lg hover:text-accent-700 transition-colors block"
                       >
-                        info@vitaxir.com
+                        info@vitaxirpro.com{" "}
                       </a>
-                      <p className="text-gray-600 text-sm mt-2">نرد على استفساراتك خلال 24 ساعة</p>
+                      <p className="text-gray-600 text-sm mt-2">
+                        نرد على استفساراتك خلال 24 ساعة
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -215,14 +219,18 @@ export default function ContactPage() {
                       <Clock className="w-6 h-6 text-blue-600" />
                     </div>
                     <div className="flex-1">
-                      <p className="font-bold text-gray-900 mb-2">ساعات العمل</p>
+                      <p className="font-bold text-gray-900 mb-2">
+                        ساعات العمل
+                      </p>
                       <p className="text-blue-900 font-bold text-lg">
                         السبت - الخميس
                       </p>
                       <p className="text-gray-700 text-lg font-semibold mt-1">
                         9:00 صباحاً - 8:00 مساءً
                       </p>
-                      <p className="text-gray-600 text-sm mt-2">نحن في خدمتك طوال أيام الأسبوع</p>
+                      <p className="text-gray-600 text-sm mt-2">
+                        نحن في خدمتك طوال أيام الأسبوع
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -235,14 +243,17 @@ export default function ContactPage() {
                     <div className="flex-1">
                       <p className="font-bold text-gray-900 mb-2">تواصل معنا</p>
                       <p className="text-gray-700 leading-relaxed">
-                        سواء كنت بحاجة إلى استشارة طبية، معلومات عن منتجاتنا، أو أي استفسار آخر، فريقنا جاهز لمساعدتك.
+                        سواء كنت بحاجة إلى استشارة طبية، معلومات عن منتجاتنا، أو
+                        أي استفسار آخر، فريقنا جاهز لمساعدتك.
                       </p>
                     </div>
                   </div>
                 </div>
 
                 <div className="border-t-2 border-gray-100 pt-6">
-                  <h3 className="font-bold text-gray-900 mb-4 text-lg">تابعنا على مواقع التواصل</h3>
+                  <h3 className="font-bold text-gray-900 mb-4 text-lg">
+                    تابعنا على مواقع التواصل
+                  </h3>
                   <div className="flex items-center gap-4">
                     <a
                       href="https://www.facebook.com/share/17fC3cf3NJ/"

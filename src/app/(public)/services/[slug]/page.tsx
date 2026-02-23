@@ -209,14 +209,14 @@ console.log(slug);
                       >
                         {/* Card Image */}
                         <div className="relative h-64 overflow-hidden">
-                          {service.images && service.images[index] ? (
+                          {service.images && service.images[index + 1] ? (
                             <div
                               className="relative w-full h-full cursor-pointer"
-                              onClick={() => setSelectedImage(index)}
+                              onClick={() => setSelectedImage(index + 1)}
                             >
                               <Image
-                                src={getImageUrl(service.images[index].imageUrl)}
-                                alt={service.images[index].altText || feature.title}
+                                src={getImageUrl(service.images[index + 1].imageUrl)}
+                                alt={service.images[index + 1].altText || feature.title}
                                 fill
                                 className="object-cover group-hover:scale-110 transition-transform duration-500"
                               />
@@ -267,17 +267,17 @@ console.log(slug);
                       >
                         {/* Image */}
                         <div className="w-full md:w-1/2">
-                          {service.images && service.images[index] ? (
+                          {service.images && service.images[index + 1] ? (
                             <div
                               className="relative h-full min-h-[400px] rounded-2xl overflow-hidden shadow-xl cursor-pointer group"
-                              onClick={() => setSelectedImage(index)}
+                              onClick={() => setSelectedImage(index + 1)}
                             >
                               <Image
                                 src={getImageUrl(
-                                  service.images[index].imageUrl
+                                  service.images[index + 1].imageUrl
                                 )}
                                 alt={
-                                  service.images[index].altText || feature.title
+                                  service.images[index + 1].altText || feature.title
                                 }
                                 fill
                                 className="object-cover group-hover:scale-105 transition-transform duration-300"
