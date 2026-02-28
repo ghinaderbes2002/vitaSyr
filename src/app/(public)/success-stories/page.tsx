@@ -112,7 +112,7 @@ export default function SuccessStoriesPage() {
           <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">قصص نجاح</h1>
             <p className="text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto mb-4 opacity-95">
-              هنا نشارككم حكايات أناس بدأوا رحلتهم بالألم والبحث عن حل، ووصلوا اليوم
+              هنا نشارككم حكايات أناس بدؤوا رحلتهم بالألم والبحث عن حل، ووصلوا اليوم
               إلى حياة أكثر ثباتًا واستقلالية وثقة.
             </p>
             <p className="text-lg md:text-xl opacity-90">

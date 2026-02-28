@@ -301,7 +301,7 @@ export default function AboutPage() {
               {/* Image 3 */}
               <div className="relative h-80 rounded-2xl overflow-hidden shadow-xl group">
                 <Image
-                  src="https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=2031&auto=format&fit=crop"
+                  src="/images/elixir.jpg"
                   alt="Ixir alhayat "
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
