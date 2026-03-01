@@ -473,7 +473,7 @@ console.log(slug);
       )}
 
       {/* Image Gallery */}
-      {service.images && service.images.length > 0 && (
+      {/* {service.images && service.images.length > 0 && (
         <section className="py-16 px-4" id="image-gallery">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">
@@ -501,7 +501,7 @@ console.log(slug);
             </div>
           </div>
         </section>
-      )}
+      )} */}
 
       {/* Products Section - Only for Prosthetics */}
       {service.serviceType === "PROSTHETICS" && (

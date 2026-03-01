@@ -2,6 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   output: "standalone", // Enable standalone output for Docker
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
+  },
   images: {
     remotePatterns: [
       {
