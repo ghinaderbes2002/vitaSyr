@@ -118,6 +118,17 @@ console.log(slug);
 
   const hasProducts = servicesWithProducts.includes(service.slug);
 
+  // ربط عنوان الميزة بصفحة المنتجات المناسبة
+  const featureProductLinks: Record<string, string> = {
+    "أطراف صناعية بمختلف أنواعها": "/products/prosthetics",
+    "أجهزة العلاج الفيزيائي": "/products/Physical_therapy_equipment",
+    "أجهزة خاصة بتحليل صحة القدم": "/products/Foot_health_analysis_devices",
+  };
+
+  const getProductLink = (featureTitle: string): string => {
+    return featureProductLinks[featureTitle] || "/products";
+  };
+
   return (
     <>
       <Header />
@@ -304,7 +315,7 @@ console.log(slug);
                             </p>
                             {hasProducts && (
                               <Link
-                                href="/products"
+                                href={getProductLink(feature.title)}
                                 className="inline-flex items-center gap-2 text-accent-500 hover:text-accent-600 transition-colors font-bold text-base self-end"
                                 title="تصفح المنتجات"
                               >
