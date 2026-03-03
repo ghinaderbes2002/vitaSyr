@@ -63,14 +63,14 @@ export default function AboutPage() {
         <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image
-              src="/images/about.png"
+              src="/panar/بانر صفحة من نحن.png"
               // src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?q=80&w=2091&auto=format&fit=crop"
               alt="مركز Vitaxir"
               fill
-              className="object-cover brightness-50"
+              className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-500/90 to-primary-600/80" />
+            <div className="absolute inset-0 bg-primary-900/60" />
           </div>
 
           <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">

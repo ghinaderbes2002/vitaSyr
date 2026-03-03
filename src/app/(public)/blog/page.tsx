@@ -76,13 +76,13 @@ export default function BlogPage() {
       <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/sponsorship.png"
+            src="/panar/بانر المدونة.png"
             alt="المدونة"
             fill
-            className="object-cover brightness-50"
+            className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-500/90 to-accent-500/80" />
+          <div className="absolute inset-0 bg-primary-900/60" />
         </div>
 
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">

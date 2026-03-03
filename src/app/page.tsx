@@ -82,7 +82,7 @@ export default function HomePage() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <Image
-              src="/images/home.png"
+              src="/panar/بانر الصفحة الرئيسية.png"
               // src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop"
               alt="Vitaxir"
               fill

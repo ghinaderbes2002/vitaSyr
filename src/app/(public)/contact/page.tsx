@@ -3,6 +3,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { contactApi } from "@/lib/api/contact";
 import { toast } from "react-hot-toast";
 import {
@@ -76,8 +77,18 @@ export default function ContactPage() {
 
       <div className="min-h-screen bg-gray-50">
         {/* Hero */}
-        <section className="bg-gradient-to-r from-primary-500 to-accent-500 py-16 px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
+        <section className="relative h-[350px] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/panar/بانر اتصل بنا.png"
+              alt="اتصل بنا"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-primary-900/60" />
+          </div>
+          <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">اتصل بنا</h1>
             <p className="text-xl opacity-90">
               نحن هنا لمساعدتك. تواصل معنا وسنرد عليك في أقرب وقت

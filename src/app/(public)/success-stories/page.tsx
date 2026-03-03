@@ -100,13 +100,13 @@ export default function SuccessStoriesPage() {
         <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image
-              src="/images/success-stories.png"
+              src="/panar/بانر صفحة اخبارنا.png"
               alt="قصص نجاح"
               fill
-              className="object-cover brightness-40"
+              className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-900/95 via-primary-800/90 to-accent-600/85" />
+            <div className="absolute inset-0 bg-primary-900/60" />
           </div>
 
           <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">

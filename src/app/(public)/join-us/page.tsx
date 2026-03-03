@@ -17,11 +17,8 @@ import {
   Upload,
   Linkedin,
   Check,
-  Award,
-  Users,
-  TrendingUp,
-  Heart,
 } from "lucide-react";
+import Image from "next/image";
 import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
 import { LoadingButton } from "@/components/ui/LoadingSpinner";
@@ -122,16 +119,23 @@ export default function JoinUsPage() {
       <Header />
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-primary-500 to-accent-500 py-20 px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <div className="inline-block p-4 bg-white/10 backdrop-blur-sm rounded-2xl mb-6">
-              <Users className="w-16 h-16" />
-            </div>
+        <section className="relative min-h-[500px] flex items-center">
+          <div className="absolute inset-0">
+            <Image
+              src="/join-us/بانر انضم إلينا.png"
+              alt="انضم إلينا"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-primary-900/60" />
+          </div>
+          <div className="relative max-w-4xl mx-auto text-center text-white px-4 py-20">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">انضم إلينا</h1>
             <p className="text-xl md:text-2xl opacity-95 leading-relaxed">
               كن جزءًا من رحلة تطوير مستقبل الأطراف الصناعية والعلاج الفيزيائي،
               وساهم في تقديم خدمات عالية الجودة للمجتمع إذا كنت متخصصًا في أحد
-              المجالات التالية أو لديك خبرة ذات صلة، فنحن نرحّب بك{" "}
+              المجالات التالية أو لديك خبرة ذات صلة، فنحن نرحّب بك
             </p>
           </div>
         </section>
@@ -178,42 +182,46 @@ export default function JoinUsPage() {
             <div className="grid md:grid-cols-4 gap-8">
               {[
                 {
-                  icon: Award,
+                  img: "/join-us/ايقونة بيئة احترافية.png",
                   title: "بيئة احترافية",
                   description: "فريق متخصص ومتعاون",
                 },
                 {
-                  icon: TrendingUp,
+                  img: "/join-us/ايقونة فرص للتطور.png",
                   title: "فرص للتطور",
                   description: "تدريب مستمر وتطوير مهني",
                 },
                 {
-                  icon: Heart,
+                  img: "/join-us/ايقونة أثر إيجابي.png",
                   title: "أثر إيجابي",
                   description: "خدمة المجتمع وتغيير حياة الناس",
                 },
                 {
-                  icon: Briefcase,
+                  img: "/join-us/ايقونة مزايا تنافسية.png",
                   title: "مزايا تنافسية",
                   description: "رواتب ومزايا جيدة",
                 },
-              ].map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={index}
-                    className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all"
-                  >
-                    <div className="inline-block p-4 bg-accent-100 rounded-xl mb-4">
-                      <Icon className="w-8 h-8 text-accent-500" />
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all"
+                >
+                  <div className="inline-block p-4 bg-accent-100 rounded-xl mb-4">
+                    <div className="relative w-8 h-8">
+                      <Image
+                        src={item.img}
+                        alt={item.title}
+                        fill
+                        className="object-contain"
+                      />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600">{item.description}</p>
                   </div>
-                );
-              })}
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600">{item.description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>

@@ -83,14 +83,13 @@ export default function PublicSponsorshipPage() {
         <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <Image
-              src="/images/sponsorship.png"
-              // src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?q=80&w=2070&auto=format&fit=crop"
+              src="/panar/بانر كفالة إنسان.png"
               alt="كفالة إنسان"
               fill
-              className="object-cover brightness-50"
+              className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-500/90 to-accent-500/80" />
+            <div className="absolute inset-0 bg-primary-900/60" />
           </div>
 
           <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
