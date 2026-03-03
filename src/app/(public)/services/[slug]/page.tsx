@@ -120,9 +120,9 @@ console.log(slug);
 
   // ربط عنوان الميزة بصفحة المنتجات المناسبة
   const featureProductLinks: Record<string, string> = {
-    "أطراف صناعية بمختلف أنواعها": "/products/prosthetics",
-    "أجهزة العلاج الفيزيائي": "/products/Physical_therapy_equipment",
-    "أجهزة خاصة بتحليل صحة القدم": "/products/Foot_health_analysis_devices",
+    "أطراف صناعية بمختلف أنواعها": "/products?category=prosthetics",
+    "أجهزة العلاج الفيزيائي": "/products?category=Physical_therapy_equipment",
+    "أجهزة خاصة بتحليل صحة القدم": "/products?category=Foot_health_analysis_devices",
   };
 
   const getProductLink = (featureTitle: string): string => {
