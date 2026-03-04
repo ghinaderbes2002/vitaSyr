@@ -151,7 +151,7 @@ export default function HomePage() {
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full mb-4">
                   <div className="relative w-10 h-10">
-                    <Image src="/images/home/خبرة عملية.png" alt="خبرة" fill className="object-contain" />
+                    <Image src="/images/home/خبرة.png" alt="خبرة" fill className="object-contain" />
                   </div>
                 </div>
                 <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
@@ -282,7 +282,7 @@ export default function HomePage() {
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
                       <div className="relative w-10 h-10">
-                        <Image src="/images/home/خبرة.png" alt="خبرة" fill className="object-contain" />
+                        <Image src="/images/home/خبرة عملية.png" alt="خبرة" fill className="object-contain" />
                       </div>
                     </div>
                   </div>
