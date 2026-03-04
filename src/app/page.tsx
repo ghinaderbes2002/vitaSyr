@@ -5,20 +5,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  ArrowLeft,
-  Heart,
-  Users,
-  Award,
-  CheckCircle,
-  Activity,
-  Stethoscope,
-  Settings,
-  Wrench,
-  Globe,
-  TrendingUp,
-  MapPin,
-} from "lucide-react";
+import { ArrowLeft, Heart, CheckCircle } from "lucide-react";
 import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
 import { productsApi } from "@/lib/api/products";
@@ -148,71 +135,60 @@ export default function HomePage() {
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-full mb-4">
-                  <Users className="w-8 h-8" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full mb-4">
+                  <div className="relative w-10 h-10">
+                    <Image src="/images/home/متدرب.png" alt="متدرب" fill className="object-contain" />
+                  </div>
                 </div>
-                <div
-                  className="text-3xl font-bold text-gray-900 mb-2"
-                  dir="ltr"
-                >
+                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
                   {stats.happyPatients}+
                 </div>
                 <div className="text-gray-600 font-medium">
                   <span className="block"> متدرب </span>
-                  <span className="block">
-                    من خلال التدريبات التخصصية التي قدمناها{" "}
-                  </span>
-                </div>{" "}
+                  <span className="block">من خلال التدريبات التخصصية التي قدمناها</span>
+                </div>
               </div>
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-full mb-4">
-                  <Award className="w-8 h-8" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full mb-4">
+                  <div className="relative w-10 h-10">
+                    <Image src="/images/home/خبرة عملية.png" alt="خبرة" fill className="object-contain" />
+                  </div>
                 </div>
-                <div
-                  className="text-3xl font-bold text-gray-900 mb-2"
-                  dir="ltr"
-                >
+                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
                   {stats.yearsExperience}+
                 </div>
                 <div className="text-gray-600 font-medium">
                   <span className="block">عام من الخبرة</span>
-                  <span className="block">
-                    بدأنا الإنجاز والتخصص منذ عام 2013
-                  </span>
+                  <span className="block">بدأنا الإنجاز والتخصص منذ عام 2013</span>
                 </div>
               </div>
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 text-white rounded-full mb-4">
-                  <Heart className="w-8 h-8" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full mb-4">
+                  <div className="relative w-10 h-10">
+                    <Image src="/images/home/شركات.png" alt="شركات" fill className="object-contain" />
+                  </div>
                 </div>
-                <div
-                  className="text-3xl font-bold text-gray-900 mb-2"
-                  dir="ltr"
-                >
+                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
                   {stats.sponsorshipCases}+
                 </div>
                 <div className="text-gray-600 font-medium">
                   <span className="block"> شركات </span>
-                  <span className="block">
-                    ساهمنا بتأسيس 4 شركات قدمت العلاج لأكثر من 3000 مريض وقامت
-                    بتركيب 2500 طرف{" "}
-                  </span>
+                  <span className="block">ساهمنا بتأسيس 4 شركات قدمت العلاج لأكثر من 3000 مريض وقامت بتركيب 2500 طرف</span>
                 </div>
               </div>
               <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-full mb-4">
-                  <TrendingUp className="w-8 h-8" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full mb-4">
+                  <div className="relative w-10 h-10">
+                    <Image src="/images/home/دول.png" alt="دول" fill className="object-contain" />
+                  </div>
                 </div>
-                <div
-                  className="text-3xl font-bold text-gray-900 mb-2"
-                  dir="ltr"
-                >
+                <div className="text-3xl font-bold text-gray-900 mb-2" dir="ltr">
                   {stats.sponsorshipCases}+
                 </div>
                 <div className="text-gray-600 font-medium">
                   <span className="block"> دول </span>
                   <span className="block">أسسنا شركاتنا في 4 دول مختلفة</span>
-                </div>{" "}
+                </div>
               </div>
             </div>
           </div>
@@ -236,8 +212,10 @@ export default function HomePage() {
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all border-t-4 border-accent-500">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center text-white">
-                      <Activity className="w-8 h-8" />
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center">
+                      <div className="relative w-10 h-10">
+                        <Image src="/images/home/كفالة.png" alt="كفالة" fill className="object-contain" />
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -257,8 +235,10 @@ export default function HomePage() {
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all border-t-4 border-primary-500">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center text-white">
-                      <Stethoscope className="w-8 h-8" />
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+                      <div className="relative w-10 h-10">
+                        <Image src="/images/home/ثقة.png" alt="ثقة" fill className="object-contain" />
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -277,8 +257,10 @@ export default function HomePage() {
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all border-t-4 border-accent-500">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center text-white">
-                      <Settings className="w-8 h-8" />
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center">
+                      <div className="relative w-10 h-10">
+                        <Image src="/images/home/شركات دولية.png" alt="شركات دولية" fill className="object-contain" />
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -298,8 +280,10 @@ export default function HomePage() {
               <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all border-t-4 border-primary-500">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center text-white">
-                      <Globe className="w-8 h-8" />
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+                      <div className="relative w-10 h-10">
+                        <Image src="/images/home/خبرة.png" alt="خبرة" fill className="object-contain" />
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -323,11 +307,10 @@ export default function HomePage() {
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
-                      <div
-                        className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 
-                rounded-xl flex items-center justify-center text-white"
-                      >
-                        <MapPin className="w-8 h-8" />
+                      <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center">
+                        <div className="relative w-10 h-10">
+                          <Image src="/images/home/نصل اليك.png" alt="نصل إليك" fill className="object-contain" />
+                        </div>
                       </div>
                     </div>
                     <div>
