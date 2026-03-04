@@ -86,7 +86,7 @@ export default function ContactPage() {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-primary-900/60" />
+            <div className="absolute inset-0 bg-primary-900/40" />
           </div>
           <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">اتصل بنا</h1>

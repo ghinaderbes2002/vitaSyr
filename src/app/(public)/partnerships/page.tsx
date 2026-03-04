@@ -23,6 +23,7 @@ import {
   Heart,
   Wrench,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import type {
   CreatePartnershipInquiryDto,
@@ -126,11 +127,18 @@ export default function PartnershipsPage() {
       <Header />
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-primary-500 to-accent-500 py-20 px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <div className="inline-block p-4 bg-white/10 backdrop-blur-sm rounded-2xl mb-6">
-              <Handshake className="w-16 h-16" />
-            </div>
+        <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/panar/بانر صفحة شراكات.png"
+              alt="شراكات"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-primary-900/40" />
+          </div>
+          <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               شراكات وفرص استثمارية
             </h1>
@@ -138,8 +146,6 @@ export default function PartnershipsPage() {
               انضم إلينا في تطوير مستقبل الأطراف الصناعية والعلاج الفيزيائي وطب
               القدم.
             </p>
-
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"

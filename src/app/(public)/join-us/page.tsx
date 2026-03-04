@@ -128,7 +128,7 @@ export default function JoinUsPage() {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-primary-900/60" />
+            <div className="absolute inset-0 bg-primary-900/40" />
           </div>
           <div className="relative max-w-4xl mx-auto text-center text-white px-4 py-20">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">انضم إلينا</h1>
