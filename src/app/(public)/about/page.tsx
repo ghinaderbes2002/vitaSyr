@@ -3,55 +3,39 @@
 "use client";
 
 import Image from "next/image";
-import {
-  Target,
-  Eye,
-  Heart,
-  Award,
-  Users,
-  Lightbulb,
-  Shield,
-  Handshake,
-} from "lucide-react";
+import { Users } from "lucide-react";
 import Header from "@/components/public/Header";
 import Footer from "@/components/public/Footer";
 
 export default function AboutPage() {
   const values = [
     {
-      icon: Heart,
+      img: "/images/about/ايقونات_من نحن - الشراكة.png",
       title: "الشراكة الاستراتيجية",
       description:
         " نعمل مع شركائنا كفريق واحد في تأسيس وتشغيل وتطوير المراكز الطبية، لضمان نجاح المشروع على المدى الطويل.     ",
       color: "from-red-500 to-pink-500",
     },
     {
-      icon: Award,
+      img: "/images/about/ايقونات_من نحن - الجودة.png",
       title: "الجودة والاعتمادية",
       description:
         "نلتزم بتوفير تجهيزات وخدمات مطابقة للمعايير العالمية، تضمن أداءً موثوقًا واستقرارًا تشغيليًا.",
       color: "from-blue-500 to-cyan-500",
     },
     {
-      icon: Lightbulb,
+      img: "/images/about/ايقونات_من نحن - الحلول المتكاملة .png",
       title: "الحلول المتكاملة",
       description:
         "  نقدّم منظومة شاملة تشمل التجهيز، التدريب، والاستشارات، لتأسيس مراكز جاهزة للعمل بكفاءة منذ اليوم الأول.",
       color: "from-yellow-500 to-orange-500",
     },
     {
-      icon: Shield,
+      img: "/images/about/ايقونات_من نحن - نقل المعرفة.png",
       title: "نقل المعرفة وبناء القدرات",
       description:
         " نركّز على تدريب وتأهيل الكوادر الفنية والإدارية لرفع مستوى الأداء وضمان استقلالية المراكز.  ",
       color: "from-green-500 to-emerald-500",
-    },
-    {
-      icon: Shield,
-      title: "الالتزام والمسؤولية المهنية ",
-      description:
-        "نلتزم بالشفافية، الدقة، والمسؤولية في كل مراحل العمل، بما يعزز الثقة ويضمن نتائج قابلة للقياس.  ",
-      color: "from-red-500 to-pink-500",
     },
   ];
 
@@ -156,7 +140,9 @@ export default function AboutPage() {
               <div className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="p-4 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl">
-                    <Target className="w-8 h-8 text-white" />
+                    <div className="relative w-8 h-8">
+                      <Image src="/images/about/ايقونات_من نحن - مهمتنا.png" alt="مهمتنا" fill className="object-contain" />
+                    </div>
                   </div>
                   <h3 className="text-3xl font-bold text-gray-900">مهمتنا</h3>
                 </div>
@@ -172,7 +158,9 @@ export default function AboutPage() {
               <div className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-shadow">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="p-4 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl">
-                    <Eye className="w-8 h-8 text-white" />
+                    <div className="relative w-8 h-8">
+                      <Image src="/images/about/ايقونات_من نحن - رؤيتنا.png" alt="رؤيتنا" fill className="object-contain" />
+                    </div>
                   </div>
                   <h3 className="text-3xl font-bold text-gray-900">رؤيتنا</h3>
                 </div>
@@ -204,27 +192,26 @@ export default function AboutPage() {
 
             {/* أول 4 قيم */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-              {values.slice(0, 4).map((value, index) => {
-                const Icon = value.icon;
-                return (
+              {values.slice(0, 4).map((value, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 duration-300"
+                >
                   <div
-                    key={index}
-                    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-2 duration-300"
+                    className={`w-16 h-16 bg-gradient-to-br ${value.color} rounded-xl flex items-center justify-center mb-6 mx-auto`}
                   >
-                    <div
-                      className={`w-16 h-16 bg-gradient-to-br ${value.color} rounded-xl flex items-center justify-center mb-6 mx-auto`}
-                    >
-                      <Icon className="w-8 h-8 text-white" />
+                    <div className="relative w-10 h-10">
+                      <Image src={value.img} alt={value.title} fill className="object-contain" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 text-center mb-3">
-                      {value.title}
-                    </h3>
-                    <p className="text-gray-600 text-center leading-relaxed">
-                      {value.description}
-                    </p>
                   </div>
-                );
-              })}
+                  <h3 className="text-xl font-bold text-gray-900 text-center mb-3">
+                    {value.title}
+                  </h3>
+                  <p className="text-gray-600 text-center leading-relaxed">
+                    {value.description}
+                  </p>
+                </div>
+              ))}
             </div>
 
             {/* القيمة الخامسة في النص */}
@@ -234,7 +221,9 @@ export default function AboutPage() {
                 style={{ maxWidth: "280px" }}
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center mb-6 mx-auto">
-                  <Handshake className="w-8 h-8 text-white" />
+                  <div className="relative w-10 h-10">
+                    <Image src="/images/about/ايقونات_من نحن -الالتزام .png" alt="الالتزام" fill className="object-contain" />
+                  </div>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 text-center mb-3">
                   الالتزام والمسؤولية المهنية

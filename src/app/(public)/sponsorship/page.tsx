@@ -130,11 +130,11 @@ export default function PublicSponsorshipPage() {
               </div> */}
               <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center">
                 <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-8 h-8 text-white" />
+                  <div className="relative w-10 h-10">
+                    <Image src="/images/sponsorship/ايقونات_كفالة - عدد الاشخاص المكفولين.png" alt="عدد الأشخاص المكفولين" fill className="object-contain" />
+                  </div>
                 </div>
-
                 <h3 className="text-3xl font-bold text-blue-900 mb-2">120</h3>
-
                 <p className="text-blue-700 font-medium">
                   عدد الأشخاص المكفولين
                 </p>
@@ -142,7 +142,9 @@ export default function PublicSponsorshipPage() {
 
               <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-6 text-center">
                 <div className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Star className="w-8 h-8 text-white fill-current" />
+                  <div className="relative w-10 h-10">
+                    <Image src="/images/sponsorship/ايقونات_كفالة - حالة .png" alt="حالة مميزة" fill className="object-contain" />
+                  </div>
                 </div>
                 <h3 className="text-3xl font-bold text-yellow-900 mb-2">
                   {featuredCases.length}

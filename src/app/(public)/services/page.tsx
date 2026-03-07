@@ -9,13 +9,11 @@ import Link from "next/link";
 import { servicesApi } from "@/lib/api/services";
 import { toast } from "react-hot-toast";
 import {
-  Activity,
   Check,
   Phone,
   ShoppingBag,
   ArrowLeft,
   Stethoscope,
-  Users,
   Award,
 } from "lucide-react";
 import type { Service } from "@/types/service";
@@ -196,42 +194,41 @@ function ServicesContent() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                icon: Award,
+                img: "/images/services/ايقونات_خدماتنا - خبرة متخصصة.png",
                 title: "خبرة متخصصة",
                 description: "فريق من الأخصائيين المرخصين والمدربين",
               },
               {
-                icon: Activity,
+                img: "/images/services/ايقونات_خدماتنا - تقنيات حديثة.png",
                 title: "تقنيات حديثة",
                 description: "استخدام أحدث التقنيات والمواد الطبية",
               },
               {
-                icon: Users,
+                img: "/images/services/ايقونات_خدماتنا - رعاية شخصية.png",
                 title: "رعاية شخصية",
                 description: "خطة علاج مصممة خصيصاً لكل مريض",
               },
               {
-                icon: Check,
+                img: "/images/services/ايقونات_خدماتنا - متابعة مستمرة.png",
                 title: "متابعة مستمرة",
                 description: "دعم وصيانة طويلة الأمد",
               },
-            ].map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={index}
-                  className="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow"
-                >
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center text-white mx-auto mb-4">
-                    <Icon className="w-8 h-8" />
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <div className="relative w-10 h-10">
+                    <Image src={item.img} alt={item.title} fill className="object-contain" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600">{item.description}</p>
                 </div>
-              );
-            })}
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600">{item.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

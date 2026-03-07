@@ -182,22 +182,22 @@ export default function JoinUsPage() {
             <div className="grid md:grid-cols-4 gap-8">
               {[
                 {
-                  img: "/join-us/ايقونة بيئة احترافية.png",
+                  img: "/join-us/ايقونات_توظف معنا - بيئة احترافية.png",
                   title: "بيئة احترافية",
                   description: "فريق متخصص ومتعاون",
                 },
                 {
-                  img: "/join-us/ايقونة فرص للتطور.png",
+                  img: "/join-us/ايقونات_توظف معنا - فرص للتطوير.png",
                   title: "فرص للتطور",
                   description: "تدريب مستمر وتطوير مهني",
                 },
                 {
-                  img: "/join-us/ايقونة أثر إيجابي.png",
+                  img: "/join-us/ايقونات_توظف معنا - أثر ايجابيي.png",
                   title: "أثر إيجابي",
                   description: "خدمة المجتمع وتغيير حياة الناس",
                 },
                 {
-                  img: "/join-us/ايقونة مزايا تنافسية.png",
+                  img: "/join-us/ايقونات_توظف معنا- مزايا تنافسية.png",
                   title: "مزايا تنافسية",
                   description: "رواتب ومزايا جيدة",
                 },

@@ -181,54 +181,52 @@ export default function PartnershipsPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  icon: TrendingUp,
+                  img: "/images/partnerships/ايقونات_شراكات - الجهات و المنشأت.png",
                   title: " الجهات والمنشآت الطبية",
-                  description:
-                    " تأسيس وتشغيل مراكز مجهزة وفق أعلى معايير الجودة.  ",
+                  description: " تأسيس وتشغيل مراكز مجهزة وفق أعلى معايير الجودة.  ",
                 },
                 {
-                  icon: Users,
+                  img: "/images/partnerships/ايقونات_شراكات - المستثمرين.png",
                   title: "المستثمرين ",
-                  description:
-                    " فرص استثمارية في قطاع الأطراف الصناعية والعلاج الفيزيائي الواعد.",
+                  description: " فرص استثمارية في قطاع الأطراف الصناعية والعلاج الفيزيائي الواعد.",
                 },
                 {
-                  icon: Target,
+                  img: "/images/partnerships/ايقونات_شراكات - مؤسسات الرعاية.png",
                   title: " مؤسسات الرعاية الصحية",
-                  description:
-                    " تطوير خدمات تأهيلية متكاملة ومستدامة.",
+                  description: " تطوير خدمات تأهيلية متكاملة ومستدامة.",
                 },
                 {
-                  icon: Heart,
+                  img: "/images/partnerships/ايقونات_شراكات- منظمات.png",
                   title: "المنظمات الإنسانية",
-                  description:
-                    "دعم مشاريع التأهيل وتحسين الوصول إلى خدمات طبية متقدمة.",
+                  description: "دعم مشاريع التأهيل وتحسين الوصول إلى خدمات طبية متقدمة.",
                 },
                 {
                   icon: Wrench,
                   title: "مطوري المنتجات الطبية",
-                  description:
-                    "شراكات لتطوير الأجهزة والتقنيات الحديثة.",
+                  description: "شراكات لتطوير الأجهزة والتقنيات الحديثة.",
                 },
-              ].map((item, index) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={index}
-                    className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border-2 border-gray-200 hover:border-accent-500 transition-all text-center"
-                  >
-                    <div className="inline-block p-4 bg-accent-100 rounded-xl mb-4">
-                      <Icon className="w-8 h-8 text-accent-500" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {item.description}
-                    </p>
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border-2 border-gray-200 hover:border-accent-500 transition-all text-center"
+                >
+                  <div className="inline-flex items-center justify-center p-4 bg-accent-100 rounded-xl mb-4">
+                    {"img" in item ? (
+                      <div className="relative w-8 h-8">
+                        <Image src={item.img!} alt={item.title} fill className="object-contain" />
+                      </div>
+                    ) : (
+                      <item.icon className="w-8 h-8 text-accent-500" />
+                    )}
                   </div>
-                );
-              })}
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
