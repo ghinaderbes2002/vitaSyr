@@ -125,7 +125,9 @@ export default function NewBlogPostPage() {
       const generatedSlug = value
         .toLowerCase()
         .replace(/\s+/g, "-")
-        .replace(/[^\u0600-\u06FFa-z0-9-]/g, "");
+        .replace(/[^\u0600-\u06FFa-z0-9._~!$&'()*+,;=:@%-]/g, "")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
       setSlug(generatedSlug);
     }
   };
@@ -178,12 +180,6 @@ export default function NewBlogPostPage() {
                 <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                   <p className="text-xs text-blue-900">
                     <strong>ما هو الـ Slug؟</strong> هو اسم مختصر يظهر داخل رابط الصفحة
-                  </p>
-                  <p className="text-xs text-blue-700 mt-1">
-                    يرجى كتابته باللغة الإنكليزية فقط، وبدون مسافات، واستخدام علامة (-) بين الكلمات.
-                  </p>
-                  <p className="text-xs text-blue-600 mt-1">
-                    مثال: <span className="font-mono bg-blue-100 px-1 rounded">health-tips-2024</span>
                   </p>
                 </div>
               </div>

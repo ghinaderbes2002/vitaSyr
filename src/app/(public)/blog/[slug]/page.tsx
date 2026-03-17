@@ -30,7 +30,10 @@ export default function BlogPostDetailPage({
     try {
       setIsLoading(true);
       const posts = await blogPostsApi.getAll();
-      const foundPost = posts.find((p) => p.slug === params.slug);
+      const decodedSlug = decodeURIComponent(params.slug);
+      const foundPost = posts.find(
+        (p) => p.slug === decodedSlug || p.slug === params.slug
+      );
 
       if (!foundPost || foundPost.status !== "PUBLISHED") {
         router.push("/blog");

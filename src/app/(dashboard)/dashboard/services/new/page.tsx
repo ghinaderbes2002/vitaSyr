@@ -118,12 +118,6 @@ export default function NewServicePage() {
                   <p className="text-xs text-blue-900">
                     <strong>ما هو الـ Slug؟</strong> هو اسم مختصر يظهر داخل رابط الصفحة
                   </p>
-                  <p className="text-xs text-blue-700 mt-1">
-                    يرجى كتابته باللغة الإنكليزية فقط، وبدون مسافات، واستخدام علامة (-) بين الكلمات.
-                  </p>
-                  <p className="text-xs text-blue-600 mt-1">
-                    مثال: <span className="font-mono bg-blue-100 px-1 rounded">prosthetic-services</span>
-                  </p>
                 </div>
               </div>
             </div>

@@ -137,7 +137,7 @@ export default function BlogPage() {
                   <article
                     key={post.id}
                     className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer group"
-                    onClick={() => router.push(`/blog/${post.slug}`)}
+                    onClick={() => router.push(`/blog/${encodeURIComponent(post.slug)}`)}
                   >
                     {post.featuredImage ? (
                       <div className="relative h-56 overflow-hidden">
@@ -215,7 +215,7 @@ export default function BlogPage() {
                   <article
                     key={post.id}
                     className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer group"
-                    onClick={() => router.push(`/blog/${post.slug}`)}
+                    onClick={() => router.push(`/blog/${encodeURIComponent(post.slug)}`)}
                   >
                     {post.featuredImage ? (
                       <div className="relative h-52 overflow-hidden">
