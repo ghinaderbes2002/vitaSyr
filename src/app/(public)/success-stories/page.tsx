@@ -23,6 +23,10 @@ import Header from "@/components/public/Header";
 import { getImageUrl } from "@/lib/utils/imageUrl";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 export default function SuccessStoriesPage() {
   const [stories, setStories] = useState<SuccessStory[]>([]);
   const [featuredStories, setFeaturedStories] = useState<SuccessStory[]>([]);
@@ -247,9 +251,10 @@ export default function SuccessStoriesPage() {
                           {featuredStories[currentSlide].storyTitle}
                         </h3>
 
-                        <p className="text-gray-700 leading-relaxed mb-6 text-lg">
-                          {featuredStories[currentSlide].storyDescription}
-                        </p>
+                        <div
+                          className="text-gray-700 leading-relaxed mb-6 text-lg article-content"
+                          dangerouslySetInnerHTML={{ __html: featuredStories[currentSlide].storyDescription }}
+                        />
 
                         {/* Patient Testimonial */}
                         <div className="bg-gradient-to-br from-accent-50 to-accent-100 p-6 rounded-2xl border-r-4 border-accent-500">
@@ -420,7 +425,7 @@ export default function SuccessStoriesPage() {
                         </h3>
 
                         <p className="text-gray-600 leading-relaxed line-clamp-3">
-                          {story.storyDescription}
+                          {stripHtml(story.storyDescription)}
                         </p>
                       </Link>
                     </div>

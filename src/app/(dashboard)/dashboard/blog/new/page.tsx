@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { blogPostsApi, blogCategoriesApi } from "@/lib/api/blog";
 import { Button } from "@/components/ui/Button";
+import { RichTextEditor } from "@/components/ui/RichTextEditor";
 import { ArrowRight, Save, Upload, X } from "lucide-react";
 import type { BlogCategory } from "@/types/blog";
 import { useAuthStore } from "@/store/authStore";
@@ -242,13 +243,11 @@ export default function NewBlogPostPage() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 المحتوى *
               </label>
-              <textarea
+              <RichTextEditor
                 value={content}
-                onChange={(e) => setContent(e.target.value)}
-                rows={10}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                onChange={setContent}
                 placeholder="محتوى المقال..."
-                required
+                minHeight="350px"
               />
             </div>
 

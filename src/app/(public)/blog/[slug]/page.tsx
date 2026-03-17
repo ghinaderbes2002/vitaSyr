@@ -175,18 +175,10 @@ export default function BlogPostDetailPage({
         {/* Article Content */}
         <section className="py-16 px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="prose prose-xl prose-slate max-w-none">
-              <div className="text-gray-800 leading-loose space-y-8">
-                {post.content.split("\n").map((paragraph, index) => {
-                  if (!paragraph.trim()) return null;
-                  return (
-                    <p key={index} className="text-lg md:text-xl text-justify leading-relaxed">
-                      {paragraph}
-                    </p>
-                  );
-                })}
-              </div>
-            </div>
+            <div
+              className="article-content"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
           </div>
         </section>
 

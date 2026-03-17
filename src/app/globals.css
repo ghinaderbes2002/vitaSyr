@@ -1,3 +1,142 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Rich Text Editor Styles */
+.rich-editor .tiptap {
+  outline: none;
+  direction: rtl;
+  text-align: right;
+}
+
+.rich-editor .tiptap h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #111827;
+}
+
+.rich-editor .tiptap h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.rich-editor .tiptap p {
+  margin-bottom: 0.75rem;
+  line-height: 1.8;
+}
+
+.rich-editor .tiptap strong {
+  font-weight: 700;
+}
+
+.rich-editor .tiptap em {
+  font-style: italic;
+}
+
+.rich-editor .tiptap ul {
+  list-style-type: disc;
+  padding-right: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.rich-editor .tiptap ol {
+  list-style-type: decimal;
+  padding-right: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.rich-editor .tiptap li {
+  margin-bottom: 0.25rem;
+}
+
+.rich-editor .tiptap blockquote {
+  border-right: 4px solid #e5e7eb;
+  padding-right: 1rem;
+  margin: 1rem 0;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.rich-editor .tiptap hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 1.5rem 0;
+}
+
+/* Public article content rendering */
+.article-content {
+  direction: rtl;
+  text-align: right;
+  line-height: 1.8;
+}
+
+.article-content h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.article-content h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #1f2937;
+}
+
+.article-content p {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  color: #374151;
+}
+
+.article-content strong {
+  font-weight: 700;
+}
+
+.article-content em {
+  font-style: italic;
+}
+
+.article-content ul {
+  list-style-type: disc;
+  padding-right: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.article-content ol {
+  list-style-type: decimal;
+  padding-right: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.article-content li {
+  margin-bottom: 0.4rem;
+  font-size: 1.125rem;
+  color: #374151;
+}
+
+.article-content blockquote {
+  border-right: 4px solid #6366f1;
+  padding-right: 1.25rem;
+  margin: 1.5rem 0;
+  color: #4b5563;
+  font-style: italic;
+  font-size: 1.1rem;
+  background: #f5f3ff;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+}
+
+.article-content hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 2rem 0;
+}

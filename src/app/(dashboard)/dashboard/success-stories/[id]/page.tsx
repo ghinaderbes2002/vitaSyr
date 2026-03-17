@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { successStoriesApi } from "@/lib/api/successStories";
 import type { SuccessStory, StoryMilestone, StoryType } from "@/types/successStory";
 import { Button } from "@/components/ui/Button";
+import { RichTextEditor } from "@/components/ui/RichTextEditor";
 import {
   ArrowRight,
   Edit2,
@@ -549,12 +550,11 @@ const handleAddMilestone = async () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 وصف القصة *
               </label>
-              <textarea
+              <RichTextEditor
                 value={storyDescription}
-                onChange={(e) => setStoryDescription(e.target.value)}
-                rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                required
+                onChange={setStoryDescription}
+                placeholder="اكتب وصف تفصيلي للقصة..."
+                minHeight="250px"
               />
             </div>
 
