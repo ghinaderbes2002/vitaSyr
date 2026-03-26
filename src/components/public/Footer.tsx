@@ -7,9 +7,8 @@ import {
   Mail,
   MapPin,
   Facebook,
-  Twitter,
   Instagram,
-  Linkedin,
+  MessageCircle,
   Clock,
 } from "lucide-react";
 
@@ -54,6 +53,15 @@ export default function Footer() {
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
+              </a>
+              <a
+                href="https://wa.me/963987106020"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 bg-white/10 rounded-lg hover:bg-accent-500 transition-all hover:scale-110"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle className="w-5 h-5" />
               </a>
             </div>
           </div>
