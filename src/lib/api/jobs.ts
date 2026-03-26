@@ -59,6 +59,15 @@ export const jobsApi = {
       formData.append("linkedinUrl", applicationData.linkedinUrl);
     }
 
+    formData.append("ref1Name", applicationData.ref1Name);
+    formData.append("ref1Company", applicationData.ref1Company);
+    formData.append("ref1JobTitle", applicationData.ref1JobTitle);
+    formData.append("ref1Phone", applicationData.ref1Phone);
+    formData.append("ref2Name", applicationData.ref2Name);
+    formData.append("ref2Company", applicationData.ref2Company);
+    formData.append("ref2JobTitle", applicationData.ref2JobTitle);
+    formData.append("ref2Phone", applicationData.ref2Phone);
+
     const { data } = await apiClient.post<JobApplication>(
       "/jobs/job-applications",
       formData,

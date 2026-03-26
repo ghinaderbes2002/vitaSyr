@@ -45,10 +45,11 @@ export default function JobApplicationsPage() {
 
   const getStatusLabel = (status: string) => {
     const labels: Record<string, string> = {
-      PENDING: "قيد الانتظار",
-      REVIEWED: "تمت المراجعة",
+      PENDING: "معلق",
+      INTERVIEW_READY: "مؤهل للمقابلة",
       ACCEPTED: "مقبول",
       REJECTED: "مرفوض",
+      HIRED: "تم التوظيف",
     };
     return labels[status] || status;
   };
@@ -56,9 +57,10 @@ export default function JobApplicationsPage() {
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
       PENDING: "bg-yellow-100 text-yellow-800",
-      REVIEWED: "bg-blue-100 text-blue-800",
+      INTERVIEW_READY: "bg-blue-100 text-blue-800",
       ACCEPTED: "bg-green-100 text-green-800",
       REJECTED: "bg-red-100 text-red-800",
+      HIRED: "bg-purple-100 text-purple-800",
     };
     return colors[status] || "bg-gray-100 text-gray-800";
   };
@@ -67,7 +69,7 @@ export default function JobApplicationsPage() {
     switch (status) {
       case "PENDING":
         return <Clock className="w-4 h-4" />;
-      case "REVIEWED":
+      case "INTERVIEW_READY":
         return <Eye className="w-4 h-4" />;
       case "ACCEPTED":
         return <CheckCircle className="w-4 h-4" />;
@@ -122,12 +124,11 @@ export default function JobApplicationsPage() {
             {applications.filter((a) => a.status === "PENDING").length})
           </Button>
           <Button
-            variant={filterStatus === "REVIEWED" ? "primary" : "outline"}
+            variant={filterStatus === "INTERVIEW_READY" ? "primary" : "outline"}
             size="sm"
-            onClick={() => setFilterStatus("REVIEWED")}
+            onClick={() => setFilterStatus("INTERVIEW_READY")}
           >
-            تمت المراجعة (
-            {applications.filter((a) => a.status === "REVIEWED").length})
+            مؤهل للمقابلة ({applications.filter((a) => a.status === "INTERVIEW_READY").length})
           </Button>
           <Button
             variant={filterStatus === "ACCEPTED" ? "primary" : "outline"}
@@ -142,6 +143,13 @@ export default function JobApplicationsPage() {
             onClick={() => setFilterStatus("REJECTED")}
           >
             مرفوض ({applications.filter((a) => a.status === "REJECTED").length})
+          </Button>
+          <Button
+            variant={filterStatus === "HIRED" ? "primary" : "outline"}
+            size="sm"
+            onClick={() => setFilterStatus("HIRED")}
+          >
+            تم التوظيف ({applications.filter((a) => a.status === "HIRED").length})
           </Button>
         </div>
       </div>

@@ -11,6 +11,17 @@ export interface JobApplication {
   cvFileUrl: string;
   coverLetter?: string | null;
   linkedinUrl?: string | null;
+
+  // المراجع
+  ref1Name: string;
+  ref1Company: string;
+  ref1JobTitle: string;
+  ref1Phone: string;
+  ref2Name: string;
+  ref2Company: string;
+  ref2JobTitle: string;
+  ref2Phone: string;
+
   status: JobApplicationStatus;
   reviewedById?: string | null;
   reviewedBy?: {
@@ -19,11 +30,18 @@ export interface JobApplication {
     email: string;
   } | null;
   reviewNotes?: string | null;
+  rejectionNote?: string | null;
+  rating?: number | null;
   createdAt: string;
   updatedAt: string;
 }
 
-export type JobApplicationStatus = "PENDING" | "REVIEWED" | "ACCEPTED" | "REJECTED";
+export type JobApplicationStatus =
+  | "PENDING"
+  | "INTERVIEW_READY"
+  | "ACCEPTED"
+  | "REJECTED"
+  | "HIRED";
 
 export interface CreateJobApplicationDto {
   fullName: string;
@@ -32,14 +50,22 @@ export interface CreateJobApplicationDto {
   specialization: string;
   yearsOfExperience: number;
   education: string;
-  cvFileUrl: string;
   coverLetter?: string;
   linkedinUrl?: string;
-  status?: JobApplicationStatus;
+  ref1Name: string;
+  ref1Company: string;
+  ref1JobTitle: string;
+  ref1Phone: string;
+  ref2Name: string;
+  ref2Company: string;
+  ref2JobTitle: string;
+  ref2Phone: string;
 }
 
 export interface UpdateJobApplicationDto {
   status?: JobApplicationStatus;
   reviewNotes?: string;
+  rejectionNote?: string;
+  rating?: number;
   reviewedById?: string;
 }

@@ -17,6 +17,7 @@ import {
   Upload,
   Linkedin,
   Check,
+  Users,
 } from "lucide-react";
 import Image from "next/image";
 import Header from "@/components/public/Header";
@@ -35,6 +36,15 @@ export default function JoinUsPage() {
   const [coverLetter, setCoverLetter] = useState("");
   const [linkedinUrl, setLinkedinUrl] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [ref1Name, setRef1Name] = useState("");
+  const [ref1Company, setRef1Company] = useState("");
+  const [ref1JobTitle, setRef1JobTitle] = useState("");
+  const [ref1Phone, setRef1Phone] = useState("");
+  const [ref2Name, setRef2Name] = useState("");
+  const [ref2Company, setRef2Company] = useState("");
+  const [ref2JobTitle, setRef2JobTitle] = useState("");
+  const [ref2Phone, setRef2Phone] = useState("");
 
   const specializations = [
     "الهندسة الطبية",
@@ -70,6 +80,12 @@ export default function JoinUsPage() {
       return;
     }
 
+    if (!ref1Name || !ref1Company || !ref1JobTitle || !ref1Phone ||
+        !ref2Name || !ref2Company || !ref2JobTitle || !ref2Phone) {
+      toast.error("الرجاء ملء جميع حقول المراجع");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -84,6 +100,14 @@ export default function JoinUsPage() {
           education: education.trim(),
           coverLetter: coverLetter.trim() || undefined,
           linkedinUrl: linkedinUrl.trim() || undefined,
+          ref1Name: ref1Name.trim(),
+          ref1Company: ref1Company.trim(),
+          ref1JobTitle: ref1JobTitle.trim(),
+          ref1Phone: ref1Phone.trim(),
+          ref2Name: ref2Name.trim(),
+          ref2Company: ref2Company.trim(),
+          ref2JobTitle: ref2JobTitle.trim(),
+          ref2Phone: ref2Phone.trim(),
         },
         cvFile
       );
@@ -100,6 +124,8 @@ export default function JoinUsPage() {
       setCvFile(null);
       setCoverLetter("");
       setLinkedinUrl("");
+      setRef1Name(""); setRef1Company(""); setRef1JobTitle(""); setRef1Phone("");
+      setRef2Name(""); setRef2Company(""); setRef2JobTitle(""); setRef2Phone("");
 
       // Redirect after 2 seconds
       setTimeout(() => {
@@ -419,6 +445,82 @@ export default function JoinUsPage() {
                       className="w-full pr-12 pl-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
                       placeholder="https://linkedin.com/in/your-profile"
                     />
+                  </div>
+                </div>
+
+                {/* References Section */}
+                <div className="border-t-2 border-gray-200 pt-6 mt-6">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 bg-primary-100 rounded-lg">
+                      <Users className="w-5 h-5 text-primary-500" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900">المراجع</h3>
+                  </div>
+
+                  {/* المرجع الأول */}
+                  <div className="mb-6">
+                    <h4 className="text-lg font-semibold text-gray-800 mb-4">
+                      المرجع الأول <span className="text-red-500">*</span>
+                    </h4>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">اسم الشخص المرجعي</label>
+                        <input type="text" value={ref1Name} onChange={(e) => setRef1Name(e.target.value)} required
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                          placeholder="الاسم الكامل" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">اسم الشركة</label>
+                        <input type="text" value={ref1Company} onChange={(e) => setRef1Company(e.target.value)} required
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                          placeholder="اسم الشركة التي يعمل بها" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">المسمى الوظيفي</label>
+                        <input type="text" value={ref1JobTitle} onChange={(e) => setRef1JobTitle(e.target.value)} required
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                          placeholder="مسماه الوظيفي" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">رقم التواصل</label>
+                        <input type="tel" value={ref1Phone} onChange={(e) => setRef1Phone(e.target.value)} required
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                          placeholder="+963-XX-XXX-XXXX" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* المرجع الثاني */}
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-800 mb-4">
+                      المرجع الثاني <span className="text-red-500">*</span>
+                    </h4>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">اسم الشخص المرجعي</label>
+                        <input type="text" value={ref2Name} onChange={(e) => setRef2Name(e.target.value)} required
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                          placeholder="الاسم الكامل" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">اسم الشركة</label>
+                        <input type="text" value={ref2Company} onChange={(e) => setRef2Company(e.target.value)} required
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                          placeholder="اسم الشركة التي يعمل بها" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">المسمى الوظيفي</label>
+                        <input type="text" value={ref2JobTitle} onChange={(e) => setRef2JobTitle(e.target.value)} required
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                          placeholder="مسماه الوظيفي" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">رقم التواصل</label>
+                        <input type="tel" value={ref2Phone} onChange={(e) => setRef2Phone(e.target.value)} required
+                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                          placeholder="+963-XX-XXX-XXXX" />
+                      </div>
+                    </div>
                   </div>
                 </div>
 

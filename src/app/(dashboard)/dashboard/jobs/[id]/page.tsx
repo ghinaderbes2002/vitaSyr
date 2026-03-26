@@ -17,6 +17,7 @@ import {
   ExternalLink,
   User,
   MessageSquare,
+  Users,
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { jobsApi } from "@/lib/api/jobs";
@@ -38,6 +39,8 @@ export default function JobApplicationDetailPage() {
   // Form fields
   const [status, setStatus] = useState<JobApplicationStatus>("PENDING");
   const [reviewNotes, setReviewNotes] = useState("");
+  const [rejectionNote, setRejectionNote] = useState("");
+  const [rating, setRating] = useState<number | ("")>("");
 
   useEffect(() => {
     if (id) {
