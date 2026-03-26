@@ -282,6 +282,14 @@ export default function ContactPage() {
                     >
                       <Instagram className="w-6 h-6" />
                     </a>
+                    <a
+                      href="https://wa.me/963987106020"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 transition-all hover:scale-110 shadow-lg"
+                    >
+                      <MessageCircle className="w-6 h-6" />
+                    </a>
                   </div>
                   <p className="text-gray-600 text-sm mt-4">
                     تابع آخر أخبارنا وقصص نجاح المرضى على صفحاتنا
