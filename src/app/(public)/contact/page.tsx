@@ -237,7 +237,7 @@ export default function ContactPage() {
                         السبت - الخميس
                       </p>
                       <p className="text-gray-700 text-lg font-semibold mt-1">
-                        9:00 صباحاً - 8:00 مساءً
+                        10:00 صباحاً - 6:00 مساءً
                       </p>
                       <p className="text-gray-600 text-sm mt-2">
                         نحن في خدمتك طوال أيام الأسبوع
