@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { jobsApi } from "@/lib/api/jobs";
+import { getImageUrl } from "@/lib/utils/imageUrl";
 import { Button } from "@/components/ui/Button";
 import type {
   JobApplication,
@@ -77,6 +78,12 @@ export default function JobApplicationDetailPage() {
       if (reviewNotes && reviewNotes.trim()) {
         updateData.reviewNotes = reviewNotes;
       }
+      if (status === "REJECTED" && rejectionNote.trim()) {
+        updateData.rejectionNote = rejectionNote;
+      }
+      if (status === "ACCEPTED" && rating !== "") {
+        updateData.rating = rating;
+      }
 
       console.log("Updating application with data:", updateData);
       await jobsApi.update(id, updateData);
@@ -100,16 +107,6 @@ export default function JobApplicationDetailPage() {
     } catch (error) {
       toast.error("فشل حذف الطلب");
     }
-  };
-
-  const getStatusLabel = (status: string) => {
-    const labels: Record<string, string> = {
-      PENDING: "قيد الانتظار",
-      REVIEWING: "قيد المراجعة",
-      ACCEPTED: "مقبول",
-      REJECTED: "مرفوض",
-    };
-    return labels[status] || status;
   };
 
   if (isLoading) {
@@ -262,7 +259,7 @@ export default function JobApplicationDetailPage() {
               <div className="space-y-3">
                 {application.cvFileUrl && (
                   <a
-                    href={application.cvFileUrl}
+                    href={getImageUrl(application.cvFileUrl)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-primary-600 hover:text-primary-700"
@@ -287,6 +284,34 @@ export default function JobApplicationDetailPage() {
               </div>
             </div>
           )}
+
+          {/* References */}
+          <div className="bg-white rounded-lg border border-gray-200 p-6">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <Users className="w-5 h-5" />
+              المراجع
+            </h2>
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-medium text-gray-800 mb-2">المرجع الأول</h3>
+                <div className="grid grid-cols-2 gap-3 bg-gray-50 p-4 rounded-lg">
+                  <div><label className="text-sm text-gray-500">الاسم</label><p className="text-gray-900 mt-1">{application.ref1Name}</p></div>
+                  <div><label className="text-sm text-gray-500">الشركة</label><p className="text-gray-900 mt-1">{application.ref1Company}</p></div>
+                  <div><label className="text-sm text-gray-500">المسمى الوظيفي</label><p className="text-gray-900 mt-1">{application.ref1JobTitle}</p></div>
+                  <div><label className="text-sm text-gray-500">رقم التواصل</label><p className="text-gray-900 mt-1" dir="ltr">{application.ref1Phone}</p></div>
+                </div>
+              </div>
+              <div>
+                <h3 className="font-medium text-gray-800 mb-2">المرجع الثاني</h3>
+                <div className="grid grid-cols-2 gap-3 bg-gray-50 p-4 rounded-lg">
+                  <div><label className="text-sm text-gray-500">الاسم</label><p className="text-gray-900 mt-1">{application.ref2Name}</p></div>
+                  <div><label className="text-sm text-gray-500">الشركة</label><p className="text-gray-900 mt-1">{application.ref2Company}</p></div>
+                  <div><label className="text-sm text-gray-500">المسمى الوظيفي</label><p className="text-gray-900 mt-1">{application.ref2JobTitle}</p></div>
+                  <div><label className="text-sm text-gray-500">رقم التواصل</label><p className="text-gray-900 mt-1" dir="ltr">{application.ref2Phone}</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Sidebar */}
@@ -308,12 +333,46 @@ export default function JobApplicationDetailPage() {
                   }
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 >
-                  <option value="PENDING">قيد الانتظار</option>
-                  <option value="REVIEWED">تمت المراجعة</option>
+                  <option value="PENDING">معلق</option>
+                  <option value="INTERVIEW_READY">مؤهل للمقابلة</option>
                   <option value="ACCEPTED">مقبول</option>
                   <option value="REJECTED">مرفوض</option>
+                  <option value="HIRED">تم التوظيف</option>
                 </select>
               </div>
+
+              {status === "REJECTED" && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    ملاحظة الرفض <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    value={rejectionNote}
+                    onChange={(e) => setRejectionNote(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                    rows={3}
+                    placeholder="سبب الرفض..."
+                  />
+                </div>
+              )}
+
+              {status === "ACCEPTED" && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    درجة التقييم (1-5) <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={rating}
+                    onChange={(e) => setRating(e.target.value === "" ? "" : Number(e.target.value))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  >
+                    <option value="">اختر درجة</option>
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <option key={n} value={n}>{n}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               {application.reviewedBy && (
                 <div className="pt-4 border-t border-gray-200">
