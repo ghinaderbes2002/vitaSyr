@@ -80,11 +80,11 @@ const menuItems = [
     href: "/dashboard/partners",
     icon: Handshake,
   },
-  {
-    title: "طلبات التوظيف",
-    href: "/dashboard/jobs",
-    icon: UserCheck,
-  },
+  // {
+  //   title: "طلبات التوظيف",
+  //   href: "/dashboard/jobs",
+  //   icon: UserCheck,
+  // },
   {
     title: "استفسارات الشراكات",
     href: "/dashboard/partnerships",

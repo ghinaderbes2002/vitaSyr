@@ -450,11 +450,14 @@ export default function JoinUsPage() {
 
                 {/* References Section */}
                 <div className="border-t-2 border-gray-200 pt-6 mt-6">
-                  <div className="flex items-center gap-3 mb-6">
+                  <div className="flex items-center gap-3 mb-2">
                     <div className="p-2 bg-primary-100 rounded-lg">
                       <Users className="w-5 h-5 text-primary-500" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900">المراجع</h3>
+                  </div>
+                  <div className="flex items-start gap-2 bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 mb-6">
+                    <p className="text-sm text-blue-700">ملاحظة: يرجى تزويدنا بمعلومات شخصين يمكن التواصل معهم للتحقق من خبرتك المهنية.</p>
                   </div>
 
                   {/* المرجع الأول */}

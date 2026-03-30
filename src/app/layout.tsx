@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import WhatsAppFloat from "@/components/ui/WhatsAppFloat";
 
 const cairo = Cairo({
   subsets: ["arabic"],
@@ -36,6 +37,7 @@ export default function RootLayout({
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body className={`${cairo.variable} font-sans antialiased`}>
         {children}
+        <WhatsAppFloat />
         <Toaster
           position="top-center"
           toastOptions={{
