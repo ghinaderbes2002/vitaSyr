@@ -37,6 +37,9 @@ export default function JoinUsPage() {
   const [linkedinUrl, setLinkedinUrl] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [currentlyEmployed, setCurrentlyEmployed] = useState<boolean | null>(null);
+  const [availabilityToJoin, setAvailabilityToJoin] = useState("");
+  const [singleRefOnly, setSingleRefOnly] = useState(false);
   const [ref1Name, setRef1Name] = useState("");
   const [ref1Company, setRef1Company] = useState("");
   const [ref1JobTitle, setRef1JobTitle] = useState("");
@@ -80,10 +83,17 @@ export default function JoinUsPage() {
       return;
     }
 
-    if (!ref1Name || !ref1Company || !ref1JobTitle || !ref1Phone ||
-        !ref2Name || !ref2Company || !ref2JobTitle || !ref2Phone) {
-      toast.error("الرجاء ملء جميع حقول المراجع");
-      return;
+    if (singleRefOnly) {
+      if (!ref1Name || !ref1Phone) {
+        toast.error("الرجاء ملء اسم المرجع ورقم التواصل");
+        return;
+      }
+    } else {
+      if (!ref1Name || !ref1Company || !ref1JobTitle || !ref1Phone ||
+          !ref2Name || !ref2Company || !ref2JobTitle || !ref2Phone) {
+        toast.error("الرجاء ملء جميع حقول المراجع");
+        return;
+      }
     }
 
     setIsSubmitting(true);
@@ -100,14 +110,16 @@ export default function JoinUsPage() {
           education: education.trim(),
           coverLetter: coverLetter.trim() || undefined,
           linkedinUrl: linkedinUrl.trim() || undefined,
+          currentlyEmployed: currentlyEmployed ?? undefined,
+          availabilityToJoin: availabilityToJoin || undefined,
           ref1Name: ref1Name.trim(),
-          ref1Company: ref1Company.trim(),
-          ref1JobTitle: ref1JobTitle.trim(),
+          ref1Company: singleRefOnly ? "-" : ref1Company.trim(),
+          ref1JobTitle: singleRefOnly ? "-" : ref1JobTitle.trim(),
           ref1Phone: ref1Phone.trim(),
-          ref2Name: ref2Name.trim(),
-          ref2Company: ref2Company.trim(),
-          ref2JobTitle: ref2JobTitle.trim(),
-          ref2Phone: ref2Phone.trim(),
+          ref2Name: singleRefOnly ? "-" : ref2Name.trim(),
+          ref2Company: singleRefOnly ? "-" : ref2Company.trim(),
+          ref2JobTitle: singleRefOnly ? "-" : ref2JobTitle.trim(),
+          ref2Phone: singleRefOnly ? "-" : ref2Phone.trim(),
         },
         cvFile
       );
@@ -124,6 +136,8 @@ export default function JoinUsPage() {
       setCvFile(null);
       setCoverLetter("");
       setLinkedinUrl("");
+      setCurrentlyEmployed(null);
+      setAvailabilityToJoin("");
       setRef1Name(""); setRef1Company(""); setRef1JobTitle(""); setRef1Phone("");
       setRef2Name(""); setRef2Company(""); setRef2JobTitle(""); setRef2Phone("");
 
@@ -448,6 +462,53 @@ export default function JoinUsPage() {
                   </div>
                 </div>
 
+                {/* هل تعمل حالياً + إمكانية الالتحاق */}
+                <div className="border-t-2 border-gray-200 pt-6 mt-6 space-y-6">
+                  <div>
+                    <label className="block text-gray-700 font-bold mb-3">هل تعمل حالياً؟</label>
+                    <div className="flex gap-6">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="currentlyEmployed" value="true"
+                          checked={currentlyEmployed === true}
+                          onChange={() => setCurrentlyEmployed(true)}
+                          className="w-4 h-4 accent-primary-500" />
+                        <span className="text-gray-700">نعم</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="currentlyEmployed" value="false"
+                          checked={currentlyEmployed === false}
+                          onChange={() => setCurrentlyEmployed(false)}
+                          className="w-4 h-4 accent-primary-500" />
+                        <span className="text-gray-700">لا</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-700 font-bold mb-3">إمكانية الالتحاق</label>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                      {[
+                        { value: "IMMEDIATE", label: "فوري" },
+                        { value: "WITHIN_ONE_WEEK", label: "خلال أسبوع" },
+                        { value: "WITHIN_TWO_WEEKS", label: "خلال أسبوعين" },
+                        { value: "WITHIN_ONE_MONTH", label: "خلال شهر" },
+                      ].map((option) => (
+                        <label key={option.value}
+                          className={`flex items-center justify-center p-3 border-2 rounded-xl cursor-pointer transition-colors
+                            ${availabilityToJoin === option.value
+                              ? "border-accent-500 bg-accent-50 text-accent-700 font-semibold"
+                              : "border-gray-200 hover:border-accent-300"}`}>
+                          <input type="radio" name="availabilityToJoin" value={option.value}
+                            checked={availabilityToJoin === option.value}
+                            onChange={() => setAvailabilityToJoin(option.value)}
+                            className="hidden" />
+                          {option.label}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
                 {/* References Section */}
                 <div className="border-t-2 border-gray-200 pt-6 mt-6">
                   <div className="flex items-center gap-3 mb-2">
@@ -456,75 +517,106 @@ export default function JoinUsPage() {
                     </div>
                     <h3 className="text-xl font-bold text-gray-900">المراجع</h3>
                   </div>
-                  <div className="flex items-start gap-2 bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 mb-6">
+                  <div className="flex items-start gap-2 bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 mb-4">
+                    <span className="text-blue-500 text-lg leading-tight">ℹ</span>
                     <p className="text-sm text-blue-700">ملاحظة: يرجى تزويدنا بمعلومات شخصين يمكن التواصل معهم للتحقق من خبرتك المهنية.</p>
                   </div>
 
-                  {/* المرجع الأول */}
-                  <div className="mb-6">
-                    <h4 className="text-lg font-semibold text-gray-800 mb-4">
-                      المرجع الأول <span className="text-red-500">*</span>
-                    </h4>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-gray-700 font-bold mb-2">اسم الشخص المرجعي</label>
-                        <input type="text" value={ref1Name} onChange={(e) => setRef1Name(e.target.value)} required
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
-                          placeholder="الاسم الكامل" />
-                      </div>
-                      <div>
-                        <label className="block text-gray-700 font-bold mb-2">اسم الشركة</label>
-                        <input type="text" value={ref1Company} onChange={(e) => setRef1Company(e.target.value)} required
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
-                          placeholder="اسم الشركة التي يعمل بها" />
-                      </div>
-                      <div>
-                        <label className="block text-gray-700 font-bold mb-2">المسمى الوظيفي</label>
-                        <input type="text" value={ref1JobTitle} onChange={(e) => setRef1JobTitle(e.target.value)} required
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
-                          placeholder="مسماه الوظيفي" />
-                      </div>
-                      <div>
-                        <label className="block text-gray-700 font-bold mb-2">رقم التواصل</label>
-                        <input type="tel" value={ref1Phone} onChange={(e) => setRef1Phone(e.target.value)} required
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
-                          placeholder="+963-XX-XXX-XXXX" />
-                      </div>
-                    </div>
-                  </div>
+                  <label className="flex items-center gap-3 cursor-pointer mb-6 w-fit">
+                    <input
+                      type="checkbox"
+                      checked={singleRefOnly}
+                      onChange={(e) => setSingleRefOnly(e.target.checked)}
+                      className="w-5 h-5 accent-accent-500 cursor-pointer"
+                    />
+                    <span className="text-gray-700 font-medium">لم أعمل سابقا </span>
+                  </label>
 
-                  {/* المرجع الثاني */}
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-800 mb-4">
-                      المرجع الثاني <span className="text-red-500">*</span>
-                    </h4>
+                  {singleRefOnly ? (
+                    /* مرجع واحد فقط — اسم ورقم */
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">اسم الشخص المرجعي</label>
-                        <input type="text" value={ref2Name} onChange={(e) => setRef2Name(e.target.value)} required
+                        <label className="block text-gray-700 font-bold mb-2">اسم المرجع <span className="text-red-500">*</span></label>
+                        <input type="text" value={ref1Name} onChange={(e) => setRef1Name(e.target.value)}
                           className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
                           placeholder="الاسم الكامل" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">اسم الشركة</label>
-                        <input type="text" value={ref2Company} onChange={(e) => setRef2Company(e.target.value)} required
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
-                          placeholder="اسم الشركة التي يعمل بها" />
-                      </div>
-                      <div>
-                        <label className="block text-gray-700 font-bold mb-2">المسمى الوظيفي</label>
-                        <input type="text" value={ref2JobTitle} onChange={(e) => setRef2JobTitle(e.target.value)} required
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
-                          placeholder="مسماه الوظيفي" />
-                      </div>
-                      <div>
-                        <label className="block text-gray-700 font-bold mb-2">رقم التواصل</label>
-                        <input type="tel" value={ref2Phone} onChange={(e) => setRef2Phone(e.target.value)} required
+                        <label className="block text-gray-700 font-bold mb-2">رقم التواصل <span className="text-red-500">*</span></label>
+                        <input type="tel" value={ref1Phone} onChange={(e) => setRef1Phone(e.target.value)}
                           className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
                           placeholder="+963-XX-XXX-XXXX" />
                       </div>
                     </div>
-                  </div>
+                  ) : (
+                    <>
+                      {/* المرجع الأول */}
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-gray-800 mb-4">
+                          المرجع الأول <span className="text-red-500">*</span>
+                        </h4>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2">اسم الشخص المرجعي</label>
+                            <input type="text" value={ref1Name} onChange={(e) => setRef1Name(e.target.value)}
+                              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                              placeholder="الاسم الكامل" />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2">اسم الشركة</label>
+                            <input type="text" value={ref1Company} onChange={(e) => setRef1Company(e.target.value)}
+                              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                              placeholder="اسم الشركة التي يعمل بها" />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2">المسمى الوظيفي</label>
+                            <input type="text" value={ref1JobTitle} onChange={(e) => setRef1JobTitle(e.target.value)}
+                              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                              placeholder="مسماه الوظيفي" />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2">رقم التواصل</label>
+                            <input type="tel" value={ref1Phone} onChange={(e) => setRef1Phone(e.target.value)}
+                              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                              placeholder="+963-XX-XXX-XXXX" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* المرجع الثاني */}
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-800 mb-4">
+                          المرجع الثاني <span className="text-red-500">*</span>
+                        </h4>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2">اسم الشخص المرجعي</label>
+                            <input type="text" value={ref2Name} onChange={(e) => setRef2Name(e.target.value)}
+                              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                              placeholder="الاسم الكامل" />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2">اسم الشركة</label>
+                            <input type="text" value={ref2Company} onChange={(e) => setRef2Company(e.target.value)}
+                              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                              placeholder="اسم الشركة التي يعمل بها" />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2">المسمى الوظيفي</label>
+                            <input type="text" value={ref2JobTitle} onChange={(e) => setRef2JobTitle(e.target.value)}
+                              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                              placeholder="مسماه الوظيفي" />
+                          </div>
+                          <div>
+                            <label className="block text-gray-700 font-bold mb-2">رقم التواصل</label>
+                            <input type="tel" value={ref2Phone} onChange={(e) => setRef2Phone(e.target.value)}
+                              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-accent-500 focus:ring-2 focus:ring-accent-200 transition-colors"
+                              placeholder="+963-XX-XXX-XXXX" />
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 {/* Submit Button */}

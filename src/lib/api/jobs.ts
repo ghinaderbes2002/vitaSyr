@@ -68,6 +68,13 @@ export const jobsApi = {
     formData.append("ref2JobTitle", applicationData.ref2JobTitle);
     formData.append("ref2Phone", applicationData.ref2Phone);
 
+    if (applicationData.currentlyEmployed !== undefined && applicationData.currentlyEmployed !== null) {
+      formData.append("currentlyEmployed", String(applicationData.currentlyEmployed));
+    }
+    if (applicationData.availabilityToJoin) {
+      formData.append("availabilityToJoin", applicationData.availabilityToJoin);
+    }
+
     const { data } = await apiClient.post<JobApplication>(
       "/jobs/job-applications",
       formData,

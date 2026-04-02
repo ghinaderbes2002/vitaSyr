@@ -234,6 +234,25 @@ export default function JobApplicationDetailPage() {
                 </label>
                 <p className="text-gray-900 mt-1">{application.education}</p>
               </div>
+              <div className="grid grid-cols-2 gap-4 pt-2 border-t border-gray-100">
+                <div>
+                  <label className="text-sm font-medium text-gray-700">هل يعمل حالياً</label>
+                  <p className="text-gray-900 mt-1">
+                    {application.currentlyEmployed === true ? "نعم" : application.currentlyEmployed === false ? "لا" : "—"}
+                  </p>
+                </div>
+                <div>
+                  <label className="text-sm font-medium text-gray-700">إمكانية الالتحاق</label>
+                  <p className="text-gray-900 mt-1">
+                    {({
+                      IMMEDIATE: "فوري",
+                      WITHIN_ONE_WEEK: "خلال أسبوع",
+                      WITHIN_TWO_WEEKS: "خلال أسبوعين",
+                      WITHIN_ONE_MONTH: "خلال شهر",
+                    } as Record<string, string>)[application.availabilityToJoin ?? ""] ?? "—"}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
