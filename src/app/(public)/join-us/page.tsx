@@ -38,7 +38,7 @@ export default function JoinUsPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [currentlyEmployed, setCurrentlyEmployed] = useState<boolean | null>(null);
-  const [availabilityToJoin, setAvailabilityToJoin] = useState("");
+  const [availabilityToJoin, setAvailabilityToJoin] = useState<"IMMEDIATE" | "WITHIN_ONE_WEEK" | "WITHIN_TWO_WEEKS" | "WITHIN_ONE_MONTH" | "">("");
   const [singleRefOnly, setSingleRefOnly] = useState(false);
   const [ref1Name, setRef1Name] = useState("");
   const [ref1Company, setRef1Company] = useState("");
@@ -488,10 +488,10 @@ export default function JoinUsPage() {
                     <label className="block text-gray-700 font-bold mb-3">إمكانية الالتحاق</label>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       {[
-                        { value: "IMMEDIATE", label: "فوري" },
-                        { value: "WITHIN_ONE_WEEK", label: "خلال أسبوع" },
-                        { value: "WITHIN_TWO_WEEKS", label: "خلال أسبوعين" },
-                        { value: "WITHIN_ONE_MONTH", label: "خلال شهر" },
+                        { value: "IMMEDIATE" as const, label: "فوري" },
+                        { value: "WITHIN_ONE_WEEK" as const, label: "خلال أسبوع" },
+                        { value: "WITHIN_TWO_WEEKS" as const, label: "خلال أسبوعين" },
+                        { value: "WITHIN_ONE_MONTH" as const, label: "خلال شهر" },
                       ].map((option) => (
                         <label key={option.value}
                           className={`flex items-center justify-center p-3 border-2 rounded-xl cursor-pointer transition-colors
