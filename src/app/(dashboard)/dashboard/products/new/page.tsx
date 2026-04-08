@@ -105,10 +105,13 @@ export default function NewProductPage() {
     } catch (error: any) {
       console.error("Error creating product:", error);
       console.error("Error response:", error.response?.data);
-      toast.error(
+      const errMsg =
+        error.response?.data?.message ||
         error.response?.data?.error ||
-          error.response?.data?.message ||
-          "فشل إنشاء المنتج"
+        (typeof error.response?.data === "string" ? error.response.data : null) ||
+        error.message ||
+        "فشل إنشاء المنتج";
+      toast.error(errMsg
       );
     } finally {
       setIsSaving(false);
