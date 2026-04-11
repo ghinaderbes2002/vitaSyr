@@ -13,7 +13,7 @@ import type { Product, ProductCategory } from "@/types/product";
 import Footer from "@/components/public/Footer";
 import { getImageUrl } from "@/lib/utils/imageUrl";
 import { formatPriceWithLabel } from "@/lib/utils/currencyFormatter";
-import { LoadingCard, LoadingSpinner } from "@/components/ui/LoadingSpinner";
+import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import Header from "@/components/public/Header";
 
 function ProductsContent() {
@@ -148,7 +148,7 @@ function ProductsContent() {
                 </p>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
                 {filteredProducts.map((product) => (
                   <Link
                     key={product.id}
