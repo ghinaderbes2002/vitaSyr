@@ -207,6 +207,13 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-accent-500 flex-shrink-0" />
+                <div className="text-sm opacity-90" dir="ltr">
+                  <p>TEL: +963 21 5226391</p>
+                  <p>FAX: +963 21 5226392</p>
+                </div>
+              </li>
+              <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent-500 flex-shrink-0" />
                 <a
                   href="mailto:info@vitaxirpro.com"
