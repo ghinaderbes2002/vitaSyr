@@ -37,6 +37,7 @@ export default function JoinUsPage() {
   const [linkedinUrl, setLinkedinUrl] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [hasCompanyRelation, setHasCompanyRelation] = useState<boolean | null>(null);
   const [currentlyEmployed, setCurrentlyEmployed] = useState<boolean | null>(null);
   const [availabilityToJoin, setAvailabilityToJoin] = useState<"IMMEDIATE" | "WITHIN_ONE_WEEK" | "WITHIN_TWO_WEEKS" | "WITHIN_ONE_MONTH" | "">("");
   const [singleRefOnly, setSingleRefOnly] = useState(false);
@@ -110,6 +111,7 @@ export default function JoinUsPage() {
           education: education.trim(),
           coverLetter: coverLetter.trim() || undefined,
           linkedinUrl: linkedinUrl.trim() || undefined,
+          hasCompanyRelation: hasCompanyRelation ?? undefined,
           currentlyEmployed: currentlyEmployed ?? undefined,
           availabilityToJoin: availabilityToJoin || undefined,
           ref1Name: ref1Name.trim(),
@@ -136,6 +138,7 @@ export default function JoinUsPage() {
       setCvFile(null);
       setCoverLetter("");
       setLinkedinUrl("");
+      setHasCompanyRelation(null);
       setCurrentlyEmployed(null);
       setAvailabilityToJoin("");
       setRef1Name(""); setRef1Company(""); setRef1JobTitle(""); setRef1Phone("");
@@ -464,6 +467,28 @@ export default function JoinUsPage() {
 
                 {/* هل تعمل حالياً + إمكانية الالتحاق */}
                 <div className="border-t-2 border-gray-200 pt-6 mt-6 space-y-6">
+                  <div>
+                    <label className="block text-gray-700 font-bold mb-2">
+                      هل تربطك صلة قرابة بأحد موظفي الشركة أو بمورد تتعامل معه الشركة؟
+                    </label>
+                    <div className="flex gap-6">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="hasCompanyRelation" value="true"
+                          checked={hasCompanyRelation === true}
+                          onChange={() => setHasCompanyRelation(true)}
+                          className="w-4 h-4 accent-primary-500" />
+                        <span className="text-gray-700">نعم</span>
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="hasCompanyRelation" value="false"
+                          checked={hasCompanyRelation === false}
+                          onChange={() => setHasCompanyRelation(false)}
+                          className="w-4 h-4 accent-primary-500" />
+                        <span className="text-gray-700">لا</span>
+                      </label>
+                    </div>
+                  </div>
+
                   <div>
                     <label className="block text-gray-700 font-bold mb-3">هل تعمل حالياً؟</label>
                     <div className="flex gap-6">

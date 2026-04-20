@@ -34,6 +34,7 @@ export interface JobApplication {
   rating?: number | null;
   currentlyEmployed?: boolean | null;
   availabilityToJoin?: "IMMEDIATE" | "WITHIN_ONE_WEEK" | "WITHIN_TWO_WEEKS" | "WITHIN_ONE_MONTH" | null;
+  hasCompanyRelation?: boolean | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -64,6 +65,7 @@ export interface CreateJobApplicationDto {
   ref2Phone: string;
   currentlyEmployed?: boolean;
   availabilityToJoin?: "IMMEDIATE" | "WITHIN_ONE_WEEK" | "WITHIN_TWO_WEEKS" | "WITHIN_ONE_MONTH";
+  hasCompanyRelation?: boolean;
 }
 
 export interface UpdateJobApplicationDto {

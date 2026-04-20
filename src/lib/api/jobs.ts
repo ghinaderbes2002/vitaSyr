@@ -74,6 +74,9 @@ export const jobsApi = {
     if (applicationData.availabilityToJoin) {
       formData.append("availabilityToJoin", applicationData.availabilityToJoin);
     }
+    if (applicationData.hasCompanyRelation !== undefined && applicationData.hasCompanyRelation !== null) {
+      formData.append("hasCompanyRelation", String(applicationData.hasCompanyRelation));
+    }
 
     const { data } = await apiClient.post<JobApplication>(
       "/jobs/job-applications",
