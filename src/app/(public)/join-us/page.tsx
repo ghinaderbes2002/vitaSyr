@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, useRef, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { jobsApi } from "@/lib/api/jobs";
 import { toast } from "react-hot-toast";
@@ -36,6 +36,7 @@ export default function JoinUsPage() {
   const [coverLetter, setCoverLetter] = useState("");
   const [linkedinUrl, setLinkedinUrl] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
 
   const [hasCompanyRelation, setHasCompanyRelation] = useState<boolean | null>(null);
   const [currentlyEmployed, setCurrentlyEmployed] = useState<boolean | null>(null);
@@ -73,6 +74,8 @@ export default function JoinUsPage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
 
     if (!cvFile) {
       toast.error("الرجاء رفع ملف السيرة الذاتية (CV)");
@@ -154,6 +157,7 @@ export default function JoinUsPage() {
       toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
+      isSubmittingRef.current = false;
     }
   };
 
