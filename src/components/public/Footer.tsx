@@ -32,7 +32,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm leading-relaxed mb-6 opacity-90">
-              مركز Vitaxir متخصص في تصميم وتركيب الأطراف الصناعية وتقديم برامج
+              شركة Vitaxir متخصص في تصميم وتركيب الأطراف الصناعية وتقديم برامج
               تأهيل متكاملة لمبتوري الأطراف.
             </p>
             <div className="flex gap-3">
