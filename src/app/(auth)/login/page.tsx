@@ -155,7 +155,7 @@ export default function LoginPage() {
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-600 items-center justify-center p-12">
         <div className="text-white text-center space-y-6 max-w-lg">
           <div className="space-y-4">
-            <h2 className="text-4xl font-bold">مركز VitaXir الطبي</h2>
+            <h2 className="text-4xl font-bold">شركة VitaXir الطبية</h2>
             <p className="text-xl text-blue-100">
               نصمّم أطرافًا صناعية متطورة ونقدّم برامج تأهيل شاملة
             </p>

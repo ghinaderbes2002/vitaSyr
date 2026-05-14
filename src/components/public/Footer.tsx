@@ -237,7 +237,7 @@ export default function Footer() {
         <div className="border-t border-white/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm opacity-90">
-              جميع الحقوق محفوظة &copy; {currentYear} مركز{" "}
+              جميع الحقوق محفوظة &copy; {currentYear} شركة{" "}
               <span className="font-bold text-accent-500">Vitaxir</span>
             </p>
             <div className="flex gap-6 text-sm">
