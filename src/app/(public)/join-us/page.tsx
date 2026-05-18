@@ -101,7 +101,11 @@ export default function JoinUsPage() {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      toast.error("يرجى ملء جميع الحقول المطلوبة");
+      if (newErrors.cvFile) {
+        toast.error("يرجى رفع ملف السيرة الذاتية (CV) قبل إرسال الطلب");
+      } else {
+        toast.error("يرجى ملء جميع الحقول المطلوبة");
+      }
       isSubmittingRef.current = false;
       return;
     }
@@ -447,7 +451,6 @@ export default function JoinUsPage() {
                           type="file"
                           accept=".pdf,.doc,.docx"
                           onChange={handleFileChange}
-                          required
                           className="hidden"
                         />
                       </label>
