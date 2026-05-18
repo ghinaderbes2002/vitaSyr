@@ -166,16 +166,19 @@ export default function JoinUsPage() {
     } catch (error: any) {
       console.error("Error submitting job application:", error);
       const status = error.response?.status;
-      let errorMessage = "حدث خطأ أثناء إرسال الطلب، حاول مرة أخرى";
+      const backendMessage =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        (typeof error.response?.data === "string" ? error.response.data : null);
+
+      let errorMessage: string;
       if (status === 413) {
         errorMessage = "حجم ملف السيرة الذاتية كبير جداً، يرجى رفع ملف أصغر من 5MB";
-      } else if (status === 400) {
-        errorMessage = error.response?.data?.message || "تأكد من ملء جميع الحقول بشكل صحيح";
-      } else if (status >= 500) {
-        errorMessage = "خطأ في الخادم، يرجى المحاولة لاحقاً";
       } else if (error.message === "Network Error" || !error.response) {
         setMightHaveSubmitted(true);
         errorMessage = "انقطع الاتصال أثناء الإرسال — قد يكون طلبك وصل إلينا بالفعل. تواصل معنا عبر واتساب للتأكيد قبل إعادة التقديم";
+      } else {
+        errorMessage = backendMessage || error.message || "حدث خطأ أثناء إرسال الطلب، حاول مرة أخرى";
       }
       toast.error(errorMessage);
     } finally {
