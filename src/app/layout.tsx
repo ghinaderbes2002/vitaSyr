@@ -12,15 +12,27 @@ const cairo = Cairo({
   variable: "--font-cairo",
 });
 
+const siteDescription =
+  "Vitaxir شركة متخصصة في تجهيز وتطوير مراكز الأطراف الصناعية وإعادة التأهيل والعلاج الفيزيائي ومراكز صحة القدم، مع تدريب الكوادر وتوريد الأجهزة والأطراف.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://vitaxirpro.com"),
   title: {
-    default: "VitaXir",
-    template: "%s | VitaXir Admin",
+    default: "VitaXir | تجهيز مراكز الأطراف الصناعية وإعادة التأهيل",
+    template: "%s | VitaXir",
   },
-  description: "لوحة تحكم إدارة محتوى موقع VitaXir",
+  description: siteDescription,
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    type: "website",
+    locale: "ar_AR",
+    siteName: "VitaXir",
+    title: "VitaXir | تجهيز مراكز الأطراف الصناعية وإعادة التأهيل",
+    description: siteDescription,
+    images: ["/logo.png"],
   },
   icons: {
     icon: "/logo.png",
